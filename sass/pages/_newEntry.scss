@@ -1,0 +1,16 @@
+@use "../abstracts/" as *;
+
+.new-entry {
+  @include flex-centered(column);
+  background-color: $color-white;
+}
+
+.chr {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+.bce,
+.ce {
+  background-color: $color-white;
+  color: $color-primary-dark;
+}

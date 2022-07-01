@@ -1,0 +1,8 @@
+@use '../abstracts' as*;
+
+.logout{
+    @include flex-centered(column);
+    min-height: 100%;
+
+
+}

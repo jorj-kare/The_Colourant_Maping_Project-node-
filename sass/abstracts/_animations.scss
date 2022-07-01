@@ -1,0 +1,50 @@
+@use "./variables" as *;
+@keyframes link-animation {
+    0%{
+      border-bottom-color: $color-orange  ;
+    }
+    25%{
+      border-right-color: $color-orange  ;
+    }
+    50%{
+      border-top-color: $color-orange  ;
+    }
+    75%{
+      border-left-color: $color-orange ;
+     
+    }
+   
+    100%{
+        
+        border-right-color: $color-orange ;
+        border-left-color: $color-orange  ;
+    }
+  }
+
+  @keyframes fade-out {
+    0%{
+      opacity: .5;
+
+    }
+    
+   100%{
+      
+    opacity: 0;
+    }
+  }
+  @keyframes fade-in {
+    0%{
+      opacity: 0;
+
+    }
+    50%{
+      opacity: .5;
+
+    }
+    
+   100%{
+      
+    opacity: 1;
+   
+    }
+  }

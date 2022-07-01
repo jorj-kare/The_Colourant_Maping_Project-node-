@@ -1,0 +1,23 @@
+@use "../abstracts/mixins" as *;
+
+
+.flex-container-r{
+    @include flex-centered(row);
+}
+.row{
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+.centered{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    
+}
+.c-center {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%
+  }

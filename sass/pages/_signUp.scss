@@ -1,0 +1,16 @@
+@use "../abstracts/" as *;
+
+.sign-up {
+ @include flex-centered();
+  min-height: 100vh;
+  padding: 15rem 0;
+  background-color: $color-white;
+
+  &__form{
+      @include form-style(column, $color-primary-light);
+      flex-basis: 50%;
+    
+
+  }
+}
+

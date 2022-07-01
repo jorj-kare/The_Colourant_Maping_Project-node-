@@ -1,0 +1,15 @@
+header.header
+    .header__logo
+        img(src='/img/logo-nav.png')
+    nav.nav 
+        a.nav__link(href='/') Overview
+        a.nav__link(href='/map') Map
+        a.nav__link(href='/newEntry') New Entry 
+        a.nav__link(href='/contact') Contact
+        a.nav__link(href="/entries") Entries
+        if ! user
+            a.nav__link(href='/login') Login/Sign-up
+        if user 
+            a.nav__link(href='/myAccount') My account
+            a.nav__link(href='/logout') Logout
+

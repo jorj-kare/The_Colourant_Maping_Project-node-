@@ -1,0 +1,17 @@
+extends base
+
+block head 
+    script(src="/js/mapBox.js" defer)
+    script(src="/js/updateEntry.js" defer)
+    script(src="/js/colourantForm.js" defer)
+
+block main 
+    main.update-entry 
+        button#btnClose.btn.btn--small.btn--close
+            a(href=('/myAccount')) ⇽  
+        include _colourantForm
+        .c-center.u-mrg-bottom-m
+            button#btn-edit-form.btn.btn--medium Edit form
+            button#btn-reset-form.btn.btn--medium( hidden) Reset form
+        
+        

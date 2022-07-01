@@ -1,0 +1,49 @@
+@use "../abstracts" as *;
+
+
+.login {
+  @include flex-centered();
+  min-height: 100%;
+
+  &__form {
+    @include form-style(column, $color-primary-light);
+    flex-basis: 50%;
+  }
+}
+
+.link-box {
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+  
+}
+.link {
+  padding:  0  0.3rem;
+  border: 1.5px solid transparent;
+  border-bottom: 1px solid $color-orange;
+  color: $color-white;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem; 
+  transition: all .5s ;
+  &:hover,
+  &:active {
+    border-radius: 50px;
+    border-left-color: $color-orange;
+    border-right-color: $color-orange;
+    border-bottom-color: transparent;
+    padding:  0  0.3rem;
+  }
+  &--m{
+    font-size: 1.6rem;
+    font-weight: 400;
+    
+  }
+}
+.link-text {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  color: $color-primary-dark;
+}

@@ -1,0 +1,78 @@
+@use "../abstracts/" as *;
+
+
+
+.list {
+  width: fit-content;
+  max-height: 25rem;
+  overflow-y: auto;
+  &__container{
+    @include form-style(column);
+    min-width: 70%;
+    border: 3px solid $color-primary-light;
+  
+    a {
+      color: inherit;
+    }
+    span{
+      color: $color-red;
+      font-weight: 400;
+    }
+  }
+
+  &__item {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    border: 0.5px solid transparent;
+    border-bottom-color: $color-primary-dark;
+    color: $color-primary-dark;
+    font-size: 1.8rem;
+    letter-spacing: 0.2rem;
+    word-spacing: 0.3rem;
+    text-transform: capitalize;
+    list-style-type: circle;
+    transition: all 0.3s;
+
+    &:hover {
+      list-style-type: disc;
+      border-left-color: $color-purple;
+      border-bottom-color: transparent;
+      color: $color-purple;
+      cursor: pointer;
+      
+    }
+    &--small{
+      font-size: 1.4rem;
+      list-style-type: none;
+      &:hover{
+        list-style-type: none;
+        border-left-color:transparent ;
+        border-bottom-color: $color-purple;
+      }
+    }
+    
+  }
+
+  &__empty {
+    color: $color-primary-dark;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    word-spacing: 0.3rem;
+    font-weight: 300;
+  }
+  //   &__key {
+  //     font-size: 1.6rem;
+  //     font-weight: 300;
+
+  //     color: $color-primary-dark;
+  // }
+  // &__value {
+  //     padding-left: .5rem;
+  //     font-size: 1.3rem;
+  //     font-weight: 200;
+  //     color: $color-primary-dark;
+  //     &--pass{
+  //         font-weight: 500;
+  //     }
+  // }
+}

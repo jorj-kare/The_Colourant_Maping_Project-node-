@@ -1,0 +1,98 @@
+@use "../abstracts/" as *;
+.btn {
+  width: 100%;
+  padding: 0.8em;
+  align-self: center;
+  border-radius: 0.2rem;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  color: $color-primary-dark;
+
+  &--animate {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: $color-primary-dark;
+    -webkit-transition: color 350ms ease-in-out;
+    transition: color 350ms ease-in-out;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0;
+      height: 100%;
+      z-index: -1;
+      background-color: $color-orange;
+      transform: translateX(-50%);
+      transition: width 350ms ease-in-out;
+    }
+    &:hover {
+      color: $color-white;
+    }
+    &:hover:after {
+      width: 110%;
+      border-radius: 0.2rem;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+  &--small {
+    width: 5rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    transition: all 0.3s;
+    &:hover,
+    &:active {
+      background-color: $color-yellow;
+    }
+  }
+  &--medium {
+    width: 30%;
+    padding: 1rem 0.5rem;
+    background-color: $color-primary-dark;
+    color: $color-white;
+    transition: all 0.5s ease-out;
+
+    &:hover,
+    &:active {
+      background-color: $color-orange;
+    }
+  }
+  &--close {
+    width: 6rem;
+    position: relative;
+    align-self: flex-end;
+    top: 3rem;
+    left: -3rem;
+    border: 1px solid $color-primary-dark;
+
+    &:hover,
+    &:active {
+      transform: translateX(-0.2rem);
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  &--dark {
+    background-color: $color-primary-light;
+    color: $color-white;
+  }
+  &--red {
+    background-color: $color-red;
+  }
+}

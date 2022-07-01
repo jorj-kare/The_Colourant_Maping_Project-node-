@@ -1,0 +1,14 @@
+@use "./variables" as *;
+@mixin flex-centered($direction : row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center ;
+    align-items: center;
+}
+@mixin form-style($direction : column , $background-color: #eee8e8){
+    @include flex-centered($direction);
+    padding: 5rem ;
+    background-color: $background-color;
+    border-radius: 15px;
+}
+

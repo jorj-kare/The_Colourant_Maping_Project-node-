@@ -1,0 +1,41 @@
+@use "../abstracts/" as *;
+.u-pad-top {
+  padding-top: 10rem !important;
+}
+.u-mrg-top-s {
+  margin-top: 3rem !important;
+}
+.u-mrg-top-m {
+  margin-top: 5rem !important;
+}
+.u-mrg-bottom-s {
+  margin-bottom: 2.5rem !important;
+}
+.u-mrg-bottom-m {
+  margin-bottom: 5rem !important;
+}
+.u-mrg-rgt{
+  margin-right: 2rem;
+}
+.u-width-50 {
+  width: 50% !important;
+}
+.u-width-60 {
+  width: 60%;
+}
+.u-width-80 {
+  width: 80%  !important;
+}
+
+.u-hidden {
+ 
+  display: none !important;
+
+}
+.u-fade-in{
+  animation: fade-in .5s forwards;
+}
+.u-fade-out{
+  animation: fade-out .5s forwards;
+}
+

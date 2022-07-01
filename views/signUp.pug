@@ -1,0 +1,32 @@
+extends base
+block append head 
+    script(src="/js/signUp.js" defer)
+
+block main 
+    main.sign-up 
+        .sign-up__form 
+            h2.h2 Sign up!
+            form.form.u-width-60
+                .form__group
+                    label.form__label Email
+                    input#email.form__input(type='email' required placeholder='plinius@email.rom')
+                .form__group
+                    label.form__label Username
+                    input#username.form__input(type='text' minlength=3 maxlength=15 required placeholder='The elder')
+                .form__group
+                    label.form__label First name
+                    input#firstName.form__input(type='text' required placeholder='Plinius')
+                .form__group
+                    label.form__label Last Name
+                    input#lastName.form__input(type='text' required placeholder='Secundus')  
+                .form__group
+                    label.form__label Affiliation
+                    input#affiliation.form__input(type='text'  placeholder='Roman academy')
+                .form__group
+                    label.form__label Password
+                    input.form__input#password(type='password' required minlength=5 placeholder='••••••••')
+                .form__group
+                    label.form__label Confirm password
+                    input#passwordConfirm.form__input(type='password' required minlength=5 placeholder='••••••••')                                
+                .form__group.u-mrg-top-s
+                    button.btn.btn--animate(type='submit') Submit

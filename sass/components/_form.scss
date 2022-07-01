@@ -1,0 +1,266 @@
+@use "../abstracts" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.7rem;
+  font-weight: 300;
+  padding: 3rem;
+
+  &__input {
+    width: 100%;
+    padding: 1.2rem 0.5rem;
+    border-radius: 5px;
+    border: none;
+    background-color: $color-white;
+    color: $color-primary-dark;
+
+    &::placeholder {
+      font-size: 1.6rem;
+      font-weight: 200;
+      opacity: 1;
+      color: $color-primary-light;
+    }
+
+    &:-moz-placeholder {
+      font-size: 1.6rem;
+      font-weight: 200;
+      opacity: 1;
+    }
+    &:focus{
+      outline: 1.5px solid $color-orange-dark;
+      
+    }
+    &--validate {
+      border: 3px solid transparent;
+      transition: all 0.2s;
+      &:focus {
+        outline: none;
+      }
+      &:not(:placeholder-shown):valid {
+        border-bottom: 3px solid $color-green;
+      }
+      &:not(:focus):not(:placeholder-shown):invalid {
+        border-bottom: 3px solid $color-red;
+      }
+    }
+    &[type="password"],
+    &[type="password"]::placeholder {
+      font-weight: 700;
+    }
+  &--small{
+  width: 20ch;
+  padding:0.2rem .5rem;
+  font-size: 1.6rem;
+  }
+
+    &--border {
+      border: 1px solid $color-primary-dark;
+      &:focus{
+        outline:transparent;
+        box-shadow: 0 .2rem 1rem $color-primary-light ;
+      }
+    }
+    &--btn{
+      display: flex;
+      flex-wrap: wrap;
+      
+      input{
+        width: 80%;
+        padding-left:1.3rem ;
+        border-radius: 0;
+        border-radius: 5px 0 0 5px;
+        &:focus{
+          outline: transparent;
+        }
+      }
+      button{
+        width: 20%;
+        border-radius: 0;
+        background-color: $color-orange-dark;
+        color: $color-white;
+        border-radius:0 5px 5px 0;
+        transition: all .4s ;
+        &:active,
+        &:hover{
+          transform: translateX(5px);
+          
+        }
+        
+      }
+    }
+
+  }
+
+  &__checkbox {
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+    &:checked ~ span {
+      border-color: $color-purple;
+    }
+    &:checked ~ label {
+      color: $color-purple;
+    }
+    &:checked ~ label:before {
+      content: "\25CD";
+    }
+  }
+  &__fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5rem;
+    padding: 5rem;
+    border: 1.5px solid $color-primary-dark;
+    border-radius: 5px;
+    &:disabled{
+      background-color: #B1D0E0;
+      & input,textarea,select,.form__group-cb  label {
+       color: rgb(108, 107, 107);
+       background-color: #B1D0E0;
+        
+      }
+     
+      .form__checkbox:checked ~ label {
+        color: $color-purple;
+      }
+    }
+  }
+  &__fieldset--dark {
+    padding-top: 10rem;
+    position: relative;
+    background-color: $color-primary-light;
+    border-color: $color-primary-light;
+    &:disabled{
+     input{
+       border:1px solid  $color-primary-dark;
+     }
+     label{
+       color:$color-primary-dark;
+     }
+    }
+  }
+
+  &__legend {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.2rem;
+    color: $color-primary-dark;
+
+    &--dark {
+      position: absolute;
+      top: 1rem;
+      left: 5rem;
+      color: $color-white;
+    }
+  }
+  &__group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5rem;
+    &--border {
+      border: 1px solid $color-primary-dark;
+      border-radius: 5px;
+      padding: 2rem;
+    }
+  }
+
+  &__group-cb {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    margin: 0.7rem;
+    // padding: 0.7rem 0rem;
+  }
+  &__group-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid $color-primary-dark;
+    border-radius: 5px;
+  }
+
+  &__label {
+    padding-bottom: 0.3rem;
+    letter-spacing: 0.1rem;
+    color: $color-primary-dark;
+    &--dark {
+      color: $color-white;
+    }
+  }
+  &__label-cb {
+    position: relative;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.12rem;
+    color: $color-primary-dark;
+    transition: all 0.1s ease-in;
+    z-index: 1;
+    &:before {
+      content: "\25CB";
+      position: relative;
+      top: -0.2rem;
+      padding-right: 0.3rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  &--row {
+    flex-direction: row;
+  }
+
+  &__dropdown {
+    position: relative;
+    padding: 0.3rem 0.5rem;
+    background-color: transparent;
+    border: 1px solid $color-primary-dark;
+    border-radius: 5px;
+    color: $color-primary-dark;
+  }
+}
+
+.custom-cb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // border-bottom: .5px solid transparent;
+  border-left: 0.5px solid transparent;
+  border-right: 0.5px solid transparent;
+  z-index: 1;
+  transition: all 0.1s ease-in;
+}
+#other-input {
+  visibility: hidden;
+  opacity: 0;
+  margin-left:  .5rem;
+  margin-right: .1rem;
+  border: none;
+  background-color: transparent;
+  box-shadow:none;
+  border-bottom: 1px solid $color-primary-dark;
+  border-radius: 0;
+  transform: translateX(-3rem);
+  transition: transform .5s, opacity .8s;
+  z-index: 10;
+ 
+}
+#other:checked ~ #other-input{
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+
+}
+

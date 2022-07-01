@@ -1,0 +1,22 @@
+extends base
+block append head 
+    script(src="/js/login.js" defer) ;
+block main 
+    main.login 
+        .login__form
+            h2.h2 Welcome!
+            h3.h3 Please fill the form to login. 
+            form.form.u-width-60
+                .form__group
+                    label.form__label(for='username') Username
+                    input#username.form__input.form__input--validate(type='text' placeholder='pliny'  required)
+                .form__group
+                    label.form__label(for='password') Password
+                    input#password.form__input.form__input--pass.form__input--validate(type='password'  placeholder='••••••••' minlength='5' required)
+                .form__group
+                    button.btn.btn--animate.u-mrg-top-s(type='submit') Login
+            .link-box        
+                p.link-text You don't have an account?       
+                a.link.link--m(href='/signUp') Sign-up!  
+            .link-box     
+                a.link(href='/forgotPassword') Forgot your password?        

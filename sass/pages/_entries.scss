@@ -1,0 +1,16 @@
+@use "../abstracts/" as *;
+
+.entries {
+  @include flex-centered(column);
+  position: relative;
+  min-height: 100vh;
+  padding: 3rem;
+  background-color: $color-white;
+
+ .link{
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color:$color-primary-dark;
+
+ }
+}

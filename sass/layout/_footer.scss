@@ -1,0 +1,15 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.footer{
+    @include flex-centered(column);
+    padding:3rem;
+    background-color: $color-primary-light;
+    font-size: 2rem;
+    color: $color-black;
+  
+    &__link{
+          color: $color-black;
+        }
+      
+}

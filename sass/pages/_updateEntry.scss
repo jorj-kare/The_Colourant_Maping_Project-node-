@@ -1,0 +1,12 @@
+@use "../abstracts/" as *;
+
+.update-entry{
+    @include flex-centered(column);
+    background-color: $color-white;
+
+    #btnClose{
+        width: 6rem;
+        height:4rem;
+    }
+    
+}

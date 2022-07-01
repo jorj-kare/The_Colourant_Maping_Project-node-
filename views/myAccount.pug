@@ -1,0 +1,63 @@
+extends base
+
+
+block head 
+    script(src="/js/myAccount.js" defer)
+block main 
+    main.account
+        .account__form
+            .background
+            h2.h2 My account 
+            h3.h3 Here you can see and change your account information.
+            form.form
+                .form__group.email-group
+                    label.form__label(for='email') Email
+                    .flex-container-r
+                        input#email.form__input(type='email' required value = `${user.email}` disabled  )
+                        button.btn.btn--small  ✎     
+                .form__group.username-group
+                    label.form__label(for='username') Username
+                    .flex-container-r
+                        input#username.form__input(type='text' minlength=3 maxlength=15 required disabled value = `${user.username}`)
+                        button.btn.btn--small(type='button')  ✎   
+                    
+                .form__group.firstName-group
+                        label.form__label(for='firstName') First name
+                        .flex-container-r
+                            input#firstName.form__input(type='text' value = `${user.firstName}` required disabled )
+                            button.btn.btn--small(type='button')  ✎   
+                .form__group.lastName-group
+                    label.form__label(for='lastName') Last Name
+                    .flex-container-r
+                        input#lastName.form__input(type='text' value = `${user.lastName}` required disabled )  
+                        button.btn.btn--small(type='button')  ✎  
+                .form__group.affiliation-group
+                    label.form__label(for='affiliation') Affiliation
+                    .flex-container-r
+                        -if(user.affiliation) 
+                            input#affiliation.form__input(type='text'  value = `${user.affiliation}` disabled )
+                        -else
+                            input#affiliation.form__input(type='text'  placeholder='No current affiliation')
+                        button.btn.btn--small(type='button')  ✎
+                .form__group.button-group
+                    button#updateAccount.btn.btn--animate.u-mrg-top-s(type='submit') Update account
+                
+            .c-center.u-mrg-top-m
+                button#changePassword.btn.btn--medium Change password
+                //- button#deleteAccount.btn.btn--medium.btn--red Delete account
+        -if(user.entries.length > 0) 
+            .list__container.u-mrg-top-m 
+                h2.h2.h2--dark My entries 
+                h3.h3.h3--dark Click on the link to see more information about the entry or to change it. 
+                h4.h4.h4--dark.u-mrg-top-m= `You have ${user.entries.length} entries.`
+                ul.list.u-mrg-top-m
+                    each entry in user.entries       
+                        -const chrStart = `${entry.chronology.start}`.includes("-") ? `${entry.chronology.start.toString().replace("-", "")} BCE` : `${entry.chronology.start} CE`;
+                        -const chrEnd = `${entry.chronology.end}`.includes("-") ? `${entry.chronology.end.toString().replace("-", "")} BCE` : `${entry.chronology.end} CE`;
+                        li.list__item(data-id=`"${entry.id}"`)
+                            -if(entry.checked ) 
+                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, pigment: (${entry.pigment}), chronology:(${chrStart}, ${chrEnd}). `
+                            -else
+                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, pigment:(${entry.pigment}), chronology: (${chrStart}, ${chrEnd}). `
+                                    span  -unchecked-
+

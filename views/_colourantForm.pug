@@ -1,0 +1,124 @@
+form.form( autocomplete="off")
+    fieldset.form__fieldset.form__fieldset--dark              
+        .map__container2
+            .map-box#map
+        legend.form__legend.form__legend--dark Provenience (place of discovery)
+        #coords.row.u-width-80.u-mrg-top-m            
+            .form__group.u-width-50.u-mrg-rgt
+                label.form__label.form__label--dark(for='latitude' step='any') Latitude
+                input#latitude.form__input(type="number" step='0.0000001' ) 
+            .form__group.u-width-50 
+                label.form__label.form__label--dark(for='longitude') Longitude
+                input#longitude.form__input(type="number" step='0.0000001')
+            .form__group
+                input#loc(hidden )
+            .tooltip.tooltip--dark ?
+                span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter 
+    fieldset#details.form__fieldset
+        
+        legend.form__legend Details
+        .row
+            .form__group.u-width-80
+                h3.h3.h3--dark Pigments 
+                #pigments.form__group-row
+                    each pigment in data.pigments
+                        .form__group-cb
+                            input.form__checkbox(type="checkbox" id=`${pigment}` name="pigment" value=`${pigment}`)
+                            span.custom-cb
+                            label.form__label-cb(for=`${pigment}` )= `${pigment}`.replace("-", " ")       
+                            if pigment === 'other'
+                                input#other-input.form__input.form__input--small.form__input--border
+                            
+
+            .tooltip ?
+                span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter 
+        .row
+            .form__group.u-width-80.u-mrg-top-s
+                h3.h3.h3--dark Chronology
+                .form__group--border
+                    label.form__label(for="chr-start") From
+                    div
+                        select#chr-start.form__dropdown.chr( name="chr-start"  ) 
+                            option(value="BCE" selected) BCE
+                            option(value="CE") CE            
+                        select#century-start.form__dropdown.century( name="century-start"   ) 
+                            option(value="" disabled selected hidden) Select chronology
+                            optgroup.bce-optgroup(label="BCE" ) 
+                                each chr in data.chronologies
+                                    if chr <= 0
+                                        option(class="bce" value=`${chr}`)=`${chr * -1} `
+                            optgroup.ce-optgroup(label="CE" disabled hidden) 
+                                each chr in data.chronologies  
+                                    if chr >= 0
+                                        option(class="ce" value=`${chr}`)=`${chr}`  
+                    label.form__label(for="chr-end") to
+                    div
+                        select#chr-end.form__dropdown.chr( name="chr-end" ) 
+                            option(value="BCE" selected) BCE
+                            option(value="CE") CE            
+                        select#century-end.form__dropdown.century( name="century-end" ) 
+                            option(value="" disabled selected hidden) Select chronology
+                            optgroup.bce-optgroup(label="BCE" ) 
+                                each chr in data.chronologies
+                                    if chr <= 0
+                                        option(class="bce" value=`${chr}`)=`${chr * -1} `
+                            optgroup.ce-optgroup(label="CE" disabled hidden) 
+                                each chr in data.chronologies  
+                                    if chr >= 0
+                                         option(class="ce" value=`${chr}`)=`${chr}`    
+            .tooltip ?
+                span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
+        .form__group.u-width-80.u-mrg-top-s
+            h3.h3.h3--dark Archeological context
+            textarea#archeological-context.form__input.form__input--border( rows="3" ) 
+        .row
+            .form__group.u-width-80.u-mrg-top-s
+                h3.h3.h3--dark Analytical techniques
+                #analytical-techniques.form__group-row
+                    each technique in data.techniques
+                        .form__group-cb
+                            input.form__checkbox(type="checkbox" id=`${technique}` name="technique" value=`${technique}`)
+                            span.custom-cb
+                            label.form__label-cb(for=`${technique}` )= `${technique}`
+                            if technique === 'other'
+                                    input#other-input.form__input.form__input--small.form__input--border
+            .tooltip ?
+                span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
+        .form__group.u-width-80.u-mrg-top-s
+            label.form__label(for='references') References
+            textarea#references.form__input.form__input--border( rows="5" ) 
+        .row
+            .form__group.u-mrg-top-s.u-width-80
+                h3.h3.h3--dark Category of finds
+                #category-of-find.form__group-row
+                    each find in data.categoryOfFind
+                        .form__group-cb
+                            input.form__checkbox(type="radio" id=`${find}` name="category-of-find" value=`${find}`)
+                            span.custom-cb
+                            label.form__label-cb(for=`${find}` )= `${find}`.replace("-", " ")
+                            if find === 'other'    
+                                input#other-input.form__input.form__input--small.form__input--border
+            .tooltip ?
+                    span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
+        .form__group.u-width-80.u-mrg-top-s
+            label.form__label(for='notes') Notes
+            textarea#notes.form__input.form__input--border( rows="5" )
+        .form__group.u-width-80.u-mrg-top-s(hidden)
+            label(for='log' hidden) Log
+            textarea#log.form__input.form__input--border( rows="3" hidden) 
+        if user
+            input#user-id(value=`${user.id}` hidden )     
+            input#username(value=`${user.username}` hidden )
+        if user && user.role=== "admin"
+            #checkedEl.form__group-row.u-width-80.u-mrg-top-s
+                    .form__group-cb
+                        input.form__checkbox(type="radio" id=`true` name="checkedEl" value= `true`)
+                        span.custom-cb
+                        label.form__label-cb(for=`true`) Checked          
+                    .form__group-cb
+                        input.form__checkbox(type="radio" id=`false` name="checkedEl" value=`false`)
+                        span.custom-cb
+                        label.form__label-cb(for=`false`) Unchecked          
+
+    .centered
+        button#btn-submit.btn.btn--dark.btn--animate.u-width-50(type="submit") Create  
