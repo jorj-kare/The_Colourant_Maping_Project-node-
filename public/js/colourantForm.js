@@ -1,45 +1,50 @@
 /* eslint-disable */
-
 // ELEMENTS
-const pigmentsInputs = document.getElementById("pigments")
-  ? document.getElementById("pigments").querySelectorAll("input")
-  : "";
-const categoryOfFindInputs = document.getElementById("category-of-find")
-  ? document.getElementById("category-of-find").querySelectorAll("input")
-  : "";
-const analyticalTechniquesInputs = document.getElementById(
-  "analytical-techniques"
-)
-  ? document.getElementById("analytical-techniques").querySelectorAll("input")
-  : "";
-const checkedEl = document.getElementById("checkedEl")
-  ? document.getElementById("checkedEl").querySelectorAll("input")
-  : "";
-const coords = document.getElementById("coords");
-const references = document.getElementById("references");
-const notes = document.getElementById("notes");
-const archeologicalContext = document.getElementById("archeological-context");
-const centuryStart = document.getElementById("century-start");
-const centuryEnd = document.getElementById("century-end");
-const chrEnd = document.getElementById("chr-end");
-const chrStart = document.getElementById("chr-start");
-const lat = document.getElementById("latitude");
-const lng = document.getElementById("longitude");
-const loc = document.getElementById("loc");
-
+// Colourant from variables
+export const cfv = {
+  pigmentsInputs: document.getElementById("pigments")
+    ? document.getElementById("pigments").querySelectorAll("input")
+    : "",
+  categoryOfFindInputs: document.getElementById("category-of-find")
+    ? document.getElementById("category-of-find").querySelectorAll("input")
+    : "",
+  analyticalTechniquesInputs: document.getElementById("analytical-techniques")
+    ? document.getElementById("analytical-techniques").querySelectorAll("input")
+    : "",
+  checkedEl: document.getElementById("checkedInputs")
+    ? document.getElementById("checkedInputs").querySelectorAll("input")
+    : "",
+  coords: document.getElementById("coords"),
+  references: document.getElementById("references"),
+  notes: document.getElementById("notes"),
+  archeologicalContext: document.getElementById("archeological-context"),
+  centuryStart: document.getElementById("century-start"),
+  centuryEnd: document.getElementById("century-end"),
+  chrEnd: document.getElementById("chr-end"),
+  chrStart: document.getElementById("chr-start"),
+  lat: document.getElementById("latitude"),
+  lng: document.getElementById("longitude"),
+  loc: document.getElementById("loc"),
+};
 // FUNCTIONS
-const hideCenturies = (e) => {
+
+const trimArrValues = (arr) => {
+  const trimmedArr= arr.filter((el) => el.trim() !== "").map((el) => el.trim());
+  return trimmedArr;
+};
+
+export const hideCenturies = (e) => {
   if (e.target.id === "century-start" || e.target.id === "chr-start") {
-    const centuries = centuryEnd.querySelectorAll("option");
-    centuryEnd.selectedIndex = 0;
+    const centuries = cfv.centuryEnd.querySelectorAll("option");
+    cfv.centuryEnd.selectedIndex = 0;
     centuries.forEach((el) => {
       if (el.value === "") return;
-      if (+el.value <= +centuryStart.value) {
-        centuryEnd.removeAttribute("disabled");
+      if (+el.value <= +cfv.centuryStart.value) {
+        cfv.centuryEnd.removeAttribute("disabled");
         el.setAttribute("hidden", "true");
         el.setAttribute("disabled", "true");
       }
-      if (+el.value >= +centuryStart.value) {
+      if (+el.value >= +cfv.centuryStart.value) {
         el.removeAttribute("hidden");
         el.removeAttribute("disabled");
       }
@@ -47,7 +52,7 @@ const hideCenturies = (e) => {
   }
 };
 
-const setRemoveAttributes = function (e) {
+export const setRemoveAttributes = function (e) {
   if (e.target.className === "form__dropdown chr") {
     e.target.parentElement.querySelector(".century").selectedIndex = 0;
     const bceOptgroup = e.target.parentElement.querySelector(".bce-optgroup");
@@ -58,16 +63,18 @@ const setRemoveAttributes = function (e) {
       ceOptgroup.removeAttribute("hidden");
       ceOptgroup.removeAttribute("disabled");
       if (e.target.id === "chr-start") {
-        chrEnd.firstElementChild.setAttribute("disabled", "true");
-        chrEnd.selectedIndex = 1;
-        centuryEnd
+        cfv.chrEnd.firstElementChild.setAttribute("disabled", "true");
+        cfv.chrEnd.selectedIndex = 1;
+        cfv.centuryEnd
           .querySelector(".bce-optgroup")
           .setAttribute("hidden", "true");
-        centuryEnd
+        cfv.centuryEnd
           .querySelector(".bce-optgroup")
           .setAttribute("disabled", "true");
-        centuryEnd.querySelector(".ce-optgroup").removeAttribute("hidden");
-        centuryEnd.querySelector(".ce-optgroup").removeAttribute("disabled");
+        cfv.centuryEnd.querySelector(".ce-optgroup").removeAttribute("hidden");
+        cfv.centuryEnd
+          .querySelector(".ce-optgroup")
+          .removeAttribute("disabled");
       }
     }
     if (e.target.value === "BCE") {
@@ -76,39 +83,50 @@ const setRemoveAttributes = function (e) {
       bceOptgroup.removeAttribute("hidden");
       bceOptgroup.removeAttribute("disabled");
       if (e.target.id === "chr-start") {
-        chrEnd.firstElementChild.removeAttribute("disabled");
+        cfv.chrEnd.firstElementChild.removeAttribute("disabled");
       }
     }
   }
 };
 
-const getFormValues = () => {
+export const createChronologyString = (data) => {
+  const start = data.chronology.start.toString().includes("-")
+    ? `${data.chronology.start.toString().replace("-", "")} BCE`
+    : `${data.chronology.start} CE`;
+  const end = data.chronology.end.toString().includes("-")
+    ? `${data.chronology.end.toString().replace("-", "")} BCE`
+    : `${data.chronology.end} CE`;
+  return { start, end };
+};
+
+export const getFormValues = () => {
   let categoryOfFind = [];
   let analyticalTechniques = [];
   let pigments = [];
-  let isChecked ;
-  if (checkedEl) {
-    checkedEl.forEach((el) => {
+  let isChecked;
+  if (cfv.checkedEl) {
+    cfv.checkedEl.forEach((el) => {
       if (el.checked) {
-        isChecked= el.value;
+        isChecked = el.value;
       }
     });
   } else {
     isChecked = false;
   }
 
-  categoryOfFindInputs.forEach((el) => {
+  cfv.categoryOfFindInputs.forEach((el) => {
     if (el.checked) {
-      categoryOfFind = el.value;
+      categoryOfFind = el.value.trim();
     }
   });
 
   // Get the checked values and pushes them to an array
-  pigmentsInputs.forEach((el) => {
+  cfv.pigmentsInputs.forEach((el) => {
     if (el.checked) {
       let value = el.value;
       if (value.includes(",")) {
         value = value.split(",");
+        value = trimArrValues(value)
         pigments.push(...value);
       } else {
         pigments.push(value);
@@ -116,32 +134,33 @@ const getFormValues = () => {
     }
   });
 
-  analyticalTechniquesInputs.forEach((el) => {
+  cfv.analyticalTechniquesInputs.forEach((el) => {
     if (el.checked) {
       let value = el.value;
       if (value.includes(",")) {
         value = value.split(",");
+        value= trimArrValues(value)
         analyticalTechniques.push(...value);
       } else {
         analyticalTechniques.push(value);
       }
     }
   });
-  
+
   const data = {
     location: {
-      address: loc.value,
-      coordinates: [lat.value * 1, lng.value * 1],
+      address: cfv.loc.value,
+      coordinates: [cfv.lat.value * 1, cfv.lng.value * 1],
     },
-    chronology: { start: +centuryStart.value, end: +centuryEnd.value },
+    chronology: { start: +cfv.centuryStart.value, end: +cfv.centuryEnd.value },
     pigment: pigments,
     analyticalTechniques,
     categoryOfFind,
-    archeologicalContext: archeologicalContext.value,
-    references: references.value,
-    notes: notes.value,
+    archeologicalContext: cfv.archeologicalContext.value,
+    references: cfv.references.value,
+    notes: cfv.notes.value,
     checked: isChecked,
   };
-  
-  return data
+
+  return data;
 };

@@ -6,6 +6,10 @@
   font-size: 1.7rem;
   font-weight: 300;
   padding: 3rem;
+  @include break($media-xSmall){
+    // padding: 3rem 0;
+  }
+
 
   &__input {
     width: 100%;
@@ -27,9 +31,8 @@
       font-weight: 200;
       opacity: 1;
     }
-    &:focus{
+    &:focus {
       outline: 1.5px solid $color-orange-dark;
-      
     }
     &--validate {
       border: 3px solid transparent;
@@ -48,48 +51,45 @@
     &[type="password"]::placeholder {
       font-weight: 700;
     }
-  &--small{
-  width: 20ch;
-  padding:0.2rem .5rem;
-  font-size: 1.6rem;
-  }
+    &--small {
+      width: 20ch;
+      padding: 0.2rem 0.5rem;
+      font-size: 1.6rem;
+    }
 
     &--border {
-      border: 1px solid $color-primary-dark;
-      &:focus{
-        outline:transparent;
-        box-shadow: 0 .2rem 1rem $color-primary-light ;
+      border: 1px solid $color-primary-light;
+      &:focus {
+        outline: transparent;
+        box-shadow: 0 0.2rem 1rem $color-primary-light;
       }
     }
-    &--btn{
+    &--btn {
       display: flex;
       flex-wrap: wrap;
-      
-      input{
+
+      input {
         width: 80%;
-        padding-left:1.3rem ;
+        padding-left: 1.3rem;
         border-radius: 0;
         border-radius: 5px 0 0 5px;
-        &:focus{
+        &:focus {
           outline: transparent;
         }
       }
-      button{
+      button {
         width: 20%;
         border-radius: 0;
         background-color: $color-orange-dark;
         color: $color-white;
-        border-radius:0 5px 5px 0;
-        transition: all .4s ;
+        border-radius: 0 5px 5px 0;
+        transition: all 0.4s;
         &:active,
-        &:hover{
+        &:hover {
           transform: translateX(5px);
-          
         }
-        
       }
     }
-
   }
 
   &__checkbox {
@@ -113,37 +113,43 @@
   &__fieldset {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
     margin-bottom: 5rem;
     padding: 5rem;
-    border: 1.5px solid $color-primary-dark;
+    border: 3px double $color-primary-dark;
     border-radius: 5px;
-    &:disabled{
-      background-color: #B1D0E0;
-      & input,textarea,select,.form__group-cb  label {
-       color: rgb(108, 107, 107);
-       background-color: #B1D0E0;
-        
+    &:disabled {
+      background-color: #b1d0e0;
+      & input,
+      textarea,
+      select,
+      .form__group-cb label {
+        color: rgb(108, 107, 107);
+        background-color: #b1d0e0;
       }
-     
+
       .form__checkbox:checked ~ label {
         color: $color-purple;
       }
     }
+
+    @include break($media-large) {
+      padding: 5rem 3rem;
+    }
+   
   }
   &__fieldset--dark {
     padding-top: 10rem;
     position: relative;
     background-color: $color-primary-light;
     border-color: $color-primary-light;
-    &:disabled{
-     input{
-       border:1px solid  $color-primary-dark;
-     }
-     label{
-       color:$color-primary-dark;
-     }
+    &:disabled {
+      input {
+        border: 1px solid $color-primary-dark;
+      }
+      label {
+        color: $color-primary-dark;
+      }
     }
   }
 
@@ -158,14 +164,18 @@
       top: 1rem;
       left: 5rem;
       color: $color-white;
+      @include break($media-large){
+        left:3rem;
+      }
     }
+    
   }
   &__group {
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
     &--border {
-      border: 1px solid $color-primary-dark;
+      border: 1px solid $color-primary-light;
       border-radius: 5px;
       padding: 2rem;
     }
@@ -185,7 +195,7 @@
     flex-wrap: wrap;
     width: 100%;
     padding: 2rem;
-    border: 1px solid $color-primary-dark;
+    border: 1px solid $color-primary-light;
     border-radius: 5px;
   }
 
@@ -224,7 +234,7 @@
     position: relative;
     padding: 0.3rem 0.5rem;
     background-color: transparent;
-    border: 1px solid $color-primary-dark;
+    border: 1px solid $color-primary-light;
     border-radius: 5px;
     color: $color-primary-dark;
   }
@@ -245,22 +255,33 @@
 #other-input {
   visibility: hidden;
   opacity: 0;
-  margin-left:  .5rem;
-  margin-right: .1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.1rem;
   border: none;
   background-color: transparent;
-  box-shadow:none;
+  box-shadow: none;
   border-bottom: 1px solid $color-primary-dark;
   border-radius: 0;
   transform: translateX(-3rem);
-  transition: transform .5s, opacity .8s;
+  transition: transform 0.5s, opacity 0.8s;
   z-index: 10;
- 
 }
-#other:checked ~ #other-input{
+#other:checked ~ #other-input {
   visibility: visible;
   opacity: 1;
   transform: translateX(0);
-
 }
-
+.form-box {
+  @include form-style(column, $color-primary-light);
+  flex-basis: 60%;
+  @include break($media-large){
+    flex-basis: 80%;
+  }
+  @include break($media-small){
+    flex-basis: 90%;
+  }
+  @include break($media-xSmall){
+    flex-basis: 100%;
+    padding: 3rem;
+  }
+}

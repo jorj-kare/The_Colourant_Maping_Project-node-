@@ -79,18 +79,6 @@ exports.getContactPage = (req, res) => {
 };
 
 exports.getEntriesTable = async (req, res) => {
-  const filters = [{}];
-  if (!req.user || (req.user && req.user.role !== "admin")) {
-    filters.push = { checked: true };
-  }
-  const entries = await Colourant.aggregate([
-    { $unwind: "$pigment" },
-    { $match: { $and: filters } },
-    { $sort: { createdAt: -1 } },
-  ]);
-  await Colourant.populate(entries, {
-    path: "contributor",
-  });
-  // console.log(entries);
-  res.status(200).render("entries", { entries });
+ 
+  res.status(200).render("entries");
 };

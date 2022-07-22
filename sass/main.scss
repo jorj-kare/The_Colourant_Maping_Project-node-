@@ -5,6 +5,7 @@
 @use "./layout/navigation";
 @use "./layout/footer";
 @use "./pages/overview";
+@use "./pages/contact";
 @use "./pages/login";
 @use "./pages/logout";
 @use "./pages/signUp";
@@ -22,3 +23,5 @@
 @use "./components/containers";
 @use "./components/tooltips";
 @use "./components/table";
+@use "./components/alert";
+@use "./components/mapbox";

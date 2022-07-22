@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "canvas-sketch": "^0.7.5",
     "cookie-parser": "^1.4.6",
     "csv-express": "^1.2.2",
     "dotenv": "^16.0.0",

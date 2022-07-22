@@ -1,4 +1,5 @@
 /* eslint-disable*/
+import { showAlert } from "./alert.js";
 const form = document.querySelector(".form");
 const signUp = async (
 userData
@@ -17,13 +18,13 @@ userData
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      alert("Congratulations you have now an account!");
+      showAlert("Congratulations you have now an account!",'success',3);
       window.setTimeout(() => {
         location.assign("/");
       }, 1000);
     }
   } catch (err) {
-    alert(err.message);
+    showAlert(err.message,'error',5);
   }
 };
 

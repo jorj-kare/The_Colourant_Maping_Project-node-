@@ -1,94 +1,94 @@
 extends base
-
-mixin detailsTd(data)
-    td.table__data
-        -const strArr = data.split(' ');
-        if strArr.length > 7
-            details 
-                summary= `${strArr.slice(0,10).join(" ")}`
-                p=`${strArr.slice(10).join(" ")}`                                                  
-        else 
-            p= `${data}`
-
 block head 
     script(src="/js/entries.js" defer)  
 block main
-    main.entries 
+    main.entries
         h2.h2.h2--dark.u-mrg-bottom-s Database
         a.link(href="/api/v1/colourants/exportData") Export to cvs⤓
-        table.table
-            thead.table__head 
-                tr.table__row
-                    th.table__header Created at 
-                    th.table__header Pigment 
-                    th.table__header Chronology 
-                    th.table__header Category of find 
-                    th.table__header Location 
-                    th.table__header Analytical techniques
-                    th.table__header Archeological context 
-                    th.table__header Notes 
-                    th.table__header References
-                    th.table__header Contributor
-                    th.table__header Edited at
-                    if user && user.role === 'admin'
-                        th.table__header Checked
-                        th.table__header Edit
-            tbody.table__body
-                each entry in entries       
-                    tr.table__row       
-                        td.table__data= `${entry.createdAt.toLocaleDateString('en-Gb')}`
-                        td.table__data= `${entry.pigment}`
-                        td.table__data= `${entry.chronology.start}, ${entry.chronology.end}`
-                        td.table__data= `${entry.categoryOfFind}`
-                        td.table__data
-                            details 
-                                summary=`${entry.location.address}`
-                                p -------------------
-                                p #[strong Coordinates:]
-                                p=`${entry.location.coordinates}`
-
-                        td.table__data= `${entry.analyticalTechniques}`
-                        +detailsTd(entry.archeologicalContext) 
-                        +detailsTd(entry.notes) 
-                        +detailsTd(entry.references) 
-                        td.table__data
+        div.centered
+            .sort-by.flex-container-r
+                label.form__label(for="sort-category") Sort by:   
+                select#sort-category.form__dropdown 
+                    option(value="createdAt" selected) Created at
+                    option(value="pigment") Pigment 
+                    option(value="chronology") Chronology
+                select#sort-order.form__dropdown
+                    option(value=-1 selected) Descending 
+                    option(value=1) Ascending 
+            .table-box
+                table.table
+                    thead.table__head 
+                        tr.table__row
+                            th.table__header Created at 
+                            th.table__header Pigment 
+                            th.table__header Chronology 
+                            th.table__header Category of find 
+                            th.table__header Location 
+                            th.table__header Analytical techniques
+                            th.table__header Archeological context 
+                            th.table__header Notes 
+                            th.table__header References
+                            th.table__header Contributor
+                            th.table__header Edited at
                             if user && user.role === 'admin'
-                                details 
-                                    summary=`${entry.contributor.username} `
-                                    p #[strong First name:]
-                                    p=`${entry.contributor.firstName}` 
-                                    p #[strong Last name:]
-                                    p=`${entry.contributor.lastName}`
-                                    p #[strong Email:] 
-                                    p=`${entry.contributor.email} ` 
-                                    p #[strong Affiliation:]
-                                    p=`${entry.contributor.affiliation} ` 
-                            else    
-                                p #[strong Username:] 
-                                = `${entry.contributor.username}`
-                        td.table__data
-                            if entry.edited.length >= 1
-                                details 
-                                    summary=`Edited ${entry.edited.length} times`
-                                    each edit in entry.edited
-                                        p #[strong Edited from:] 
-                                        p=`${edit.from}`
-                                        p #[strong Edited at:]
-                                        p=`${edit.at.toLocaleDateString('en-Gb')}`
-                                        p #[strong Log:]
-                                        p=`${edit.log}`
-                                        p= `---------------`
-                            else    
-                                p The entry has not been edited            
-                        if user && user.role === 'admin'
-                            td.table__data  
-                                if entry.checked
-                                    = 'Checked'
-                                else
-                                    ='Unchecked'
-                            td.table__data.table__data--hover
-                                a(href=`/updateEntry?id=${entry._id}`) ✎           
-                                
+                                th.table__header Checked
+                                th.table__header Edit
+                    tbody.table__body
+                //-     each entry in entries       
+                //-         tr.table__row       
+                //-             td.table__data= `${entry.createdAt.toLocaleDateString('en-Gb')}`
+                //-             td.table__data= `${entry.pigment}`
+                //-             td.table__data= `${entry.chronology.start}, ${entry.chronology.end}`
+                //-             td.table__data= `${entry.categoryOfFind}`
+                //-             td.table__data
+                //-                 details 
+                //-                     summary=`${entry.location.address}`
+                //-                     p -------------------
+                //-                     p #[strong Coordinates:]
+                //-                     p=`${entry.location.coordinates}`
+
+                //-             td.table__data= `${entry.analyticalTechniques}`
+                //-             +detailsTd(entry.archeologicalContext) 
+                //-             +detailsTd(entry.notes) 
+                //-             +detailsTd(entry.references) 
+                //-             td.table__data
+                //-                 if user && user.role === 'admin'
+                //-                     details 
+                //-                         summary=`${entry.contributor.username} `
+                //-                         p #[strong First name:]
+                //-                         p=`${entry.contributor.firstName}` 
+                //-                         p #[strong Last name:]
+                //-                         p=`${entry.contributor.lastName}`
+                //-                         p #[strong Email:] 
+                //-                         p=`${entry.contributor.email} ` 
+                //-                         p #[strong Affiliation:]
+                //-                         p=`${entry.contributor.affiliation} ` 
+                //-                 else    
+                //-                     p #[strong Username:] 
+                //-                     = `${entry.contributor.username}`
+                //-             td.table__data
+                //-                 if entry.edited.length >= 1
+                //-                     details 
+                //-                         summary=`Edited ${entry.edited.length} times`
+                //-                         each edit in entry.edited
+                //-                             p #[strong Edited from:] 
+                //-                             p=`${edit.from}`
+                //-                             p #[strong Edited at:]
+                //-                             p=`${edit.at.toLocaleDateString('en-Gb')}`
+                //-                             p #[strong Log:]
+                //-                             p=`${edit.log}`
+                //-                             p= `---------------`
+                //-                 else    
+                //-                     p The entry has not been edited            
+                //-             if user && user.role === 'admin'
+                //-                 td.table__data  
+                //-                     if entry.checked
+                //-                         = 'Checked'
+                //-                     else
+                //-                         ='Unchecked'
+                //-                 td.table__data.table__data--hover
+                //-                     a(href=`/updateEntry?id=${entry._id}`) ✎           
+
 
 
 

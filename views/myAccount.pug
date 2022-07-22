@@ -2,10 +2,10 @@ extends base
 
 
 block head 
-    script(src="/js/myAccount.js" defer)
+    script(type="module" src="/js/myAccount.js" defer)
 block main 
     main.account
-        .account__form
+        .account__form.form-box
             .background
             h2.h2 My account 
             h3.h3 Here you can see and change your account information.
@@ -42,7 +42,7 @@ block main
                 .form__group.button-group
                     button#updateAccount.btn.btn--animate.u-mrg-top-s(type='submit') Update account
                 
-            .c-center.u-mrg-top-m
+            .c-center
                 button#changePassword.btn.btn--medium Change password
                 //- button#deleteAccount.btn.btn--medium.btn--red Delete account
         -if(user.entries.length > 0) 

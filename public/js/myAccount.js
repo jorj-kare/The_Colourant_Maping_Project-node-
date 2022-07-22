@@ -45,11 +45,11 @@ const updateAccount = async (userData) => {
       throw new Error(data.message);
     }
     if (data.status === "success") {
-      alert("Your account have been updated.");
+      showAlert("Your account have been updated.",'success',3);
       location.reload();
     }
   } catch (err) {
-    alert(err);
+    showAlert(err,'error',5);
   }
 };
 
@@ -76,9 +76,9 @@ const updatePassword = async (
     if (!res.ok) {
       throw new Error(data.message);
     } else if (data.status === "success")
-      alert("Your password have been updated.");
+      showAlert("Your password have been updated.",'success',3);
   } catch (err) {
-    alert(err);
+    showAlert(err,'error',5);
   }
 };
 const hideShowForm = (...elements) => {
@@ -111,9 +111,9 @@ editInput();
 
 //     if (!res.ok) {
 //       throw new Error(data.message);
-//     } else alert("Your account have been deleted.");
+//     } else showAlert("Your account have been deleted.",'success,3);
 //   } catch (err) {
-//     alert(err);
+//     showAlert(err,'error',5);
 //   }
 // };
 
@@ -136,11 +136,11 @@ btnUpdateAccount.addEventListener("click", (e) => {
 // Show form Change password
 btnChangePassword.addEventListener("click", (e) => {
   e.preventDefault();
-  const markup = `<div class="password__form u-hidden">
+  const markup = `<div class="password__form form-box u-hidden">
   <button class="btn btn--small btn--close">⇽</button>
   <h2 class="h2" >My password</h2> 
   <h3 class="h3"> Here you can change your password.</h3>
-  <form class='form u-mrg-top-s'>  
+  <form class='form '>  
     <div class='form__group'>
       <label class='form__label' for='currentPassword'> Current password</label>
       <input class='form__input form__input--validate' id="currentPassword" minlength="5" required placeholder="••••••••" type="password">

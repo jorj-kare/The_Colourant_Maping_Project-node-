@@ -1,49 +1,49 @@
 @use "../abstracts" as *;
 
-
 .login {
   @include flex-centered();
-  min-height: 100%;
+  background-color: $color-white;
+  padding: 10rem 3rem 5rem 3rem;
+  @include break($media-large) {
+    padding: 5rem 3rem;
+  }
+  .h2{
+    border-bottom: 3px double $color-white;
+    margin-bottom: 1rem;
+  }
 
-  &__form {
-    @include form-style(column, $color-primary-light);
-    flex-basis: 50%;
+  .link-box {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
   }
-}
-
-.link-box {
-  display: flex;
-  align-items: center;
-  padding: .5rem;
-  
-}
-.link {
-  padding:  0  0.3rem;
-  border: 1.5px solid transparent;
-  border-bottom: 1px solid $color-orange;
-  color: $color-white;
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 0.1rem; 
-  transition: all .5s ;
-  &:hover,
-  &:active {
-    border-radius: 50px;
-    border-left-color: $color-orange;
-    border-right-color: $color-orange;
-    border-bottom-color: transparent;
-    padding:  0  0.3rem;
+  .link {
+    padding: 0 0.3rem;
+    border: 1.5px solid transparent;
+    border-bottom: 1px solid $color-orange;
+    color: $color-white;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    transition: all 0.5s;
+    &:hover,
+    &:active {
+      border-radius: 50px;
+      border-left-color: $color-orange;
+      border-right-color: $color-orange;
+      border-bottom-color: transparent;
+      padding: 0 0.3rem;
+    }
+    &--m {
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
   }
-  &--m{
-    font-size: 1.6rem;
-    font-weight: 400;
-    
+  .link-text {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    color: $color-primary-dark;
   }
-}
-.link-text {
-  margin-right: 1rem;
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 0.1rem;
-  color: $color-primary-dark;
 }

@@ -17,17 +17,24 @@ app.use(express.json({ limit: "10kb" }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(
+  "/mapboxgl-spiderifier",
+  express.static("node_modules/mapboxgl-spiderifier")
+);
+app.use("/mapbox-gl", express.static("node_modules/mapbox-gl"));
 const scriptSrcUrls = [
   "https://api.tiles.mapbox.com/",
   "https://api.mapbox.com/",
   "https://events.mapbox.com/",
+  "https://kit.fontawesome.com/",
   "https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js",
 ];
 const styleSrcUrls = [
   "https://api.mapbox.com/",
   "https://api.tiles.mapbox.com/",
   "https://fonts.googleapis.com/",
+  "https://ka-f.fontawesome.com/",
+  "https://kit.fontawesome.com/",
 ];
 const connectSrcUrls = [
   "https://api.mapbox.com/",
@@ -35,8 +42,11 @@ const connectSrcUrls = [
   "https://b.tiles.mapbox.com/",
   "https://events.mapbox.com/",
   "https://api.geoapify.com/",
+  "https://ka-f.fontawesome.com/",
+  "https://kit.fontawesome.com/",
+  
 ];
-const fontSrcUrls = ["fonts.googleapis.com", "fonts.gstatic.com"];
+const fontSrcUrls = ["fonts.googleapis.com", "fonts.gstatic.com","ka-f.fontawesome.com",];
 app.use(
   helmet.contentSecurityPolicy({
     directives: {

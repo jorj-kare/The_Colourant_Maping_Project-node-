@@ -22,7 +22,10 @@
   }
 
   @keyframes fade-out {
-    0%{
+   0%{
+    opacity: 1;
+   }
+    50%{
       opacity: .5;
 
     }

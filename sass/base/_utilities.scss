@@ -14,28 +14,31 @@
 .u-mrg-bottom-m {
   margin-bottom: 5rem !important;
 }
-.u-mrg-rgt{
+.u-mrg-rgt {
   margin-right: 2rem;
 }
-.u-width-50 {
+.u-width-s {
   width: 50% !important;
 }
-.u-width-60 {
+.u-width-m {
   width: 60%;
 }
-.u-width-80 {
-  width: 80%  !important;
+.u-width-l {
+  width: 80% !important;
+  @include break($media-medium){
+    width: 100% !important;
+  }
 }
 
 .u-hidden {
- 
   display: none !important;
-
 }
-.u-fade-in{
-  animation: fade-in .5s forwards;
+.u-transparent {
+  opacity: 0 !important;
 }
-.u-fade-out{
-  animation: fade-out .5s forwards;
+.u-fade-in {
+  animation: fade-in 0.3s forwards;
 }
-
+.u-fade-out {
+  animation: fade-out 0.3s forwards;
+}

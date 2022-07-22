@@ -4,14 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-image: linear-gradient(
     rgba(46, 43, 43, 0.618),
     rgba(46, 43, 43, 0.608)
   );
   z-index: 3;
-
+  transition: all .1s;
   &__list {
     display: flex;
     flex-direction: column;

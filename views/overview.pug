@@ -1,6 +1,6 @@
 extends base
 block append head 
-    script(src='/js/overview.js' defer)
+    script(type="module" src='/js/overview.js' defer)
 block main
     main.main 
         .hero-img.u-pad-top
@@ -9,7 +9,7 @@ block main
 
         section.overview#overview 
             p.overview__text Archaeological research has unearthed a vibrantly
-                | colourful ancient world: from Egyptian sarcophagi to Pompeian houses
+                |  colourful ancient world: from Egyptian sarcophagi to Pompeian houses
                 | and from tinted glass to scarlet red textiles, recent advances in 
                 | archaeological science have led to the identification of a plethora of 
                 | materials used to colour things. Minerals, metals, plants, earths, 

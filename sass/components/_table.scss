@@ -1,59 +1,194 @@
 @use "../abstracts/" as *;
-.table{
+.table {
+  border-collapse: separate;
+  border-spacing: 0.3rem;
+  border: 1px solid $color-primary-dark;
+  min-width: 100%;
 
-
-    border-collapse: separate;
-    border-spacing: .3rem;
+  &__head{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  &__header {
+    max-width: 15ch;
+    padding: 1rem;
     border: 1px solid $color-primary-dark;
+    background-color: $color-primary-light;
+    letter-spacing: .8px;
+    font-weight: 400;
    
-    &__head{
-       
-    }
-    &__header{
-        max-width: 15ch;
-        padding: 1rem;
-        border:1px solid $color-primary-dark;
-        background-color: $color-primary-light; 
-        font-size: 1.6rem;
-        font-weight: 400;
-    }
+  }
 
+ 
+  &__data {
 
-    &__body{
+    position: relative;
+    max-width: 15ch;
+    padding: 0.5rem;
+    border: 1px solid $color-primary-dark;
+    font-size: 1.5rem;
+    font-weight: 300;
+    word-break: break-all;
+    transition: 0.5s all;
 
-    }
-    &__data{
-        position: relative;
-        max-width: 15ch;
-        padding: .5rem;
-        border:1px solid $color-primary-dark;
-        font-size: 1.5rem;
-        font-weight: 300;
-        word-break: break-all;
-        transition: .5s all;
-
-        &--hover:hover{
-            background-color: $color-yellow-dark;
-        }
-
-        a{
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            inset: 0;
-            
-           
-            
-        }
-       
+    &--hover:hover {
+      background-color: $color-yellow-dark;
     }
 
-    
-    &__row{
-
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      inset: 0;
+      color: $color-primary-dark;
       
-
     }
+  }
+
+ 
 }
+@media only screen and (max-width: $media-medium) {
+  .table {
+    border: 0;
+
+    &__head {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    &__row {
+      display: block;
+      //   box-shadow: 0.5px 5px 5px #21859295;
+      //   margin-bottom: 3rem;
+      &:after {
+        content: "\21FA \0020 \0020  \25C8 \0020 \0020 \21FB";
+        position: relative;
+        left: 45%;
+        color: $color-purple;
+      }
+    }
+
+    &__data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: none;
+      padding: 2rem;
+      padding-right: 4rem;
+      border: 2px double $color-primary-dark;
+      border-top-width: 0.5px;
+      border-bottom-width: 0.5px;
+      
+    }
+
+    &__data::before {
+      content: attr(data-label);
+      align-self: flex-start;
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    &__data:first-child {
+      margin-top: 1.5rem;
+      border-top-width: 2px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    &__data:last-child {
+      border-bottom-width: 2px;
+      box-shadow: 0 5px 5px #12121234;
+      margin-bottom: 1.5rem;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+
+// @media only screen and (max-width: $media-medium) {
+//   /* Force table to not be like tables anymore */
+//   .table {
+//     display: block;
+//     &__head,
+//     &__body,
+//     &__header,
+//     &__data,
+//     &__row {
+//       display: block;
+//     }
+//   }
+
+//   /* Hide table headers (but not display: none;, for accessibility) */
+//   .table__head {
+//     .table__row {
+//       position: absolute;
+//       top: -9999px;
+//       left: -9999px;
+//     }
+//   }
+
+//   .table__row {
+//     border: 1px solid #ccc;
+//   }
+
+//   .table__data {
+//     /* Behave  like a "row" */
+//     border: none;
+//     border-bottom: 1px solid #eee;
+//     position: relative;
+//     padding-left: 50%;
+
+//     &:before {
+//         /* Now like a table header */
+//         position: absolute;
+//         /* Top/left values mimic padding */
+//         top: 6px;
+//         left: 6px;
+//         width: 45%;
+//         padding-right: 10px;
+//         white-space: nowrap;
+//       }
+//   }
+
+//   /*
+// 	Label the data
+// 	*/
+//   .table__data:nth-of-type(1):before {
+//     content: "First Name";
+//   }
+//   .table__data:nth-of-type(2):before {
+//     content: "Last Name";
+//   }
+//   .table__data:nth-of-type(3):before {
+//     content: "Job Title";
+//   }
+//   .table__data:nth-of-type(4):before {
+//     content: "Favorite Color";
+//   }
+//   .table__data:nth-of-type(5):before {
+//     content: "Wars of Trek?";
+//   }
+//   .table__data:nth-of-type(6):before {
+//     content: "Secret Alias";
+//   }
+//   .table__data:nth-of-type(7):before {
+//     content: "Date of Birth";
+//   }
+//   .table__data:nth-of-type(8):before {
+//     content: "Dream Vacation City";
+//   }
+//   .table__data:nth-of-type(9):before {
+//     content: "GPA";
+//   }
+//   .table__data:nth-of-type(10):before {
+//     content: "Arbitrary Data";
+//   }
+// }

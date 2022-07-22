@@ -1,4 +1,5 @@
 /* eslint-disable*/
+import { showAlert } from "./alert.js";
 const form = document.querySelector(".form");
 
 const login = async (username, password) => {
@@ -15,13 +16,13 @@ const login = async (username, password) => {
     if (!res.ok) throw new Error(data.message);
     
     if (data.status === "success") {
-      alert("Login successfully!");
+      showAlert("Login successfully!",'success',5);
       window.setTimeout(() => {
         location.assign("/");
       }, 500);
     }
   } catch (err) {
-    alert(err.message);
+    showAlert(err.message,'error',5);
   }
 };
 

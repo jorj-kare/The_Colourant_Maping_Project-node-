@@ -1,15 +1,19 @@
 header.header
     .header__logo
         img(src='/img/logo-nav.png')
-    nav.nav 
+        a(href='/')    
+    i.header__nav-icon.fa-solid.fa-bars
+    
+    nav.nav.u-hidden
         a.nav__link(href='/') Overview
         a.nav__link(href='/map') Map
         a.nav__link(href='/newEntry') New Entry 
-        a.nav__link(href='/contact') Contact
         a.nav__link(href="/entries") Entries
+        a.nav__link(href='/contact') Contact
         if ! user
             a.nav__link(href='/login') Login/Sign-up
         if user 
             a.nav__link(href='/myAccount') My account
             a.nav__link(href='/logout') Logout
+
 

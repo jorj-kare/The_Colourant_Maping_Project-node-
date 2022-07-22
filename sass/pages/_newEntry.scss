@@ -3,6 +3,10 @@
 .new-entry {
   @include flex-centered(column);
   background-color: $color-white;
+  padding-top: 10rem;
+  @include break($media-medium){
+    padding-top: 5rem;
+  }
 }
 
 .chr {

@@ -1,7 +1,6 @@
 // Color variables
-$color-primary-dark: #006778;
+$color-primary-dark: #006678;
 $color-primary-light: #8fbcc4;
-
 $color-green:#65C18C;
 $color-blue: #0e3274;
 $color-blue-dark:#292841;
@@ -18,8 +17,15 @@ $color-white: #eee8e8;
 $color-grey-dark: #838383;
 $color-black: #36393f;
 
+// #218592f7 #0093AB #11698eef;
+
 // Font variables
 $font-primary:"Oswald",sans-serif;
 $font-secondary: "Raleway", sans-serif;
 
-// #218592f7 #0093AB #11698eef;
+// Break points
+$media-xLarge:1200px;
+$media-large: 991px;
+$media-medium:768px;
+$media-small:600px;
+$media-xSmall:480px;

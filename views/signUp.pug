@@ -1,12 +1,12 @@
 extends base
 block append head 
-    script(src="/js/signUp.js" defer)
+    script(type="module" src="/js/signUp.js" defer)
 
 block main 
     main.sign-up 
-        .sign-up__form 
+        .form-box 
             h2.h2 Sign up!
-            form.form.u-width-60
+            form.form.u-width-m
                 .form__group
                     label.form__label Email
                     input#email.form__input(type='email' required placeholder='plinius@email.rom')

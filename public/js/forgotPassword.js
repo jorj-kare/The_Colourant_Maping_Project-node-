@@ -1,4 +1,5 @@
 /*eslint-disable */
+import { showAlert } from "./alert.js";
 const form = document.querySelector("form");
 const forgotPassword = async (email) => {
   try {
@@ -14,14 +15,14 @@ const forgotPassword = async (email) => {
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      alert(data.message);
+      showAlert(data.message,'success',3);
       window.setTimeout(() => {
         location.assign("/");
       }, 1000);
     }
   } catch (err) {
     console.log(err);
-    alert(err.message);
+    showAlert(err.message,'error',5);
   }
 };
 form.addEventListener("submit", (e) => {

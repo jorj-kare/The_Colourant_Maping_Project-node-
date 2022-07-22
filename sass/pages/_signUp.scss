@@ -2,15 +2,14 @@
 
 .sign-up {
  @include flex-centered();
-  min-height: 100vh;
-  padding: 15rem 0;
+  padding: 15rem 3rem;
   background-color: $color-white;
-
-  &__form{
-      @include form-style(column, $color-primary-light);
-      flex-basis: 50%;
-    
-
+  @include break($media-medium){
+    padding: 10rem 3rem;
+  }
+  .h2{
+    border-bottom: 3px double $color-white;
+    margin-bottom: 1rem;
   }
 }
 

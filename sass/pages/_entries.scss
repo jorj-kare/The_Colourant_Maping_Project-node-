@@ -3,14 +3,61 @@
 .entries {
   @include flex-centered(column);
   position: relative;
-  min-height: 100vh;
-  padding: 3rem;
+  padding: 5rem;
   background-color: $color-white;
+  
 
- .link{
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  color:$color-primary-dark;
+  .table-box {
+    overflow: scroll;
+    height: 90vh;
+    max-width: 100%;
+    border: 3px double $color-primary-dark;
+    border-radius: 5px;
+   
 
- }
+    &::-webkit-scrollbar {
+      width: 1rem;
+      height: 1rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 8px;
+      background-color: $color-yellow;
+      outline: 1px solid $color-primary-dark;
+      border-radius: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: $color-primary-light;
+      
+    }
+    &::-webkit-scrollbar-corner {
+      background-color: $color-primary-light;
+    }
+  }
+ 
+  
+
+  .link {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: $color-primary-dark;
+  }
+
+  .sort-by {
+    justify-self: flex-end;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    @include break($media-medium) {
+      justify-self: center;
+      margin: 2rem 0;
+      
+    }
+
+    .form__label {
+      font-size: 1.6rem;
+      color: $color-primary-dark;
+    }
+    .form__dropdown {
+      font-size: 1.6rem;
+    }
+  }
 }

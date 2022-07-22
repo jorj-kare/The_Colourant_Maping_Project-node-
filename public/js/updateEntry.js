@@ -1,5 +1,8 @@
 /* eslint-disable*/
-
+import { setRemoveAttributes, hideCenturies,getFormValues, cfv } from "./colourantForm.js";
+import { MapBox } from "./mapBox.js";
+import { showAlert } from "./alert.js";
+const mapBox = new MapBox();
 // ELEMENTS
 const form = document.querySelector("form");
 const mapElement = document.getElementById("map");
@@ -10,9 +13,6 @@ const btnSubmit = document.getElementById("btn-submit");
 const username = document.getElementById("username");
 const userId = document.getElementById("user-id");
 const log = document.getElementById("log");
-// const checkedInputs = document.getElementById("checkedEl")
-//   ? document.getElementById("checkedEl").querySelectorAll("input")
-//   : "";
 let colourantData;
 // FUNCTIONS
 
@@ -26,7 +26,7 @@ const getColourant = async () => {
     if (!res.ok) throw new Error(data.message);
     return data;
   } catch (err) {
-    alert(err);
+   showAlert(err,'error',5);
   }
 };
 
@@ -44,37 +44,16 @@ const updateEntry = async (colourantData) => {
 
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
-      alert("You entry has been updated!");
+      showAlert("You entry has been updated!",'success',5);
     }
   } catch (err) {
-    alert(err);
+    showAlert(err,'error',5);
   }
-};
-
-const initiateFormValues = (data) => {
-  references.value = data.colourant.references;
-  notes.value = data.colourant.notes;
-  archeologicalContext.value = data.colourant.archeologicalContext;
-  centuryStart.value = data.colourant.chronology.start;
-  chrStart.selectedIndex = `${data.colourant.chronology.start}`.startsWith("-")
-    ? 0
-    : 1;
-  chrEnd.selectedIndex = `${data.colourant.chronology.end}`.startsWith("-")
-    ? 0
-    : 1;
-  centuryEnd.value = data.colourant.chronology.end;
-  lat.value = data.colourant.location.coordinates[0];
-  lng.value = data.colourant.location.coordinates[1];
-  checkInput(pigmentsInputs, data.colourant.pigment);
-  checkInput(categoryOfFindInputs, data.colourant.categoryOfFind);
-  checkInput(analyticalTechniquesInputs, data.colourant.analyticalTechniques);
-  if (checkedEl) checkInput(checkedEl, data.colourant.checked);
-  btnSubmit.innerText = "Update entry";
 };
 
 const checkInput = (elements, values) => {
   if (typeof values === "string" || typeof values === "boolean")
-    values = new Array(values);
+    values = new Array(values.toString());
   const otherCheckbox = elements[elements.length - 2];
   const otherInput = elements[elements.length - 1];
   const elIds = [];
@@ -92,6 +71,36 @@ const checkInput = (elements, values) => {
     }
   });
 };
+
+const initiateFormValues = (data) => {
+
+  cfv.references.value = data.colourant.references;
+  cfv.notes.value = data.colourant.notes;
+  cfv.archeologicalContext.value = data.colourant.archeologicalContext;
+  cfv.centuryStart.value = data.colourant.chronology.start;
+  cfv.chrStart.selectedIndex = `${data.colourant.chronology.start}`.startsWith(
+    "-"
+  )
+    ? 0
+    : 1;
+  cfv.chrEnd.selectedIndex = `${data.colourant.chronology.end}`.startsWith("-")
+    ? 0
+    : 1;
+  cfv.centuryEnd.value = data.colourant.chronology.end;
+  cfv.lat.value = data.colourant.location.coordinates[0];
+  cfv.lng.value = data.colourant.location.coordinates[1];
+  checkInput(cfv.pigmentsInputs, data.colourant.pigment);
+  checkInput(cfv.categoryOfFindInputs, data.colourant.categoryOfFind);
+  checkInput(
+    cfv.analyticalTechniquesInputs,
+    data.colourant.analyticalTechniques
+  );
+ 
+  checkInput(cfv.checkedEl, data.colourant.checked);
+  btnSubmit.innerText = "Update entry";
+};
+
+
 
 const disableForm = () => {
   fieldsets.forEach((el) => el.setAttribute("disabled", "true"));
@@ -113,14 +122,14 @@ const enableForm = () => {
 };
 
 const setMarker = (lat, lng) => {
-  if (marker) marker.remove();
-  geocoder.query(`${lat},${lng}`);
-  marker = createMarker([lng, lat]);
+  mapBox.removeMarker();
+  mapBox.geocoder.query(`${lat},${lng}`);
+  mapBox.createMarker([lng, lat]);
 };
 
 // EVENT LISTENERS
-let marker;
 
+mapBox.displayMap();
 form.addEventListener("change", function (e) {
   setRemoveAttributes(e);
   hideCenturies(e);
@@ -132,9 +141,9 @@ window.addEventListener("load", async (e) => {
   colourantData = await getColourant();
   if (!colourantData) return;
   initiateFormValues(colourantData);
-  setLocation(lng, lat, loc, coords);
+  mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
   window.setTimeout(() => {
-    setMarker(lat.value, lng.value);
+    setMarker(cfv.lat.value, cfv.lng.value);
   }, 1000);
 });
 
@@ -171,5 +180,5 @@ btnSubmit.addEventListener("click", (e) => {
   updateEntry(updatedData);
   window.setTimeout(() => {
     location.assign("/myAccount");
-  }, 500);
+  }, 1000);
 });

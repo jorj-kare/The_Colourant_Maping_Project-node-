@@ -1,10 +1,12 @@
 /* eslint-disable*/
-
+import { setRemoveAttributes,hideCenturies,getFormValues,cfv } from "./colourantForm.js";
+import { MapBox } from "./mapBox.js";
+import { showAlert } from "./alert.js";
+const mapBox = new MapBox();
 // SELECTORS
 const form = document.querySelector(".form");
 const userId = document.getElementById("user-id");
-const detailsField = document.getElementById("details");
-
+    
 // FUNCTIONS
 
 const createColourant = async (colourantData) => {
@@ -20,14 +22,16 @@ const createColourant = async (colourantData) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
-      alert("You entry has been submitted successfully!");
+      showAlert("You entry has been submitted successfully!",'success',5);
     }
   } catch (err) {
-    alert(err.message);
+    showAlert(err.message,'error',5);
   }
 };
 
 // EVENTS LISTENERS
+mapBox.displayMap()
+
 window.addEventListener("load", (e) => {
   setRemoveAttributes(e);
 });
@@ -36,9 +40,9 @@ details.addEventListener("change", function (e) {
   setRemoveAttributes(e);
   hideCenturies(e);
 });
-let marker;
 
-setLocation(lng, lat, loc, coords);
+
+mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
 
 form.addEventListener("change", (e) => {
   e.preventDefault();
@@ -59,7 +63,7 @@ form.addEventListener("change", (e) => {
 
   if (
     e.target.type === "radio" &&
-    e.target.closest(".form__group-row").id !== "checkedEl" &&
+    e.target.closest(".form__group-row").id !== "checkedInputs" &&
     e.target.id !== "other"
   ) {
     const otherInput = e.target
@@ -85,5 +89,5 @@ form.addEventListener("submit", (e) => {
   createColourant(data);
   window.setTimeout(() => {
     location.assign("/");
-  }, 500);
+  }, 1000);
 });

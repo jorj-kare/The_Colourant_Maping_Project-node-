@@ -1,11 +1,10 @@
 /*eslint-disable */
+import { showAlert } from "./alert.js";
 const form = document.querySelector("form");
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const token = urlParams.get("token");
 let userId;
-
-
 
 const resetPassword = async (password, passwordConfirm, userId) => {
   try {
@@ -19,13 +18,13 @@ const resetPassword = async (password, passwordConfirm, userId) => {
 
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
-      alert( data.message );
+      showAlert( data.message,'success',3 );
       window.setTimeout(() => {
         location.assign("/login");
       }, 1000);
     }
   } catch (err) {
-    alert(err.message);
+    showAlert(err.message,'error',5);
   }
 };
 
@@ -44,7 +43,7 @@ const isTokenValid = async (token) => {
     userId = undefined;
     },10 * 60 * 1000 );
   } catch (err) {
-    alert(err.message);
+    showAlert(err.message,'error',5);
     window.setTimeout(() => {
       location.assign("/");
     }, 1000);

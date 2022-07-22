@@ -1,13 +1,13 @@
 form.form( autocomplete="off")
     fieldset.form__fieldset.form__fieldset--dark              
-        .map__container2
+        .map__container.map__container--large
             .map-box#map
-        legend.form__legend.form__legend--dark Provenience (place of discovery)
-        #coords.row.u-width-80.u-mrg-top-m            
-            .form__group.u-width-50.u-mrg-rgt
+        legend.form__legend.form__legend--dark.form__legend--centered Provenience (place of discovery)
+        #coords.row.u-width-l.u-mrg-top-m            
+            .form__group.u-width-s.u-mrg-rgt
                 label.form__label.form__label--dark(for='latitude' step='any') Latitude
                 input#latitude.form__input(type="number" step='0.0000001' ) 
-            .form__group.u-width-50 
+            .form__group.u-width-s
                 label.form__label.form__label--dark(for='longitude') Longitude
                 input#longitude.form__input(type="number" step='0.0000001')
             .form__group
@@ -18,7 +18,7 @@ form.form( autocomplete="off")
         
         legend.form__legend Details
         .row
-            .form__group.u-width-80
+            .form__group.u-width-l
                 h3.h3.h3--dark Pigments 
                 #pigments.form__group-row
                     each pigment in data.pigments
@@ -33,7 +33,7 @@ form.form( autocomplete="off")
             .tooltip ?
                 span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter 
         .row
-            .form__group.u-width-80.u-mrg-top-s
+            .form__group.u-width-l.u-mrg-top-s
                 h3.h3.h3--dark Chronology
                 .form__group--border
                     label.form__label(for="chr-start") From
@@ -68,11 +68,11 @@ form.form( autocomplete="off")
                                          option(class="ce" value=`${chr}`)=`${chr}`    
             .tooltip ?
                 span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
-        .form__group.u-width-80.u-mrg-top-s
+        .form__group.u-width-l.u-mrg-top-s
             h3.h3.h3--dark Archeological context
             textarea#archeological-context.form__input.form__input--border( rows="3" ) 
         .row
-            .form__group.u-width-80.u-mrg-top-s
+            .form__group.u-width-l.u-mrg-top-s
                 h3.h3.h3--dark Analytical techniques
                 #analytical-techniques.form__group-row
                     each technique in data.techniques
@@ -84,11 +84,11 @@ form.form( autocomplete="off")
                                     input#other-input.form__input.form__input--small.form__input--border
             .tooltip ?
                 span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
-        .form__group.u-width-80.u-mrg-top-s
+        .form__group.u-width-l.u-mrg-top-s
             label.form__label(for='references') References
             textarea#references.form__input.form__input--border( rows="5" ) 
         .row
-            .form__group.u-mrg-top-s.u-width-80
+            .form__group.u-mrg-top-s.u-width-l
                 h3.h3.h3--dark Category of finds
                 #category-of-find.form__group-row
                     each find in data.categoryOfFind
@@ -100,25 +100,25 @@ form.form( autocomplete="off")
                                 input#other-input.form__input.form__input--small.form__input--border
             .tooltip ?
                     span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter                           
-        .form__group.u-width-80.u-mrg-top-s
+        .form__group.u-width-l.u-mrg-top-s
             label.form__label(for='notes') Notes
             textarea#notes.form__input.form__input--border( rows="5" )
-        .form__group.u-width-80.u-mrg-top-s(hidden)
+        .form__group.u-width-l.u-mrg-top-s(hidden)
             label(for='log' hidden) Log
             textarea#log.form__input.form__input--border( rows="3" hidden) 
         if user
             input#user-id(value=`${user.id}` hidden )     
             input#username(value=`${user.username}` hidden )
         if user && user.role=== "admin"
-            #checkedEl.form__group-row.u-width-80.u-mrg-top-s
-                    .form__group-cb
-                        input.form__checkbox(type="radio" id=`true` name="checkedEl" value= `true`)
-                        span.custom-cb
-                        label.form__label-cb(for=`true`) Checked          
-                    .form__group-cb
-                        input.form__checkbox(type="radio" id=`false` name="checkedEl" value=`false`)
-                        span.custom-cb
-                        label.form__label-cb(for=`false`) Unchecked          
+            #checkedInputs.form__group-row.u-width-l.u-mrg-top-s
+                .form__group-cb
+                    input.form__checkbox(type="radio" id="true" name="checkedEl"  value="true")
+                    span.custom-cb
+                    label.form__label-cb(for="true") Checked          
+                .form__group-cb
+                    input.form__checkbox(type="radio" id="false" name="checkedEl" value="false")
+                    span.custom-cb
+                    label.form__label-cb(for="false") Unchecked          
 
     .centered
-        button#btn-submit.btn.btn--dark.btn--animate.u-width-50(type="submit") Create  
+        button#btn-submit.btn.btn--dark.btn--animate.u-width-s(type="submit") Create  

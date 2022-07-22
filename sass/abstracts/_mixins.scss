@@ -12,3 +12,8 @@
     border-radius: 15px;
 }
 
+@mixin break($width) {
+    @media screen and (max-width: $width) {
+        @content
+    }    
+}

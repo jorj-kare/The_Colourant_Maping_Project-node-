@@ -1,10 +1,7 @@
 extends base
 
 block head 
-    script(src="/js/mapBox.js" defer)
-    script(src="/js/updateEntry.js" defer)
-    script(src="/js/colourantForm.js" defer)
-
+    script(type="module" src="/js/updateEntry.js" )
 block main 
     main.update-entry 
         button#btnClose.btn.btn--small.btn--close

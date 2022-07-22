@@ -1,12 +1,12 @@
 extends base
 block append head 
-    script(src="/js/login.js" defer) ;
+    script(type="module" src="/js/login.js" defer) ;
 block main 
     main.login 
-        .login__form
+        .form-box
             h2.h2 Welcome!
             h3.h3 Please fill the form to login. 
-            form.form.u-width-60
+            form.form
                 .form__group
                     label.form__label(for='username') Username
                     input#username.form__input.form__input--validate(type='text' placeholder='pliny'  required)

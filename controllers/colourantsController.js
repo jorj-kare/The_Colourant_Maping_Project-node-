@@ -22,8 +22,9 @@ exports.createColourant = async (req, res, next) => {
 };
 
 exports.getColourants = async (req, res, next) => {
-  const filters = [{}];
-
+  const filters = [{}]; 
+  const sortBy={}
+  let contributorFields ;
   const {
     pigment,
     categoryOfFind,
@@ -31,12 +32,15 @@ exports.getColourants = async (req, res, next) => {
     centuryStart,
     centuryEnd,
     checked,
+    sortCategory,
+    sortOrder
   } = req.query;
 
-  if (checked !== "" && req.user && req.user.role === "admin") {
+  
+  if (checked && checked !== "" && req.user && req.user.role === "admin") {
     filters.push({ checked: checked === "true" });
-  } else if (!req.user || (req.user && req.user.role !== "admin"))
-    filters.push({ checked: false });
+  } else if (!req.user || (req.user && req.user.role !== "admin")){
+    filters.push({ checked: true })};
   if (pigment) filters.push({ pigment });
   if (categoryOfFind) filters.push({ categoryOfFind });
   if (analyticalTechniques) filters.push({ analyticalTechniques });
@@ -51,25 +55,30 @@ exports.getColourants = async (req, res, next) => {
         $lte: +centuryEnd,
       },
     });
-  // Object.keys(filters).forEach((el) => {
-  //   if (!filters[el] || el.includes("century")) {
-  //     delete filters[el];
-  //   }
-  // });
+
+  if(sortCategory) sortBy[sortCategory] = sortOrder*1   
+  else sortBy["chronology"] = -1
+
+    console.log(sortBy);
+    console.log(filters);
   const colourants = await Colourant.aggregate([
-    { $unwind: "$pigment" },
     {
       $match: {
         $and: filters,
       },
     },
-    { $sort: { pigment: 1 } },
+    { $sort: sortBy },
   ]);
+
+  if (req.user && req.user.role === "admin") {
+    contributorFields = "username firstName lastName affiliation"
+  }
+  else contributorFields = "username";
+
   await Colourant.populate(colourants, {
     path: "contributor",
-    select: "firstName lastName affiliation",
+    select: contributorFields,
   });
-
   res.status(200).json({
     status: "success",
     colourants,

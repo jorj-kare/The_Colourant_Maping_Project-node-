@@ -1,6 +1,19 @@
-@use "../abstracts/variables" as *;
+@use "../abstracts/" as *;
+
+html {
+  @include break($media-xLarge) {
+    font-size: 56.25%;
+  }
+  @include break($media-small) {
+    font-size: 50%;
+  }
+  @include break($media-xSmall) {
+    font-size: 43.75%;
+  }
+}
 
 body {
+  font-size: 1.6rem;
   font-family: $font-primary;
   font-weight: 200;
   line-height: 1.5;
@@ -8,31 +21,38 @@ body {
 }
 
 .h1 {
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 700;
-  letter-spacing: .8rem;
+  letter-spacing: 0.8rem;
   color: $color-white;
-  &--dark{
+  text-align: center;
+  &--dark {
     color: $color-primary-dark;
+  }
+  
+  @include break($media-large) {
+    font-size: 6rem;
+  }
+  @include break($media-xSmall) {
+    letter-spacing: 0.5rem;
   }
 }
 
 .h2 {
   font-size: 3.5rem;
   font-weight: 500;
-  letter-spacing: .5rem;
+  letter-spacing: 0.5rem;
   color: $color-white;
-  &--dark{
+  &--dark {
     color: $color-primary-dark;
-}
-
+  }
 }
 .h3 {
   font-size: 2rem;
   font-weight: 300;
-  letter-spacing: .15rem;
+  letter-spacing: 0.15rem;
   color: $color-white;
-  &--dark{
+  &--dark {
     color: $color-primary-dark;
   }
 }
@@ -40,6 +60,6 @@ body {
 .h4 {
   font-size: 1.5rem;
   font-weight: 300;
-  letter-spacing: .25rem;
+  letter-spacing: 0.25rem;
   color: $color-primary-dark;
 }

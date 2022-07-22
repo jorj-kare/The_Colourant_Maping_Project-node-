@@ -1,0 +1,26 @@
+@use "../abstracts/" as *;
+
+.alert {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 1rem;
+  padding: 3rem 15rem;
+  border-radius: 5px;
+//   border: 2px double $color-purple;
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  color: $color-white;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.2rem;
+  z-index: 100;
+  &--success {
+    background-color: $color-green;
+  }
+  &--error {
+    border-color: $color-red;
+    background-color: $color-red;
+  }
+}

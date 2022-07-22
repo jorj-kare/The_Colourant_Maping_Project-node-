@@ -1,46 +1,42 @@
 extends base
 
 block head 
-    script(src="/js/mapBox.js" defer)
-    script(src="/js/colourantForm.js" defer)
-    script(src="/js/map.js" type="module")
-    
-   
-    
+    script(type="module" src="/js/map.js" )    
 block main 
     main.map 
         .map__container
             .map-box#map
-        .search
+        .search.u-mrg-bottom-m
             form.form(autocomplete="off")
-                .search__box.u-mrg-top-m
-                    .form__group
-                        label.form__label(for="search") Pigments
-                        select#pigment.form__dropdown
-                            option(value="" selected ) All pigments
-                            each pigment in data.pigments
-                                option(id=`${pigment}` value=`${pigment}`)= `${pigment}`              
-                        input#other-pigment.form__input.form__input--small.form__input--border(hidden)            
-                    .form__group
-                        label.form__label(for="techniques") Analytical techniques
-                        select#techniques.form__dropdown
-                            option(value="" selected) All techniques
-                            each technique in data.techniques
-                                option(value=`${technique}`)= `${technique}`  
-                        .form__group
-                        label.form__label(for="category-of-find") Category of find
-                        select#category-of-find.form__dropdown
-                            option(value="" selected) All categories
-                            each category in data.categoryOfFind
-                                option(value=`${category}`)= `${category}`             
-                    .form__group--border
-                    label.form__label(for="chr-start") From
-                    div
-                        select#chr-start.form__dropdown.chr( name="chr-start"  ) 
+                .search__box
+                    .form__group.area-pigments
+                        .custom-input.form__dropdown
+                            select#pigment
+                                option(value="" selected ) All pigments
+                                each pigment in data.pigments
+                                    option( value=`${pigment}` id=`${pigment}`)= `${pigment}`              
+                            input.input-other#other-pigment(hidden)            
+                    .form__group.area-techniques
+                        .custom-input.form__dropdown
+                            select#techniques
+                                option(value="" selected) All techniques
+                                each technique in data.techniques
+                                    option( value=`${technique}` id=`${technique}`)= `${technique}`
+                            input.input-other#other-techniques(hidden)          
+                    .form__group.area-category
+                        .custom-input.form__dropdown
+                            select#category-of-find
+                                option(value="" selected) All categories
+                                each category in data.categoryOfFind
+                                    option(value=`${category}` id=`${category}`)= `${category}`
+                            input.input-other#other-category(hidden)                               
+                    div.area-chrStart
+                        //- label.form__label(for="chr-start") From
+                        select#chr-start.form__dropdown.chr( name="chr-start"  )  
                             option(value="BCE" selected) BCE
-                            option(value="CE") CE            
+                            option(value="CE") CE                
                         select#century-start.form__dropdown.century( name="century-start"   ) 
-                            option(value="" disabled selected hidden) Select chronology
+                            option(value=""  selected ) Chronology from
                             optgroup.bce-optgroup(label="BCE" ) 
                                 each chr in data.chronologies
                                     if (chr <= 0)
@@ -49,13 +45,13 @@ block main
                                 each chr in data.chronologies  
                                     if (chr >= 0)
                                         option(class="ce" value=`${chr}`)=`${chr}`  
-                    label.form__label(for="chr-end") to
-                    div
+                    div.area-chrEnd
+                        //- label.form__label(for="chr-end") &nbsp;&nbsp;&nbsp;&nbsp;to
                         select#chr-end.form__dropdown.chr( name="chr-end" ) 
                             option(value="BCE" selected) BCE
                             option(value="CE") CE            
                         select#century-end.form__dropdown.century( name="century-end" ) 
-                            option(value="" disabled selected hidden) Select chronology
+                            option(value=""  selected ) Chronology end
                             optgroup.bce-optgroup(label="BCE" ) 
                                 each chr in data.chronologies
                                     if (chr <= 0)
@@ -64,13 +60,22 @@ block main
                                 each chr in data.chronologies  
                                     if (chr >= 0)
                                         option(class="ce" value=`${chr}`)=`${chr}`    
-                        if user && user.role==='admin' 
-                            .form__group
-                                label.form__label(for="checked") Checked
-                                select#checked.form__dropdown( name="checked" ) 
-                                    option(value="" selected) All 
-                                    option(value= 'true') True
-                                    option(value= 'false') False
-                button.btn.btn--dark Search 
-        .list__container.u-mrg-bottom-m
+                    if user && user.role==='admin' 
+                        .form__group.area-checked
+                            select#checked.form__dropdown( name="checked" ) 
+                                option(value="" selected) All 
+                                option(value= 'true') Checked
+                                option(value= 'false') Unchecked
+                button.btn.btn--dark.btn--animate Search 
+        .results.list__container.u-mrg-bottom-m
+            h4#counter.h4.h4--dark.u-mrg-bottom-m
+            .sort-by.flex-container-r.u-mrg-bottom-s
+                label.form__label(for="sort-category") Sort by:   
+                select#sort-category.form__dropdown(autocomplete="off") 
+                    option(value="createdAt" selected) Created at
+                    option(value="pigment") Pigment 
+                    option(value="chronology") Chronology
+                select#sort-order.form__dropdown(autocomplete="off")
+                    option(value=-1 selected) Descending 
+                    option(value=1) Ascending 
             ul.list      
