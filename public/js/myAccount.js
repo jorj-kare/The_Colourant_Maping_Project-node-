@@ -31,7 +31,7 @@ const editInput = () => {
 };
 const updateAccount = async (userData) => {
   try {
-    const url = "http://127.0.0.1:3000/api/v1/users/myAccount";
+    const url = `${window.location.origin}/api/v1/users/myAccount`;
     const res = await fetch(url, {
       method: "PATCH",
       headers: {
@@ -45,11 +45,11 @@ const updateAccount = async (userData) => {
       throw new Error(data.message);
     }
     if (data.status === "success") {
-      showAlert("Your account have been updated.",'success',3);
+      showAlert("Your account have been updated.", "success", 3);
       location.reload();
     }
   } catch (err) {
-    showAlert(err,'error',5);
+    showAlert(err, "error", 5);
   }
 };
 
@@ -59,7 +59,7 @@ const updatePassword = async (
   passwordConfirm
 ) => {
   try {
-    const url = "http://127.0.0.1:3000/api/v1/users/updateMyPassword";
+    const url = `${window.location.origin}/api/v1/users/updateMyPassword`;
     const res = await fetch(url, {
       method: "PATCH",
       headers: {
@@ -76,9 +76,9 @@ const updatePassword = async (
     if (!res.ok) {
       throw new Error(data.message);
     } else if (data.status === "success")
-      showAlert("Your password have been updated.",'success',3);
+      showAlert("Your password have been updated.", "success", 3);
   } catch (err) {
-    showAlert(err,'error',5);
+    showAlert(err, "error", 5);
   }
 };
 const hideShowForm = (...elements) => {
@@ -118,7 +118,6 @@ editInput();
 // };
 
 // EVENTS LISTENERS
-
 
 // Update account
 btnUpdateAccount.addEventListener("click", (e) => {

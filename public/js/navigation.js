@@ -21,7 +21,6 @@ const showNavbar = (sec) => {
 const events = ["load", "resize"];
 events.forEach((event) => {
   window.addEventListener(event, (e) => {
-console.log(  window.getComputedStyle(navBtn).display === "none")
     if (window.getComputedStyle(navBtn).display === "none") showNavbar();
     else hideNavbar();
   });
@@ -33,6 +32,5 @@ body.addEventListener("click", (e) => {
   if (e.target.classList.contains("header__nav-icon")) {
     if (window.getComputedStyle(nav).display === "none") showNavbar(50);
     else hideNavbar(200);
-    
   }
 });

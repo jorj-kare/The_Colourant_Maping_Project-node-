@@ -7,7 +7,7 @@ const sortOrder = document.querySelector("#sort-order");
 // FUNCTIONS
 const getColourants = async (filters) => {
   const str = filters.toString();
-  const url = ` http://127.0.0.1:3000/api/v1/colourants/?${str}`;
+  const url = `${window.location.origin}/api/v1/colourants/?${str}`;
   const res = await fetch(url);
   const data = await res.json();
   return data;
@@ -75,24 +75,32 @@ const displayEntries = (entries) => {
   tBody.innerHTML = "";
   entries.forEach((entry) => {
     markup += `<tr class="table__row">
-    <td class='table__data' data-label="Created at">${new Date(entry.createdAt).toLocaleDateString(
-      "en-Gb"
-    )}</td>
+    <td class='table__data' data-label="Created at">${new Date(
+      entry.createdAt
+    ).toLocaleDateString("en-Gb")}</td>
     <td class='table__data' data-label="Pigment">${entry.pigment}</td>
-    <td class='table__data' data-label="Chronology">${entry.chronology.start}, ${
-      entry.chronology.end
+    <td class='table__data' data-label="Chronology">${
+      entry.chronology.start
+    }, ${entry.chronology.end}</td>
+    <td class='table__data' data-label="Category of find">${
+      entry.categoryOfFind
     }</td>
-    <td class='table__data' data-label="Category of find">${entry.categoryOfFind}</td>
     <td class='table__data' data-label="Location"><details>
     <summary>${entry.location.address}</summary>
     -----------------<br>
     <strong>Coordinates</strong><br>
     ${entry.location.coordinates}
     </details></td>
-    <td class='table__data' data-label="Analytical techniques">${entry.analyticalTechniques}</td>
-    <td class='table__data' data-label="Archeological context ">${editLongText(entry.archeologicalContext)}</td>
+    <td class='table__data' data-label="Analytical techniques">${
+      entry.analyticalTechniques
+    }</td>
+    <td class='table__data' data-label="Archeological context ">${editLongText(
+      entry.archeologicalContext
+    )}</td>
     <td class='table__data' data-label="Notes">${editLongText(entry.notes)}</td>
-    <td class='table__data' data-label="References">${editLongText(entry.references)}</td>
+    <td class='table__data' data-label="References">${editLongText(
+      entry.references
+    )}</td>
     <td class='table__data' data-label="Contributor">
     ${editContributorField(entry.contributor)}
     </td>

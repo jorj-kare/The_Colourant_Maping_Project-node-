@@ -1,5 +1,10 @@
 /* eslint-disable*/
-import { setRemoveAttributes, hideCenturies,getFormValues, cfv } from "./colourantForm.js";
+import {
+  setRemoveAttributes,
+  hideCenturies,
+  getFormValues,
+  cfv,
+} from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
 const mapBox = new MapBox();
@@ -20,19 +25,19 @@ const getColourant = async () => {
   try {
     const param = new URLSearchParams(window.location.search);
     const entryId = param.get("id");
-    const url = `http://127.0.0.1:3000/api/v1/colourants/${entryId}`;
+    const url = `${window.location.origin}/api/v1/colourants/${entryId}`;
     const res = await fetch(url);
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
     return data;
   } catch (err) {
-   showAlert(err,'error',5);
+    showAlert(err, "error", 5);
   }
 };
 
 const updateEntry = async (colourantData) => {
   try {
-    const url = `http://127.0.0.1:3000/api/v1/colourants/`;
+    const url = `${window.location.origin}/api/v1/colourants/`;
     const res = await fetch(url, {
       method: "PATCH",
       headers: {
@@ -44,10 +49,10 @@ const updateEntry = async (colourantData) => {
 
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
-      showAlert("You entry has been updated!",'success',5);
+      showAlert("You entry has been updated!", "success", 5);
     }
   } catch (err) {
-    showAlert(err,'error',5);
+    showAlert(err, "error", 5);
   }
 };
 
@@ -73,7 +78,6 @@ const checkInput = (elements, values) => {
 };
 
 const initiateFormValues = (data) => {
-
   cfv.references.value = data.colourant.references;
   cfv.notes.value = data.colourant.notes;
   cfv.archeologicalContext.value = data.colourant.archeologicalContext;
@@ -95,12 +99,10 @@ const initiateFormValues = (data) => {
     cfv.analyticalTechniquesInputs,
     data.colourant.analyticalTechniques
   );
- 
+
   checkInput(cfv.checkedEl, data.colourant.checked);
   btnSubmit.innerText = "Update entry";
 };
-
-
 
 const disableForm = () => {
   fieldsets.forEach((el) => el.setAttribute("disabled", "true"));

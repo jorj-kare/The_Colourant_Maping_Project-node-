@@ -47,9 +47,11 @@ const displayResults = (data) => {
   if (data.length > 0) {
     data.forEach((el) => {
       const chr = createChronologyString(el);
-      const str = `${new Date(el.createdAt).toLocaleDateString(
-        "en-Gb"
-      )}, ${el.pigment}, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, (${el.location.address})`;
+      const str = `${new Date(el.createdAt).toLocaleDateString("en-Gb")}, ${
+        el.pigment
+      }, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, (${
+        el.location.address
+      })`;
       markup += `<li data-id="${el._id}" data-pigment="${el.pigment}" class="list__item">${str}</li>`;
     });
   }
@@ -91,7 +93,7 @@ const createGeoJson = (data) => {
 
 const getColourant = async (filter) => {
   const str = filter.toString();
-  const url = ` http://127.0.0.1:3000/api/v1/colourants/?${str}`;
+  const url = ` ${window.location.origin}/api/v1/colourants/?${str}`;
   const res = await fetch(url);
   const data = await res.json();
 
@@ -278,7 +280,6 @@ mapContainer.addEventListener("click", (e) => {
     mapContainer.insertAdjacentHTML("afterbegin", markup);
     const details = document.querySelector(".details");
     details.classList.add("u-fade-in");
-   
   }
   closeDetailsWindow(e);
 });

@@ -72,7 +72,6 @@ class MapBox {
 
       const latValue = latEl.value * 1;
       const lngValue = lngEl.value * 1;
-      console.log(latValue, lngValue);
       this.removeMarker();
       if (
         latValue >= -90 &&
@@ -80,7 +79,6 @@ class MapBox {
         lngValue >= -180 &&
         lngValue <= 180
       ) {
-        console.log(latValue, lngValue);
         this.geocoder.query(`${latValue},${lngValue}`);
         this.createMarker([lngValue, latValue]);
       } else {

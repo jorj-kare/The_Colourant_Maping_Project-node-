@@ -1,11 +1,9 @@
 /* eslint-disable*/
 import { showAlert } from "./alert.js";
 const form = document.querySelector(".form");
-const signUp = async (
-userData
-) => {
+const signUp = async (userData) => {
   try {
-    const url = " http://127.0.0.1:3000/api/v1/users/signUp";
+    const url = `${window.location.origin}/api/v1/users/signUp`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -14,17 +12,17 @@ userData
       body: JSON.stringify(userData),
     });
     const data = await res.json();
-    
+
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      showAlert("Congratulations you have now an account!",'success',3);
+      showAlert("Congratulations you have now an account!", "success", 3);
       window.setTimeout(() => {
         location.assign("/");
       }, 1000);
     }
   } catch (err) {
-    showAlert(err.message,'error',5);
+    showAlert(err.message, "error", 5);
   }
 };
 

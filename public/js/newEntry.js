@@ -1,17 +1,22 @@
 /* eslint-disable*/
-import { setRemoveAttributes,hideCenturies,getFormValues,cfv } from "./colourantForm.js";
+import {
+  setRemoveAttributes,
+  hideCenturies,
+  getFormValues,
+  cfv,
+} from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
 const mapBox = new MapBox();
 // SELECTORS
 const form = document.querySelector(".form");
 const userId = document.getElementById("user-id");
-    
+
 // FUNCTIONS
 
 const createColourant = async (colourantData) => {
   try {
-    const url = " http://127.0.0.1:3000/api/v1/colourants";
+    const url = `${window.location.origin}/api/v1/colourants`;
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -22,15 +27,15 @@ const createColourant = async (colourantData) => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
-      showAlert("You entry has been submitted successfully!",'success',5);
+      showAlert("You entry has been submitted successfully!", "success", 5);
     }
   } catch (err) {
-    showAlert(err.message,'error',5);
+    showAlert(err.message, "error", 5);
   }
 };
 
 // EVENTS LISTENERS
-mapBox.displayMap()
+mapBox.displayMap();
 
 window.addEventListener("load", (e) => {
   setRemoveAttributes(e);
@@ -40,7 +45,6 @@ details.addEventListener("change", function (e) {
   setRemoveAttributes(e);
   hideCenturies(e);
 });
-
 
 mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
 
