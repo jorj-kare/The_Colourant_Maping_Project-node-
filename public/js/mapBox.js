@@ -36,6 +36,17 @@ class MapBox {
     this.map.addControl(this.geocoder);
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(new mapboxgl.ScaleControl());
+    // Set layers for mapbox
+    const layerList = document.getElementById("menu");
+    const inputs = layerList.querySelectorAll("option");
+
+    inputs.forEach((input) => {
+      input.onclick = (layer) => {
+        const layerId = layer.target.id;
+        this.map.setStyle("mapbox://styles/" + layerId);
+      };
+    });
+
     return this.map;
   }
 
