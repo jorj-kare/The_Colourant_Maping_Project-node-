@@ -1,24 +1,26 @@
 @use "../abstracts/" as *;
 
-
-
 .list {
   width: fit-content;
   max-height: 25rem;
   overflow-y: auto;
   padding-left: 2rem;
-  &__container{
+  &__container {
     @include form-style(column);
     min-width: 70%;
+    max-width: 90%;
     border: 3px double $color-primary-light;
-    @include break($media-medium){
+    @include break($media-medium) {
       padding: 5rem 2rem;
     }
-  
+    @include break($media-large) {
+      max-width: 100%;
+    }
+
     a {
       color: inherit;
     }
-    span{
+    span {
       color: $color-red;
       font-weight: 400;
     }
@@ -44,18 +46,16 @@
       border-bottom-color: transparent;
       color: $color-purple;
       cursor: pointer;
-      
     }
-    &--small{
+    &--small {
       font-size: 1.4rem;
       list-style-type: none;
-      &:hover{
+      &:hover {
         list-style-type: none;
-        border-left-color:transparent ;
+        border-left-color: transparent;
         border-bottom-color: $color-purple;
       }
     }
-    
   }
 
   &__empty {
@@ -65,5 +65,4 @@
     word-spacing: 0.3rem;
     font-weight: 300;
   }
- 
 }

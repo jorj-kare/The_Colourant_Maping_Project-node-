@@ -11,16 +11,18 @@
     rgba(46, 43, 43, 0.608)
   );
   z-index: 3;
-  transition: all .1s;
+  transition: all 0.1s;
   &__list {
     display: flex;
     flex-direction: column;
-    min-width: 60%;
+    width: 70%;
     padding: 5rem;
     background-color: $color-white;
     outline: 5px solid $color-primary-light;
     border-radius: 5px;
-
+    @include break($media-medium) {
+      width: 85%;
+    }
     button {
       align-self: flex-end;
       position: relative;
@@ -40,7 +42,6 @@
     word-spacing: 0.1rem;
     text-transform: capitalize;
     color: $color-primary-dark;
-    
   }
   &__icon {
     position: relative;

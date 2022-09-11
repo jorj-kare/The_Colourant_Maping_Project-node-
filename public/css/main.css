@@ -661,60 +661,13 @@ body {
   color: #006678;
 }
 
-.search {
-  width: 55rem;
+.map__search {
+  margin: 5rem 0;
 }
-.search__box {
-  width: 100%;
-  display: grid;
-  justify-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "pigment techniques category" "chrStart chrStart chrStart" "chrEnd chrEnd chrEnd" ". checked .";
-}
-.search .form {
-  width: 100%;
-}
-.search .custom-input input {
-  width: 65%;
-  background-color: #eee8e8;
-  border: none;
-  border-bottom: 0.5px solid #006678;
-  outline: transparent;
-  color: inherit;
-}
-.search .custom-input select {
-  color: inherit;
-}
-.search button {
-  width: 50%;
-  border-width: 1px;
-}
-.search .area-pigments {
-  grid-area: pigment;
-  min-width: 0;
-}
-.search .area-techniques {
-  grid-area: techniques;
-  min-width: 0;
-}
-.search .area-category {
-  grid-area: category;
-  min-width: 0;
-}
-.search .area-chrStart {
-  grid-area: chrStart;
-  min-width: 0;
-}
-.search .area-chrEnd {
-  grid-area: chrEnd;
-  min-width: 0;
-}
-.search .area-checked {
-  grid-area: checked;
-  min-width: 0;
-  margin-bottom: 1.5rem;
+@media screen and (max-width: 600px) {
+  .map__search {
+    margin: 2.5rem;
+  }
 }
 
 .results {
@@ -754,11 +707,16 @@ body {
 .details__list {
   display: flex;
   flex-direction: column;
-  min-width: 60%;
+  width: 70%;
   padding: 5rem;
   background-color: #eee8e8;
   outline: 5px solid #8fbcc4;
   border-radius: 5px;
+}
+@media screen and (max-width: 768px) {
+  .details__list {
+    width: 85%;
+  }
 }
 .details__list button {
   align-self: flex-end;
@@ -809,8 +767,25 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 5rem;
+  padding: 5rem 3rem;
   background-color: #eee8e8;
+}
+@media screen and (max-width: 991px) {
+  .entries {
+    padding: 5rem;
+  }
+}
+.entries__search .search__box {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 991px) {
+  .entries__search .search__box {
+    display: grid;
+  }
+}
+.entries__search .form {
+  padding: 3rem 0;
 }
 .entries .table-box {
   overflow: scroll;
@@ -841,7 +816,7 @@ body {
   color: #006678;
 }
 .entries .sort-by {
-  justify-self: flex-end;
+  justify-self: center;
   gap: 1rem;
   margin-bottom: 2.5rem;
 }
@@ -862,6 +837,9 @@ body {
 .form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   font-size: 1.7rem;
   font-weight: 300;
   padding: 3rem;
@@ -960,7 +938,7 @@ body {
 .form__fieldset {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   margin-bottom: 5rem;
   padding: 5rem;
   border: 3px double #006678;
@@ -982,6 +960,7 @@ body {
 @media screen and (max-width: 991px) {
   .form__fieldset {
     padding: 5rem 3rem;
+    width: 100%;
   }
 }
 .form__fieldset--dark {
@@ -1065,9 +1044,6 @@ body {
   padding-right: 0.3rem;
   font-size: 1.8rem;
 }
-.form--row {
-  flex-direction: row;
-}
 .form__dropdown {
   position: relative;
   padding: 0.3rem 0.5rem;
@@ -1075,6 +1051,15 @@ body {
   border: 1px solid #8fbcc4;
   border-radius: 5px;
   color: #006678;
+}
+.form__dropdown--dark {
+  border: 1px solid #eee8e8;
+}
+.form--row {
+  flex-direction: row;
+}
+.form--b {
+  align-items: stretch;
 }
 
 .custom-cb {
@@ -1110,6 +1095,12 @@ body {
   transform: translateX(0);
 }
 
+#exact-loc {
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
 .form-box {
   display: flex;
   flex-direction: column;
@@ -1118,21 +1109,21 @@ body {
   padding: 5rem;
   background-color: #8fbcc4;
   border-radius: 15px;
-  flex-basis: 60%;
+  width: 60%;
 }
 @media screen and (max-width: 991px) {
   .form-box {
-    flex-basis: 80%;
+    width: 80%;
   }
 }
 @media screen and (max-width: 600px) {
   .form-box {
-    flex-basis: 90%;
+    width: 90%;
   }
 }
 @media screen and (max-width: 480px) {
   .form-box {
-    flex-basis: 100%;
+    width: 100%;
     padding: 3rem;
   }
 }
@@ -1251,11 +1242,17 @@ body {
   background-color: #eee8e8;
   border-radius: 15px;
   min-width: 70%;
+  max-width: 90%;
   border: 3px double #8fbcc4;
 }
 @media screen and (max-width: 768px) {
   .list__container {
     padding: 5rem 2rem;
+  }
+}
+@media screen and (max-width: 991px) {
+  .list__container {
+    max-width: 100%;
   }
 }
 .list__container a {
@@ -1430,6 +1427,10 @@ body {
   inset: 0;
   color: #006678;
 }
+.table #td-pigment:hover {
+  cursor: pointer;
+  color: #006678;
+}
 
 @media only screen and (max-width: 768px) {
   .table {
@@ -1531,6 +1532,7 @@ body {
   }
 }
 .map__container {
+  position: relative;
   width: 70%;
   height: 50rem;
   outline: 4px double #8fbcc4;
@@ -1554,6 +1556,26 @@ body {
   .map__container--large {
     width: 100%;
   }
+}
+.map__menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+@media screen and (max-width: 480px) {
+  .map__menu {
+    left: unset;
+    right: 1rem;
+    top: 7rem;
+  }
+}
+.map__menu select {
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #eee8e8;
+  color: #006678;
 }
 
 .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
@@ -1604,6 +1626,76 @@ body {
   .mapboxgl-ctrl.mapboxgl-ctrl-group {
     display: none;
   }
+}
+
+.search__box {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  grid-template-areas: "pigment techniques category" "chrStart chrStart chrStart" "chrEnd chrEnd chrEnd" ". checked .";
+}
+@media screen and (max-width: 480px) {
+  .search__box {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "pigment   pigment " "category  techniques" "chrStart chrStart " "chrEnd chrEnd " "checked checked ";
+  }
+}
+.search__box .form {
+  width: 100%;
+}
+.search__box .form__group {
+  max-width: 20rem;
+}
+@media screen and (max-width: 1200px) {
+  .search__box .form__group {
+    max-width: 20rem;
+  }
+}
+@media screen and (max-width: 991px) {
+  .search__box .form__group {
+    max-width: 25rem;
+  }
+}
+.search__box .custom-input input {
+  width: 63%;
+  background-color: #eee8e8;
+  border: none;
+  border-bottom: 0.5px solid #006678;
+  outline: transparent;
+  color: inherit;
+}
+.search__box .custom-input select {
+  color: inherit;
+}
+@media screen and (max-width: 600px) {
+  .search__box .custom-input select {
+    padding: 0;
+  }
+}
+.search__box button {
+  width: 50%;
+  border-width: 1px;
+}
+.search__box .area-pigments {
+  grid-area: pigment;
+}
+.search__box .area-techniques {
+  grid-area: techniques;
+}
+.search__box .area-category {
+  grid-area: category;
+}
+.search__box .area-chrStart {
+  grid-area: chrStart;
+}
+.search__box .area-chrEnd {
+  grid-area: chrEnd;
+}
+.search__box .area-checked {
+  grid-area: checked;
+  margin-bottom: 1.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */

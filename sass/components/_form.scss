@@ -3,13 +3,12 @@
 .form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   font-size: 1.7rem;
   font-weight: 300;
   padding: 3rem;
-  @include break($media-xSmall){
-    // padding: 3rem 0;
-  }
-
 
   &__input {
     width: 100%;
@@ -113,7 +112,7 @@
   &__fieldset {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
     margin-bottom: 5rem;
     padding: 5rem;
     border: 3px double $color-primary-dark;
@@ -135,8 +134,8 @@
 
     @include break($media-large) {
       padding: 5rem 3rem;
+      width: 100%;
     }
-   
   }
   &__fieldset--dark {
     padding-top: 10rem;
@@ -164,11 +163,10 @@
       top: 1rem;
       left: 5rem;
       color: $color-white;
-      @include break($media-large){
-        left:3rem;
+      @include break($media-large) {
+        left: 3rem;
       }
     }
-    
   }
   &__group {
     display: flex;
@@ -226,10 +224,6 @@
     }
   }
 
-  &--row {
-    flex-direction: row;
-  }
-
   &__dropdown {
     position: relative;
     padding: 0.3rem 0.5rem;
@@ -237,6 +231,17 @@
     border: 1px solid $color-primary-light;
     border-radius: 5px;
     color: $color-primary-dark;
+
+    &--dark {
+      border: 1px solid $color-white;
+    }
+  }
+
+  &--row {
+    flex-direction: row;
+  }
+  &--b {
+    align-items: stretch;
   }
 }
 
@@ -271,17 +276,22 @@
   opacity: 1;
   transform: translateX(0);
 }
+#exact-loc {
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
 .form-box {
   @include form-style(column, $color-primary-light);
-  flex-basis: 60%;
-  @include break($media-large){
-    flex-basis: 80%;
+  width: 60%;
+  @include break($media-large) {
+    width: 80%;
   }
-  @include break($media-small){
-    flex-basis: 90%;
+  @include break($media-small) {
+    width: 90%;
   }
-  @include break($media-xSmall){
-    flex-basis: 100%;
+  @include break($media-xSmall) {
+    width: 100%;
     padding: 3rem;
   }
 }

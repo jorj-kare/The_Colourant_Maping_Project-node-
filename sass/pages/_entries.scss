@@ -3,17 +3,41 @@
 .entries {
   @include flex-centered(column);
   position: relative;
-  padding: 5rem;
+  padding: 5rem 3rem;
   background-color: $color-white;
-  
+  @include break($media-large) {
+    padding: 5rem;
+  }
 
+  &__search {
+    .search__box {
+      display: flex;
+      flex-wrap: wrap;
+
+      @include break($media-large) {
+        display: grid;
+      }
+    }
+    // button {
+    //   border-radius: 0;
+    //   border-width: 1px;
+    //   border-left: none;
+    //   border-right: none;
+    //   @include break($media-large) {
+    //     border: 1px solid $color-primary-light;
+    //     border-radius: 5px;
+    //   }
+    // }
+    .form {
+      padding: 3rem 0;
+    }
+  }
   .table-box {
     overflow: scroll;
     height: 90vh;
     max-width: 100%;
     border: 3px double $color-primary-dark;
     border-radius: 5px;
-   
 
     &::-webkit-scrollbar {
       width: 1rem;
@@ -27,29 +51,24 @@
     }
     &::-webkit-scrollbar-track {
       background-color: $color-primary-light;
-      
     }
     &::-webkit-scrollbar-corner {
       background-color: $color-primary-light;
     }
   }
- 
-  
 
   .link {
     margin-bottom: 1rem;
     font-size: 2rem;
     color: $color-primary-dark;
   }
-
   .sort-by {
-    justify-self: flex-end;
+    justify-self: center;
     gap: 1rem;
     margin-bottom: 2.5rem;
     @include break($media-medium) {
       justify-self: center;
       margin: 2rem 0;
-      
     }
 
     .form__label {
