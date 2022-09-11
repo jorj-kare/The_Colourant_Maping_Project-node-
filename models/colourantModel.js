@@ -18,6 +18,7 @@ const colourantSchema = new mongoose.Schema(
       },
       coordinates: [Number],
       address: String,
+      exact: Boolean,
     },
     analyticalTechniques: {
       type: [String],
@@ -60,6 +61,10 @@ colourantSchema.pre("save", async function (next) {
 
   next();
 });
+colourantSchema.index(
+  { pigment: 1, categoryOfFind: 1, analyticalTechniques: 1 },
+  { collation: { locale: "en", strength: 1, alternate: "shifted" } }
+);
 
 // colourantSchema.pre(/^delete/, async function (next) {
 //   //TODO: if delete an entry to deleted also from the user entries array
