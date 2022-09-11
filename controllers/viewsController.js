@@ -1,16 +1,44 @@
 const data = {
   pigments: [
-    "egyptian-blue",
+git     "egyptian blue",
     "charcoal",
-    "red-earth",
-    "green-earth",
+    "red earth",
+    "green earth",
     "azurite",
     "cinnabar",
+    "brown ochre",
+    "calcium carbonate",
+    "calcium sulfate",
+    "copper salts",
+    "egyptian green",
+    "galena",
+    "green earth (celadonite)",
+    "green earth (glauconite)",
+    "Han blue",
+    "Han purple",
+    "huntine",
+    "indigo",
+    "kaolinite",
+    "kermes",
+    "lazurite",
+    "lead white",
+    "madder",
+    "malachite",
+    "manganese oxide",
+    "Maya blue",
+    "murex purple",
+    "orpiment",
+    "realgar",
+    "red lead",
+    "red earth",
+    "carbon black",
+    "verdigris",
+    "yellow earth",
     "other",
   ],
   techniques: [
     "p-XRF",
-    "NIRR",
+    "NIR",
     "XRF",
     "OM",
     "MSI",
@@ -23,20 +51,20 @@ const data = {
     "other",
   ],
   categoryOfFind: [
-    "wall-painting",
+    "wall painting",
     "sculpture",
     "pottery",
     "dyestuff",
     "deposit",
-    "unused-pigment",
+    "unused pigment",
     "other",
   ],
   chronologies: [
     -5000, -4000, -3000, -2000, -1000, -900, -800, -700, -600, -500, -400, -300,
-    -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
+    -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100,
+    1200, 1300, 1400, 1500,
   ],
 };
-const Colourant = require("../models/colourantModel");
 
 exports.getView = (req, res) => {
   res.status(200).render("overview");
@@ -79,6 +107,5 @@ exports.getContactPage = (req, res) => {
 };
 
 exports.getEntriesTable = async (req, res) => {
- 
-  res.status(200).render("entries");
+  res.status(200).render("entries", { data });
 };

@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { showAlert } from "./alert.js";
+
 // ELEMENTS
 const btnDeleteAccount = document.getElementById("deleteAccount");
 const btnUpdateAccount = document.getElementById("updateAccount");
@@ -46,7 +48,9 @@ const updateAccount = async (userData) => {
     }
     if (data.status === "success") {
       showAlert("Your account have been updated.", "success", 3);
-      location.reload();
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
     }
   } catch (err) {
     showAlert(err, "error", 5);
@@ -77,6 +81,9 @@ const updatePassword = async (
       throw new Error(data.message);
     } else if (data.status === "success")
       showAlert("Your password have been updated.", "success", 3);
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
   } catch (err) {
     showAlert(err, "error", 5);
   }
