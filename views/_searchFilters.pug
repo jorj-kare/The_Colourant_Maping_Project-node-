@@ -1,0 +1,60 @@
+form.form(autocomplete="off")
+    .search__box
+        .form__group.area-pigments
+            .custom-input.form__dropdown
+                select#pigment
+                    option(value="" selected ) All pigments
+                    each pigment in data.pigments
+                        option( value=`${pigment}` id=`${pigment}`)= `${pigment}`              
+                input.input-other#other-pigment(hidden)            
+        .form__group.area-techniques
+            .custom-input.form__dropdown
+                select#techniques
+                    option(value="" selected) All techniques
+                    each technique in data.techniques
+                        option( value=`${technique}` id=`${technique}`)= `${technique}`
+                input.input-other#other-techniques(hidden)          
+        .form__group.area-category
+            .custom-input.form__dropdown
+                select#category-of-find
+                    option(value="" selected) All categories
+                    each category in data.categoryOfFind
+                        option(value=`${category}` id=`${category}`)= `${category}`
+                input.input-other#other-category(hidden)                               
+        div.area-chrStart
+            //- label.form__label(for="chr-start") From
+            select#chr-start.form__dropdown.chr( name="chr-start"  )  
+                option(value="BCE" selected) BCE
+                option(value="CE") CE                
+            select#century-start.form__dropdown.century( name="century-start"   ) 
+                option(value=""  selected ) Chronology from
+                optgroup.bce-optgroup(label="BCE" ) 
+                    each chr in data.chronologies
+                        if (chr <= 0)
+                            option(class="bce" value=`${chr}`)=`${chr * -1} `
+                optgroup.ce-optgroup(label="CE" disabled hidden) 
+                    each chr in data.chronologies  
+                        if (chr >= 0)
+                            option(class="ce" value=`${chr}`)=`${chr}`  
+        div.area-chrEnd
+            //- label.form__label(for="chr-end") &nbsp;&nbsp;&nbsp;&nbsp;to
+            select#chr-end.form__dropdown.chr( name="chr-end" ) 
+                option(value="BCE" selected) BCE
+                option(value="CE") CE            
+            select#century-end.form__dropdown.century( name="century-end" ) 
+                option(value=""  selected ) Chronology end
+                optgroup.bce-optgroup(label="BCE" ) 
+                    each chr in data.chronologies
+                        if (chr <= 0)
+                            option(class="bce" value=`${chr}`)=`${chr * -1} `
+                optgroup.ce-optgroup(label="CE" disabled hidden) 
+                    each chr in data.chronologies  
+                        if (chr >= 0)
+                            option(class="ce" value=`${chr}`)=`${chr}`    
+        if user && user.role==='admin' 
+            .form__group.area-checked
+                select#checked.form__dropdown( name="checked" ) 
+                    option(value="" selected) All 
+                    option(value= 'true') Checked
+                    option(value= 'false') Unchecked
+    //- button.btn.btn--dark.btn--animate Search 

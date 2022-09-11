@@ -1,16 +1,17 @@
 extends base
 block head 
-    script(src="/js/entries.js" defer)  
+    script( type="module" src="/js/entries.js" )  
 block main
     main.entries
         h2.h2.h2--dark.u-mrg-bottom-s Database
         a.link(href="/api/v1/colourants/exportData") Export to cvs⤓
+        .entries__search
+            include _searchFilters
         div.centered
             .sort-by.flex-container-r
                 label.form__label(for="sort-category") Sort by:   
                 select#sort-category.form__dropdown 
                     option(value="createdAt" selected) Created at
-                    option(value="pigment") Pigment 
                     option(value="chronology") Chronology
                 select#sort-order.form__dropdown
                     option(value=-1 selected) Descending 

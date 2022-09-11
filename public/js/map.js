@@ -1,25 +1,12 @@
 /* eslint-disable*/
 import { MapBox } from "./mapBox.js";
-import {
-  createChronologyString,
-  hideCenturies,
-  setRemoveAttributes,
-} from "./colourantForm.js";
-
+import { createChronologyString } from "./colourantForm.js";
+import { getFilteredColourant } from "./searchFilters.js";
+import { displayDetails, closeDetailsWindow } from "./details.js";
 // ELEMENTS
 const mapContainer = document.querySelector(".map");
 const form = document.querySelector(".form");
-const pigment = document.getElementById("pigment");
-const analyticalTechniques = document.getElementById("techniques");
-const categoryOfFind = document.getElementById("category-of-find");
-const centuryStart = document.getElementById("century-start");
-const centuryEnd = document.getElementById("century-end");
-const checked = document.getElementById("checked")
-  ? document.getElementById("checked")
-  : "";
 const sortBy = document.querySelector(".sort-by");
-const sortCategory = document.querySelector("#sort-category");
-const sortOrder = document.querySelector("#sort-order");
 const resultCounter = document.querySelector("#counter");
 const resultsList = document.querySelector(".list");
 const mapBox = new MapBox();
@@ -28,18 +15,6 @@ let geoData = { type: "FeatureCollection", features: [] };
 
 // FUNCTIONS
 const randomNumber = (max) => Math.random() * max;
-
-const closeDetailsWindow = (e) => {
-  if (e.target.id === "btnClose" || e.target.className === "details") {
-    const el = document.querySelector(".details");
-    if (el) {
-      el.classList.add("u-fade-out");
-      window.setTimeout(() => {
-        el.parentElement.removeChild(el);
-      }, 1000);
-    }
-  }
-};
 
 const displayResults = (data) => {
   let markup = "";
@@ -91,28 +66,9 @@ const createGeoJson = (data) => {
   });
 };
 
-const getColourant = async (filter) => {
-  const str = filter.toString();
-  const url = ` ${window.location.origin}/api/v1/colourants/?${str}`;
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
-
-const getAndDisplayColourants = async () => {
-  const filter = new URLSearchParams({
-    pigment: pigment.value,
-    analyticalTechniques: analyticalTechniques.value,
-    categoryOfFind: categoryOfFind.value,
-    centuryStart: centuryStart.value,
-    centuryEnd: centuryEnd.value,
-    checked: checked.value,
-    sortCategory: sortCategory.value,
-    sortOrder: sortOrder.value,
-  });
+const displayColourants = async () => {
   filteredColourants = [];
-  filteredColourants = await getColourant(filter);
+  filteredColourants = await getFilteredColourant();
   displayResults(filteredColourants.colourants);
   createGeoJson(filteredColourants.colourants);
   if (mapBox.map.getSource("colourants"))
@@ -181,12 +137,11 @@ mapBox.map.on("click", "unclustered-point", (e) => {
     .setHTML(
       `<li class="list__item list__item--small" data-id="${
         e.features[0].properties.id
-      }" data-pigment="${
-        e.features[0].properties.pigment
-      }" >${e.features[0].properties.pigment
-        .replace("[", "")
-        .replace("]", "")
-        .replaceAll('"', "")}</li>`
+      }" 
+       >${e.features[0].properties.pigment
+         .replace("[", "")
+         .replace("]", "")
+         .replaceAll('"', "")}</li>`
     )
     .addTo(mapBox.map);
 });
@@ -214,72 +169,20 @@ mapBox.map.on("mouseleave", "clusters", () => {
   mapBox.map.getCanvas().style.cursor = "";
 });
 
-window.addEventListener("load", getAndDisplayColourants);
+window.addEventListener("load", displayColourants);
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  getAndDisplayColourants();
-});
 form.addEventListener("change", (e) => {
   e.preventDefault();
-  hideCenturies(e);
-  setRemoveAttributes(e);
-  const otherInput = e.target.parentElement.querySelector(".input-other");
-  const selectEl = e.target.parentElement.querySelector("select");
-
-  if (selectEl.selectedOptions[0].id !== "other" && otherInput) {
-    otherInput.setAttribute("hidden", "true");
-    selectEl.style.width = "100%";
-  }
-  if (selectEl.selectedOptions[0].id === "other") {
-    selectEl.style.width = "35%";
-    otherInput.removeAttribute("hidden");
-    if (otherInput.value) selectEl.lastChild.value = otherInput.value;
-  }
+  displayColourants();
 });
 
 sortBy.addEventListener("change", async (e) => {
-  const filter = new URLSearchParams({
-    pigment: pigment.value,
-    analyticalTechniques: analyticalTechniques.value,
-    categoryOfFind: categoryOfFind.value,
-    centuryStart: centuryStart.value,
-    centuryEnd: centuryEnd.value,
-    checked: checked.value,
-    sortCategory: sortCategory.value,
-    sortOrder: sortOrder.value,
-  });
   filteredColourants = [];
-  filteredColourants = await getColourant(filter);
+  filteredColourants = await getFilteredColourant();
   displayResults(filteredColourants.colourants);
 });
 
 mapContainer.addEventListener("click", (e) => {
-  if (e.target.className.includes("list__item")) {
-    const colourant = filteredColourants.colourants.filter(
-      (el) => el._id === e.target.dataset.id
-    );
-
-    const chr = createChronologyString(colourant[0]);
-    const markup = `<div class="details">
-  <ul class="details__list">
-  <button id="btnClose" class="btn btn--small btn--close">⇽</button>
-  <li class="details__item"><span  class="details__icon">&#9677;</span><span class="details__header">  Pigment: </span>${colourant[0].pigment}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Chronology: </span>${chr.start}, ${chr.end}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Category of find: </span>${colourant[0].categoryOfFind}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Archeological context: </span>${colourant[0].archeologicalContext}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Notes: </span>${colourant[0].notes}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Analytical techniques: </span>${colourant[0].analyticalTechniques}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> References: </span>${colourant[0].references}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Address: </span>${colourant[0].location.address}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Coordinates: </span>${colourant[0].location.coordinates}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Contributor: </span>${colourant[0].contributor.firstName} ${colourant[0].contributor.lastName}</li>
-  <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Affiliation: </span>${colourant[0].contributor.affiliation}</li>
-  </ul>
-  </div>`;
-    mapContainer.insertAdjacentHTML("afterbegin", markup);
-    const details = document.querySelector(".details");
-    details.classList.add("u-fade-in");
-  }
+  displayDetails(e, filteredColourants.colourants);
   closeDetailsWindow(e);
 });

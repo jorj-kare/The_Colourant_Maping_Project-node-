@@ -1,17 +1,20 @@
+import { getFilteredColourant } from "./searchFilters.js";
+import { displayDetails, closeDetailsWindow } from "./details.js";
 /* eslint-disable */
 // SELECTORS
+const form = document.querySelector(".form");
 const sortBy = document.querySelector(".sort-by");
 const tBody = document.querySelector(".table__body");
-const sortCategory = document.querySelector("#sort-category");
-const sortOrder = document.querySelector("#sort-order");
+const entriesContainer = document.querySelector(".entries");
+let filteredColourants = [];
 // FUNCTIONS
-const getColourants = async (filters) => {
-  const str = filters.toString();
-  const url = `${window.location.origin}/api/v1/colourants/?${str}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-};
+// const getColourants = async (filters) => {
+//   const str = filters.toString();
+//   const url = `${window.location.origin}/api/v1/colourants/?${str}`;
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   return data;
+// };
 const editLongText = (entry) => {
   const wordsArray = entry.split(" ");
   let output;
@@ -39,7 +42,7 @@ const editContributorField = (contributor) => {
   return output;
 };
 
-editEditedField = (entry) => {
+const editEditedField = (entry) => {
   let output;
   if (entry.length > 1) {
     let details = "";
@@ -73,12 +76,15 @@ const addTablesForAdmin = (entry) => {
 const displayEntries = (entries) => {
   let markup = "";
   tBody.innerHTML = "";
+  if (!entries) return;
   entries.forEach((entry) => {
     markup += `<tr class="table__row">
     <td class='table__data' data-label="Created at">${new Date(
       entry.createdAt
     ).toLocaleDateString("en-Gb")}</td>
-    <td class='table__data' data-label="Pigment">${entry.pigment}</td>
+    <td id="td-pigment" class='table__data' data-id="${
+      entry._id
+    }" data-label="Pigment">${entry.pigment}</td>
     <td class='table__data' data-label="Chronology">${
       entry.chronology.start
     }, ${entry.chronology.end}</td>
@@ -116,19 +122,21 @@ const displayEntries = (entries) => {
 
 // EVENTS LISTENERS
 window.addEventListener("load", async (e) => {
-  const filter = new URLSearchParams({
-    sortCategory: sortCategory.value,
-    sortOrder: sortOrder.value,
-  });
-  const data = await getColourants(filter);
-  displayEntries(data.colourants);
+  filteredColourants = await getFilteredColourant();
+  displayEntries(filteredColourants.colourants);
+});
+form.addEventListener("change", async (e) => {
+  e.preventDefault();
+  filteredColourants = await getFilteredColourant();
+  displayEntries(filteredColourants.colourants);
 });
 
 sortBy.addEventListener("change", async (e) => {
-  const filter = new URLSearchParams({
-    sortCategory: sortCategory.value,
-    sortOrder: sortOrder.value,
-  });
-  const entries = await getColourants(filter);
-  displayEntries(entries.colourants);
+  filteredColourants = await getFilteredColourant();
+  displayEntries(filteredColourants.colourants);
+});
+
+entriesContainer.addEventListener("click", (e) => {
+  displayDetails(e, filteredColourants.colourants);
+  closeDetailsWindow(e);
 });

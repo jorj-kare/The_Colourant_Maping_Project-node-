@@ -1,0 +1,81 @@
+@use "../abstracts/" as *;
+
+.search__box {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  // grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "pigment techniques category"
+    "chrStart chrStart chrStart"
+    "chrEnd chrEnd chrEnd"
+    ". checked .";
+
+  @include break($media-xSmall) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "pigment   pigment "
+      "category  techniques"
+      "chrStart chrStart "
+      "chrEnd chrEnd "
+      "checked checked ";
+  }
+
+  .form {
+    width: 100%;
+  }
+  .form__group {
+    max-width: 20rem;
+    @include break($media-xLarge) {
+      max-width: 20rem;
+    }
+    @include break($media-large) {
+      max-width: 25rem;
+    }
+  }
+
+  .custom-input {
+    input {
+      width: 63%;
+      background-color: $color-white;
+      border: none;
+      border-bottom: 0.5px solid $color-primary-dark;
+      outline: transparent;
+      color: inherit;
+    }
+    select {
+      color: inherit;
+
+      @include break($media-small) {
+        padding: 0;
+      }
+    }
+  }
+  button {
+    width: 50%;
+    border-width: 1px;
+  }
+
+  .area-pigments {
+    grid-area: pigment;
+  }
+  .area-techniques {
+    grid-area: techniques;
+  }
+  .area-category {
+    grid-area: category;
+  }
+  .area-chrStart {
+    grid-area: chrStart;
+  }
+  .area-chrEnd {
+    grid-area: chrEnd;
+  }
+  .area-checked {
+    grid-area: checked;
+
+    margin-bottom: 1.5rem;
+  }
+}
