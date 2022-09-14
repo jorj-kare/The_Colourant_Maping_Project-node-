@@ -40,50 +40,53 @@ exports.getColourants = async (req, res, next) => {
     filters.push({ checked: checked === "true" });
   } else if (!req.user || (req.user && req.user.role !== "admin")) {
     filters.push({ checked: true });
-
-    if (pigment) filters.push({ pigment });
-    if (categoryOfFind) filters.push({ categoryOfFind });
-    if (analyticalTechniques) filters.push({ analyticalTechniques });
-    if (centuryStart)
-      filters.push({
-        "chronology.start": { $gte: +centuryStart },
-      });
-
-    if (centuryEnd)
-      filters.push({
-        "chronology.end": {
-          $lte: +centuryEnd,
-        },
-      });
-
-    if (sortCategory) sortBy[sortCategory] = sortOrder * 1;
-    else sortBy["chronology"] = -1;
-    const colourants = await Colourant.aggregate(
-      [
-        {
-          $match: {
-            $and: filters,
-          },
-        },
-        { $sort: sortBy },
-      ],
-      { collation: { locale: "en", strength: 2, alternate: "shifted" } }
-    );
-
-    if (req.user && req.user.role === "admin") {
-      contributorFields = "username firstName lastName affiliation";
-    } else contributorFields = "username";
-
-    await Colourant.populate(colourants, {
-      path: "contributor",
-      select: contributorFields,
-    });
-    res.status(200).json({
-      status: "success",
-      colourants,
-    });
   }
+
+  if (pigment) filters.push({ pigment });
+  if (categoryOfFind) filters.push({ categoryOfFind });
+  if (analyticalTechniques) filters.push({ analyticalTechniques });
+  if (centuryStart)
+    filters.push({
+      "chronology.start": { $gte: +centuryStart },
+    });
+
+  if (centuryEnd)
+    filters.push({
+      "chronology.end": {
+        $lte: +centuryEnd,
+      },
+    });
+
+  if (sortCategory) sortBy[sortCategory] = sortOrder * 1;
+  else sortBy["chronology"] = -1;
+
+  const colourants = await Colourant.aggregate(
+    [
+      {
+        $match: {
+          $and: filters,
+        },
+      },
+      { $sort: sortBy },
+    ],
+    { collation: { locale: "en", strength: 2, alternate: "shifted" } }
+  );
+
+  if (req.user && req.user.role === "admin") {
+    contributorFields = "username firstName lastName affiliation";
+  } else contributorFields = "username";
+
+  await Colourant.populate(colourants, {
+    path: "contributor",
+    select: contributorFields,
+  });
+
+  res.status(200).json({
+    status: "success",
+    colourants,
+  });
 };
+
 exports.getColourant = async (req, res, next) => {
   try {
     const colourant = await Colourant.findById(req.params.id);

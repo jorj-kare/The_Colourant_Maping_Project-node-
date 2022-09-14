@@ -235,7 +235,7 @@ body {
 }
 
 .u-width-m {
-  width: 60%;
+  width: 60% !important;
 }
 
 .u-width-l {
@@ -701,7 +701,7 @@ body {
   position: fixed;
   inset: 0;
   background-image: linear-gradient(rgba(46, 43, 43, 0.618), rgba(46, 43, 43, 0.608));
-  z-index: 3;
+  z-index: 5;
   transition: all 0.1s;
 }
 .details__list {
@@ -1095,10 +1095,12 @@ body {
   transform: translateX(0);
 }
 
-#exact-loc {
+#certainProvenance {
   align-items: center;
-  justify-content: center;
-  align-self: center;
+  align-self: flex-start;
+  margin: 1rem 0;
+  padding: 1.2rem 0.5rem;
+  background-color: #eee8e8;
 }
 
 .form-box {
@@ -1626,6 +1628,10 @@ body {
   .mapboxgl-ctrl.mapboxgl-ctrl-group {
     display: none;
   }
+}
+
+.mapboxgl-popup {
+  z-index: 3;
 }
 
 .search__box {

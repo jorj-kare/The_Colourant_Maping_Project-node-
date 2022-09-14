@@ -4,6 +4,7 @@ import {
   hideCenturies,
   getFormValues,
   cfv,
+  toggleCertainProvenance,
 } from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
@@ -82,11 +83,10 @@ form.addEventListener("change", (e) => {
     const other = e.target.parentElement.querySelector("#other");
     other.value = e.target.value;
   }
+  if (e.target.id === "certainProvenance") toggleCertainProvenance(e, mapBox);
 });
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  // FORM INPUTS
   // Get the checked value
   const data = getFormValues();
   data.contributor = userId ? userId.value : "";

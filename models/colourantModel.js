@@ -18,7 +18,7 @@ const colourantSchema = new mongoose.Schema(
       },
       coordinates: [Number],
       address: String,
-      exact: Boolean,
+      certainProvenance: Boolean,
     },
     analyticalTechniques: {
       type: [String],

@@ -4,6 +4,7 @@ import {
   hideCenturies,
   getFormValues,
   cfv,
+  toggleCertainProvenance,
 } from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
@@ -57,18 +58,21 @@ const updateEntry = async (colourantData) => {
 };
 
 const checkInput = (elements, values) => {
-  if (typeof values === "string" || typeof values === "boolean")
+  if (typeof values === "string" || typeof values === "boolean") {
     values = new Array(values.toString());
+  }
+  values = values.map((value) => value.toLowerCase());
+
   const otherCheckbox = elements[elements.length - 2];
   const otherInput = elements[elements.length - 1];
   const elIds = [];
   const otherValues = [];
   elements.forEach((el) => {
-    elIds.push(el.id);
-    if (values.includes(el.id)) el.checked = true;
+    elIds.push(el.id.toLowerCase());
+    if (values.includes(el.id.toLowerCase())) el.checked = true;
   });
   values.forEach((el) => {
-    if (!elIds.includes(el)) {
+    if (!elIds.includes(el.toLowerCase())) {
       otherValues.push(el);
       otherCheckbox.checked = true;
       otherCheckbox.value = otherValues;
@@ -78,6 +82,13 @@ const checkInput = (elements, values) => {
 };
 
 const initiateFormValues = (data) => {
+  if (data.colourant.location.certainProvenance) {
+    cfv.certainProvenance.selectedIndex = 0;
+  } else {
+    cfv.certainProvenance.selectedIndex = 1;
+    cfv.loc.value = data.colourant.location.address;
+  }
+
   cfv.references.value = data.colourant.references;
   cfv.notes.value = data.colourant.notes;
   cfv.archeologicalContext.value = data.colourant.archeologicalContext;
@@ -91,16 +102,21 @@ const initiateFormValues = (data) => {
     ? 0
     : 1;
   cfv.centuryEnd.value = data.colourant.chronology.end;
-  cfv.lat.value = data.colourant.location.coordinates[0];
-  cfv.lng.value = data.colourant.location.coordinates[1];
+  cfv.lat.value = data.colourant.location.coordinates
+    ? data.colourant.location.coordinates[0]
+    : "";
+  cfv.lng.value = data.colourant.location.coordinates
+    ? data.colourant.location.coordinates[1]
+    : "";
   checkInput(cfv.pigmentsInputs, data.colourant.pigment);
   checkInput(cfv.categoryOfFindInputs, data.colourant.categoryOfFind);
   checkInput(
     cfv.analyticalTechniquesInputs,
     data.colourant.analyticalTechniques
   );
-
-  checkInput(cfv.checkedEl, data.colourant.checked);
+  if (cfv.checkedEl) {
+    checkInput(cfv.checkedEl, data.colourant.checked);
+  }
   btnSubmit.innerText = "Update entry";
 };
 
@@ -124,6 +140,7 @@ const enableForm = () => {
 };
 
 const setMarker = (lat, lng) => {
+  if (!lat || !lng) return;
   mapBox.removeMarker();
   mapBox.geocoder.query(`${lat},${lng}`);
   mapBox.createMarker([lng, lat]);
@@ -131,32 +148,24 @@ const setMarker = (lat, lng) => {
 
 // EVENT LISTENERS
 
-mapBox.displayMap();
-form.addEventListener("change", function (e) {
-  setRemoveAttributes(e);
-  hideCenturies(e);
-});
-
 window.addEventListener("load", async (e) => {
-  disableForm();
-  setRemoveAttributes(e);
+  mapBox.displayMap();
   colourantData = await getColourant();
   if (!colourantData) return;
   initiateFormValues(colourantData);
+  toggleCertainProvenance(e, mapBox);
+  disableForm();
+  setRemoveAttributes(e);
   mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
   window.setTimeout(() => {
     setMarker(cfv.lat.value, cfv.lng.value);
   }, 1000);
 });
 
-btnEditForm.addEventListener("click", enableForm);
-
-btnResetForm.addEventListener("click", (e) => {
-  location.reload();
-});
-
 form.addEventListener("change", (e) => {
   e.preventDefault();
+  setRemoveAttributes(e);
+  hideCenturies(e);
   if (e.target.id === "other") {
     const otherInput = e.target.parentElement.querySelector("#other-input");
     if (e.target.checked) {
@@ -166,6 +175,9 @@ form.addEventListener("change", (e) => {
   if (e.target.id === "other-input") {
     const other = e.target.parentElement.querySelector("#other");
     other.value = e.target.value;
+  }
+  if (e.target.id === "certainProvenance") {
+    toggleCertainProvenance(e, mapBox);
   }
 });
 
@@ -183,4 +195,13 @@ btnSubmit.addEventListener("click", (e) => {
   window.setTimeout(() => {
     location.assign("/myAccount");
   }, 1000);
+});
+
+btnEditForm.addEventListener("click", (e) => {
+  enableForm();
+  toggleCertainProvenance(e, mapBox);
+});
+
+btnResetForm.addEventListener("click", (e) => {
+  location.reload();
 });

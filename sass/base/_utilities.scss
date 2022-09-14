@@ -21,11 +21,12 @@
   width: 50% !important;
 }
 .u-width-m {
-  width: 60%;
+  width: 60% !important;
 }
+
 .u-width-l {
   width: 80% !important;
-  @include break($media-medium){
+  @include break($media-medium) {
     width: 100% !important;
   }
 }

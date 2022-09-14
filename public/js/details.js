@@ -1,4 +1,4 @@
-γιτ import { createChronologyString } from "./colourantForm.js";
+import { createChronologyString } from "./colourantForm.js";
 const closeDetailsWindow = (e) => {
   if (e.target.id === "btnClose" || e.target.id === "details") {
     const el = document.querySelector(".details");

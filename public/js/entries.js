@@ -8,13 +8,6 @@ const tBody = document.querySelector(".table__body");
 const entriesContainer = document.querySelector(".entries");
 let filteredColourants = [];
 // FUNCTIONS
-// const getColourants = async (filters) => {
-//   const str = filters.toString();
-//   const url = `${window.location.origin}/api/v1/colourants/?${str}`;
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   return data;
-// };
 const editLongText = (entry) => {
   const wordsArray = entry.split(" ");
   let output;
@@ -95,7 +88,10 @@ const displayEntries = (entries) => {
     <summary>${entry.location.address}</summary>
     -----------------<br>
     <strong>Coordinates</strong><br>
-    ${entry.location.coordinates}
+    ${entry.location.coordinates}<br>
+    -----------------<br>
+    <strong>Certain <br> provenance</strong><br>
+    ${entry.location.certainProvenance}
     </details></td>
     <td class='table__data' data-label="Analytical techniques">${
       entry.analyticalTechniques

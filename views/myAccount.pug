@@ -18,14 +18,14 @@ block main
                 .form__group.username-group
                     label.form__label(for='username') Username
                     .flex-container-r
-                        input#username.form__input(type='text' minlength=3 maxlength=15 required disabled value = `${user.username}`)
+                        input#username.form__input(type='text' minlength=3 maxlength=50 required disabled value = `${user.username}`)
                         button.btn.btn--small(type='button')  ✎   
-                    
+
                 .form__group.firstName-group
-                        label.form__label(for='firstName') First name
-                        .flex-container-r
-                            input#firstName.form__input(type='text' value = `${user.firstName}` required disabled )
-                            button.btn.btn--small(type='button')  ✎   
+                    label.form__label(for='firstName') First name
+                    .flex-container-r
+                        input#firstName.form__input(type='text' value = `${user.firstName}` required disabled )
+                        button.btn.btn--small(type='button')  ✎   
                 .form__group.lastName-group
                     label.form__label(for='lastName') Last Name
                     .flex-container-r
@@ -37,11 +37,11 @@ block main
                         -if(user.affiliation) 
                             input#affiliation.form__input(type='text'  value = `${user.affiliation}` disabled )
                         -else
-                            input#affiliation.form__input(type='text'  placeholder='No current affiliation')
+                            input#affiliation.form__input(type='text' placeholder='No current affiliation')
                         button.btn.btn--small(type='button')  ✎
                 .form__group.button-group
                     button#updateAccount.btn.btn--animate.u-mrg-top-s(type='submit') Update account
-                
+
             .c-center
                 button#changePassword.btn.btn--medium Change password
                 //- button#deleteAccount.btn.btn--medium.btn--red Delete account

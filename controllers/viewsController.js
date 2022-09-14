@@ -1,6 +1,6 @@
 const data = {
   pigments: [
-git     "egyptian blue",
+    "egyptian blue",
     "charcoal",
     "red earth",
     "green earth",

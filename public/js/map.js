@@ -26,7 +26,9 @@ const displayResults = (data) => {
         el.pigment
       }, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, (${
         el.location.address
-      })`;
+      }), <strong>${
+        el.location.certainProvenance === true ? "" : "Uncertain provenance"
+      }</strong>`;
       markup += `<li data-id="${el._id}" data-pigment="${el.pigment}" class="list__item">${str}</li>`;
     });
   }
@@ -38,6 +40,7 @@ const createGeoJson = (data) => {
   geoData.features = [];
   filteredColourants.colourants.forEach((el) => {
     // If two entries have the exact same coordinates change slightly the coordinates of one so both they will be visible on the map
+    if (el.location.coordinates === null) return;
     let x = 0;
     geoData.features.forEach((f) => {
       if (

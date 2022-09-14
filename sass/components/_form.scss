@@ -276,10 +276,12 @@
   opacity: 1;
   transform: translateX(0);
 }
-#exact-loc {
+#certainProvenance {
   align-items: center;
-  justify-content: center;
-  align-self: center;
+  align-self: flex-start;
+  margin: 1rem 0;
+  padding: 1.2rem 0.5rem;
+  background-color: $color-white;
 }
 .form-box {
   @include form-style(column, $color-primary-light);

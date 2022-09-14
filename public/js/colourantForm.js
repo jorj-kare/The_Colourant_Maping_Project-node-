@@ -25,11 +25,13 @@ export const cfv = {
   lat: document.getElementById("latitude"),
   lng: document.getElementById("longitude"),
   loc: document.getElementById("loc"),
+  certainProvenance: document.getElementById("certainProvenance"),
 };
 // FUNCTIONS
-
 const trimArrValues = (arr) => {
-  const trimmedArr= arr.filter((el) => el.trim() !== "").map((el) => el.trim());
+  const trimmedArr = arr
+    .filter((el) => el.trim() !== "")
+    .map((el) => el.trim());
   return trimmedArr;
 };
 
@@ -49,6 +51,39 @@ export const hideCenturies = (e) => {
         el.removeAttribute("disabled");
       }
     });
+  }
+};
+export const toggleCertainProvenance = (e, mapBox) => {
+  const mapElement = document.getElementById("map");
+  const certainProvenance = document.getElementById("certainProvenance");
+  const geocoder = document.querySelector(".mapboxgl-ctrl-geocoder--input");
+  const loc = document.querySelector("#loc");
+  const lat = document.querySelector("#latitude");
+  const lon = document.querySelector("#longitude");
+  if (certainProvenance.value === "uncertain") {
+    loc.removeAttribute("hidden");
+    mapElement.style.pointerEvents = "none";
+    setTimeout(() => {
+      document.querySelector(".suggestions").style.display = "none";
+      lat.value = "";
+      lon.value = "";
+      if (e.type === "change") {
+        loc.value = "";
+      }
+      geocoder.value = "";
+      lat.setAttribute("disabled", "true");
+      lon.setAttribute("disabled", "true");
+      geocoder.setAttribute("disabled", "true");
+      mapBox.removeMarker();
+    }, 500);
+  }
+  if (certainProvenance.value === "certain") {
+    loc.value = "";
+    loc.setAttribute("hidden", "true");
+    map.style.pointerEvents = "auto";
+    geocoder.removeAttribute("disabled");
+    lat.removeAttribute("disabled");
+    lon.removeAttribute("disabled");
   }
 };
 
@@ -126,7 +161,7 @@ export const getFormValues = () => {
       let value = el.value;
       if (value.includes(",")) {
         value = value.split(",");
-        value = trimArrValues(value)
+        value = trimArrValues(value);
         pigments.push(...value);
       } else {
         pigments.push(value);
@@ -139,7 +174,7 @@ export const getFormValues = () => {
       let value = el.value;
       if (value.includes(",")) {
         value = value.split(",");
-        value= trimArrValues(value)
+        value = trimArrValues(value);
         analyticalTechniques.push(...value);
       } else {
         analyticalTechniques.push(value);
@@ -150,7 +185,11 @@ export const getFormValues = () => {
   const data = {
     location: {
       address: cfv.loc.value,
-      coordinates: [cfv.lat.value * 1, cfv.lng.value * 1],
+      coordinates:
+        cfv.certainProvenance.value === "certain"
+          ? [cfv.lat.value * 1, cfv.lng.value * 1]
+          : null,
+      certainProvenance: cfv.certainProvenance.value === "certain",
     },
     chronology: { start: +cfv.centuryStart.value, end: +cfv.centuryEnd.value },
     pigment: pigments,
