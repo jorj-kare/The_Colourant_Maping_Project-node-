@@ -90,6 +90,8 @@ exports.getColourants = async (req, res, next) => {
 exports.getColourant = async (req, res, next) => {
   try {
     const colourant = await Colourant.findById(req.params.id);
+    console.log(colourant);
+
     if (!colourant)
       return next(new CustomError("No colourant found with this id."), 404);
     res.status(200).json({
