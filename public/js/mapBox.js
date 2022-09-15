@@ -23,7 +23,7 @@ class MapBox {
       center: [8.6992782, 48.4740928],
       zoom: 2,
       maxBounds: bounds,
-      // projection: 'globe'
+      projection: "mercator",
     });
     // displayMap();
     this.geocoder = new MapboxGeocoder({
@@ -38,13 +38,9 @@ class MapBox {
     this.map.addControl(new mapboxgl.ScaleControl());
     // Set layers for mapbox
     const layerList = document.getElementById("menu");
-    const inputs = layerList.querySelectorAll("option");
-
-    inputs.forEach((input) => {
-      input.onclick = (layer) => {
-        const layerId = layer.target.id;
-        this.map.setStyle("mapbox://styles/" + layerId);
-      };
+    layerList.querySelector("select").addEventListener("change", (e) => {
+      const layerId = e.target.value;
+      this.map.setStyle("mapbox://styles/" + layerId);
     });
 
     return this.map;
@@ -63,6 +59,8 @@ class MapBox {
 
   setLocation(lngEl, latEl, locEl, coordsEl) {
     this.map.on("click", (e) => {
+      console.log(e);
+
       this.removeMarker();
       lngEl.value = e.lngLat.lng;
       latEl.value = e.lngLat.lat;
