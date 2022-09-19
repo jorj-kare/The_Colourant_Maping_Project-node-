@@ -59,19 +59,20 @@ class MapBox {
 
   setLocation(lngEl, latEl, locEl, coordsEl) {
     this.map.on("click", (e) => {
-      console.log(e);
-
       this.removeMarker();
-      lngEl.value = e.lngLat.lng;
-      latEl.value = e.lngLat.lat;
-      this.createMarker(e.lngLat);
-      this.geocoder.query(`${e.lngLat.lat},${e.lngLat.lng}`);
+      lngEl.value = e.lngLat.lng.toFixed(8);
+      latEl.value = e.lngLat.lat.toFixed(8);
+      this.createMarker([lngEl.value, latEl.value]);
+      this.geocoder.query(`${latEl.value},${lngEl.value}`);
     }),
       this.geocoder.on("result", (e) => {
-        this.removeMarker();
-        this.createMarker(e.result.center);
-        lngEl.value = e.result.center[0];
-        latEl.value = e.result.center[1];
+        // this.removeMarker();
+        // this.createMarker([
+        //   e.result.center[0].toFixed(8),
+        //   e.result.center[1].toFixed(8),
+        // ]);
+        // lngEl.value = e.result.center[0];
+        // latEl.value = e.result.center[1];
         locEl.value = e.result.place_name;
       });
 
