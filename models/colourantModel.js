@@ -4,7 +4,12 @@ const colourantSchema = new mongoose.Schema(
   {
     pigment: {
       type: [String],
-      required: [true, "This field is required."],
+      validate: {
+        validator: function (arr) {
+          return arr.length > 0;
+        },
+        message: "This field is required.",
+      },
     },
     chronology: {
       start: { type: Number, required: [true, "This field is required."] },
@@ -22,7 +27,12 @@ const colourantSchema = new mongoose.Schema(
     },
     analyticalTechniques: {
       type: [String],
-      required: [true, "This field is required."],
+      validate: {
+        validator: function (arr) {
+          return arr.length > 0;
+        },
+        message: "This field is required.",
+      },
     },
     categoryOfFind: {
       type: String,

@@ -135,9 +135,9 @@ export const createChronologyString = (data) => {
 };
 
 export const getFormValues = () => {
-  let categoryOfFind = [];
+  let categoryOfFind;
   let analyticalTechniques = [];
-  let pigments = [];
+  let colourants = [];
   let isChecked;
   if (cfv.checkedEl) {
     cfv.checkedEl.forEach((el) => {
@@ -152,7 +152,7 @@ export const getFormValues = () => {
   cfv.categoryOfFindInputs.forEach((el) => {
     if (el.checked) {
       categoryOfFind = el.value.trim();
-    }
+    } else categoryOfFind = "";
   });
 
   // Get the checked values and pushes them to an array

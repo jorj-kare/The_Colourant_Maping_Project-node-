@@ -25,7 +25,7 @@ const globalErrorHandler = (err, req, res, next) => {
     )} already exist, please try another value.`;
     error = new CustomError(message, 400);
   }
-  
+
   res.status(error.statusCode).json({
     status: error.status,
     message: error.message,
