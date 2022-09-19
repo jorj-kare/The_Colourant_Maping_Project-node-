@@ -24,9 +24,9 @@ const displayResults = (data) => {
       const chr = createChronologyString(el);
       const str = `${new Date(el.createdAt).toLocaleDateString("en-Gb")}, ${
         el.pigment
-      }, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, (${
+      }, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, ${
         el.location.address
-      }), <strong>${
+      }, <strong>${
         el.location.certainProvenance === true ? "" : "Uncertain provenance"
       }</strong>`;
       markup += `<li data-id="${el._id}" data-pigment="${el.pigment}" class="list__item">${str}</li>`;

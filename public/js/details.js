@@ -29,6 +29,7 @@ const displayDetails = (e, data) => {
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> References: </span>${colourant[0].references}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Address: </span>${colourant[0].location.address}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Coordinates: </span>${colourant[0].location.coordinates}</li>
+<li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Certain provenance: </span>${colourant[0].location.certainProvenance}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Contributor: </span>${colourant[0].contributor.firstName} ${colourant[0].contributor.lastName}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Affiliation: </span>${colourant[0].contributor.affiliation}</li>
 </ul>
