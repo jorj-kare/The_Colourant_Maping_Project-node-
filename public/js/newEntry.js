@@ -29,6 +29,9 @@ const createColourant = async (colourantData) => {
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
       showAlert("You entry has been submitted successfully!", "success", 5);
+      window.setTimeout(() => {
+        location.assign("/");
+      }, 1000);
     }
   } catch (err) {
     showAlert(err.message, "error", 5);
@@ -91,7 +94,4 @@ form.addEventListener("submit", (e) => {
   const data = getFormValues();
   data.contributor = userId ? userId.value : "";
   createColourant(data);
-  window.setTimeout(() => {
-    location.assign("/");
-  }, 1000);
 });
