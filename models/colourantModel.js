@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const User = require("./userModel");
 const colourantSchema = new mongoose.Schema(
   {
-    pigment: {
+    colourants: {
       type: [String],
       validate: {
         validator: function (arr) {
@@ -72,7 +72,7 @@ colourantSchema.pre("save", async function (next) {
   next();
 });
 colourantSchema.index(
-  { pigment: 1, categoryOfFind: 1, analyticalTechniques: 1 },
+  { colourants: 1, categoryOfFind: 1, analyticalTechniques: 1 },
   { collation: { locale: "en", strength: 1, alternate: "shifted" } }
 );
 

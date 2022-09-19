@@ -23,13 +23,13 @@ const displayResults = (data) => {
     data.forEach((el) => {
       const chr = createChronologyString(el);
       const str = `${new Date(el.createdAt).toLocaleDateString("en-Gb")}, ${
-        el.pigment
+        el.colourants
       }, (${chr.start}, ${chr.end}), ${el.categoryOfFind}, ${
         el.location.address
       }, <strong>${
         el.location.certainProvenance === true ? "" : "Uncertain provenance"
       }</strong>`;
-      markup += `<li data-id="${el._id}" data-pigment="${el.pigment}" class="list__item">${str}</li>`;
+      markup += `<li data-id="${el._id}" data-colourants="${el.colourants}" class="list__item">${str}</li>`;
     });
   }
   resultsList.insertAdjacentHTML("afterbegin", markup);
@@ -38,7 +38,7 @@ const displayResults = (data) => {
 
 const createGeoJson = (data) => {
   geoData.features = [];
-  filteredColourants.colourants.forEach((el) => {
+  filteredColourants.data.forEach((el) => {
     // If two entries have the exact same coordinates change slightly the coordinates of one so both they will be visible on the map
     if (el.location.coordinates === null) return;
     let x = 0;
@@ -63,7 +63,7 @@ const createGeoJson = (data) => {
       },
       properties: {
         id: el._id,
-        pigment: el.pigment,
+        colourants: el.colourants,
       },
     });
   });
@@ -72,8 +72,8 @@ const createGeoJson = (data) => {
 const displayColourants = async () => {
   filteredColourants = [];
   filteredColourants = await getFilteredColourant();
-  displayResults(filteredColourants.colourants);
-  createGeoJson(filteredColourants.colourants);
+  displayResults(filteredColourants.data);
+  createGeoJson(filteredColourants.data);
   if (mapBox.map.getSource("colourants"))
     mapBox.map.getSource("colourants").setData(geoData);
 };
@@ -141,7 +141,7 @@ mapBox.map.on("click", "unclustered-point", (e) => {
       `<li class="list__item list__item--small" data-id="${
         e.features[0].properties.id
       }" 
-       >${e.features[0].properties.pigment
+       >${e.features[0].properties.colourants
          .replace("[", "")
          .replace("]", "")
          .replaceAll('"', "")}</li>`
@@ -182,10 +182,10 @@ form.addEventListener("change", (e) => {
 sortBy.addEventListener("change", async (e) => {
   filteredColourants = [];
   filteredColourants = await getFilteredColourant();
-  displayResults(filteredColourants.colourants);
+  displayResults(filteredColourants.data);
 });
 
 mapContainer.addEventListener("click", (e) => {
-  displayDetails(e, filteredColourants.colourants);
+  displayDetails(e, filteredColourants.data);
   closeDetailsWindow(e);
 });

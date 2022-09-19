@@ -82,40 +82,35 @@ const checkInput = (elements, values) => {
 };
 
 const initiateFormValues = (data) => {
-  if (data.colourant.location.certainProvenance) {
+  if (data.data.location.certainProvenance) {
     cfv.certainProvenance.selectedIndex = 0;
   } else {
     cfv.certainProvenance.selectedIndex = 1;
-    cfv.loc.value = data.colourant.location.address;
+    cfv.loc.value = data.data.location.address;
   }
 
-  cfv.references.value = data.colourant.references;
-  cfv.notes.value = data.colourant.notes;
-  cfv.archeologicalContext.value = data.colourant.archeologicalContext;
-  cfv.centuryStart.value = data.colourant.chronology.start;
-  cfv.chrStart.selectedIndex = `${data.colourant.chronology.start}`.startsWith(
-    "-"
-  )
+  cfv.references.value = data.data.references;
+  cfv.notes.value = data.data.notes;
+  cfv.archeologicalContext.value = data.data.archeologicalContext;
+  cfv.centuryStart.value = data.data.chronology.start;
+  cfv.chrStart.selectedIndex = `${data.data.chronology.start}`.startsWith("-")
     ? 0
     : 1;
-  cfv.chrEnd.selectedIndex = `${data.colourant.chronology.end}`.startsWith("-")
+  cfv.chrEnd.selectedIndex = `${data.data.chronology.end}`.startsWith("-")
     ? 0
     : 1;
-  cfv.centuryEnd.value = data.colourant.chronology.end;
-  cfv.lat.value = data.colourant.location.coordinates
-    ? data.colourant.location.coordinates[0]
+  cfv.centuryEnd.value = data.data.chronology.end;
+  cfv.lat.value = data.data.location.coordinates
+    ? data.data.location.coordinates[0]
     : "";
-  cfv.lng.value = data.colourant.location.coordinates
-    ? data.colourant.location.coordinates[1]
+  cfv.lng.value = data.data.location.coordinates
+    ? data.data.location.coordinates[1]
     : "";
-  checkInput(cfv.pigmentsInputs, data.colourant.pigment);
-  checkInput(cfv.categoryOfFindInputs, data.colourant.categoryOfFind);
-  checkInput(
-    cfv.analyticalTechniquesInputs,
-    data.colourant.analyticalTechniques
-  );
+  checkInput(cfv.colourantsInputs, data.data.colourants);
+  checkInput(cfv.categoryOfFindInputs, data.data.categoryOfFind);
+  checkInput(cfv.analyticalTechniquesInputs, data.data.analyticalTechniques);
   if (cfv.checkedEl) {
-    checkInput(cfv.checkedEl, data.colourant.checked);
+    checkInput(cfv.checkedEl, data.data.checked);
   }
   btnSubmit.innerText = "Update entry";
 };

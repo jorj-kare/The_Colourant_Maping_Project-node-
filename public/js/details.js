@@ -20,7 +20,7 @@ const displayDetails = (e, data) => {
   const markup = `<div id="details" class="details u-fade-in">
 <ul class="details__list">
 <button id="btnClose" class="btn btn--small btn--close">⇽</button>
-<li class="details__item"><span  class="details__icon">&#9677;</span><span class="details__header">  Pigment: </span>${colourant[0].pigment}</li>
+<li class="details__item"><span  class="details__icon">&#9677;</span><span class="details__header">  Colourant(s): </span>${colourant[0].colourants}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Chronology: </span>${chr.start}, ${chr.end}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Category of find: </span>${colourant[0].categoryOfFind}</li>
 <li class="details__item"><span class="details__icon">&#9677;</span><span class="details__header"> Archeological context: </span>${colourant[0].archeologicalContext}</li>

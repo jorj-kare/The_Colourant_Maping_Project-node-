@@ -26,7 +26,7 @@ exports.getColourants = async (req, res, next) => {
   const sortBy = {};
   let contributorFields;
   const {
-    pigment,
+    colourants,
     categoryOfFind,
     analyticalTechniques,
     centuryStart,
@@ -42,7 +42,7 @@ exports.getColourants = async (req, res, next) => {
     filters.push({ checked: true });
   }
 
-  if (pigment) filters.push({ pigment });
+  if (colourants) filters.push({ colourants });
   if (categoryOfFind) filters.push({ categoryOfFind });
   if (analyticalTechniques) filters.push({ analyticalTechniques });
   if (centuryStart)
@@ -60,7 +60,7 @@ exports.getColourants = async (req, res, next) => {
   if (sortCategory) sortBy[sortCategory] = sortOrder * 1;
   else sortBy["chronology"] = -1;
 
-  const colourants = await Colourant.aggregate(
+  const data = await Colourant.aggregate(
     [
       {
         $match: {
@@ -76,27 +76,26 @@ exports.getColourants = async (req, res, next) => {
     contributorFields = "username firstName lastName affiliation";
   } else contributorFields = "username";
 
-  await Colourant.populate(colourants, {
+  await Colourant.populate(data, {
     path: "contributor",
     select: contributorFields,
   });
 
   res.status(200).json({
     status: "success",
-    colourants,
+    data,
   });
 };
 
 exports.getColourant = async (req, res, next) => {
   try {
-    const colourant = await Colourant.findById(req.params.id);
-    console.log(colourant);
+    const data = await Colourant.findById(req.params.id);
 
-    if (!colourant)
+    if (!data)
       return next(new CustomError("No colourant found with this id."), 404);
     res.status(200).json({
       status: "success",
-      colourant,
+      data,
     });
   } catch (err) {
     next(err);
@@ -116,7 +115,7 @@ exports.updateColourant = async (req, res, next) => {
         )
       );
 
-    const colourant = await Colourant.findOneAndUpdate(
+    const data = await Colourant.findOneAndUpdate(
       { _id: req.body.id },
       req.body,
       {
@@ -127,7 +126,7 @@ exports.updateColourant = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      colourant,
+      data,
     });
   } catch (err) {
     next(err);
@@ -139,7 +138,7 @@ exports.exportDataToCsv = async (req, res, next) => {
     const fileName = "entries.csv";
     const filters = {};
     const fields = [
-      { label: "Pigment", value: "pigment" },
+      { label: "Colourant(s)", value: "colourants" },
       { label: "Chronology start", value: "chronology.start" },
       { label: "Chronology end", value: "chronology.end" },
       { label: "Location address", value: "location.address" },
@@ -152,7 +151,7 @@ exports.exportDataToCsv = async (req, res, next) => {
       { label: "Contributor", value: "contributor.username" },
       { label: "Edited ", value: "edited" },
     ];
-    const transforms = [unwind({ paths: ["pigment"] })];
+    const transforms = [unwind({ paths: ["colourants"] })];
     // flatten({ objects: "true", arrays: "false" })
     if (!req.user || (req.user && req.user.role !== "admin"))
       filters.checked = true;

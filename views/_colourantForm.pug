@@ -21,14 +21,14 @@ form.form( autocomplete="off")
         legend.form__legend Details
         .row
             .form__group.u-width-l
-                h3.h3.h3--dark Pigments 
-                #pigments.form__group-row
-                    each pigment in data.pigments
+                h3.h3.h3--dark Colourant(s)
+                #colourants.form__group-row
+                    each colourant in data.colourants
                         .form__group-cb
-                            input.form__checkbox(type="checkbox" id=`${pigment}` name="pigment" value=`${pigment}`)
+                            input.form__checkbox(type="checkbox" id=`${colourant}` name="colourants" value=`${colourant}`)
                             span.custom-cb
-                            label.form__label-cb(for=`${pigment}` )= `${pigment}`      
-                            if pigment === 'other'
+                            label.form__label-cb(for=`${colourant}` )= `${colourant}`      
+                            if colourant === 'other'
                                 input#other-input.form__input.form__input--small.form__input--border
             .tooltip ?
                 span.tooltip__text Here the text will help you navigate and the sun will arise again with more and lighter 

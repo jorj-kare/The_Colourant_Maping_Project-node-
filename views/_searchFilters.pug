@@ -1,12 +1,12 @@
 form.form(autocomplete="off")
     .search__box
-        .form__group.area-pigments
+        .form__group.area-colourants
             .custom-input.form__dropdown
-                select#pigment
-                    option(value="" selected ) All pigments
-                    each pigment in data.pigments
-                        option( value=`${pigment}` id=`${pigment}`)= `${pigment}`              
-                input.input-other#other-pigment(hidden)            
+                select#colourants
+                    option(value="" selected ) All colourants
+                    each colourant in data.colourants
+                        option( value=`${colourant}` id=`${colourant}`)= `${colourant}`              
+                input.input-other#other-colourants(hidden)            
         .form__group.area-techniques
             .custom-input.form__dropdown
                 select#techniques

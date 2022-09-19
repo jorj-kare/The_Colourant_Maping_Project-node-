@@ -1,5 +1,5 @@
 import { hideCenturies, setRemoveAttributes } from "./colourantForm.js";
-const pigment = document.getElementById("pigment");
+const colourants = document.getElementById("colourants");
 const analyticalTechniques = document.getElementById("techniques");
 const categoryOfFind = document.getElementById("category-of-find");
 const centuryStart = document.getElementById("century-start");
@@ -30,7 +30,7 @@ form.addEventListener("change", (e) => {
 
 export const getFilteredColourant = async () => {
   const filter = new URLSearchParams({
-    pigment: pigment.value,
+    colourants: colourants.value,
     analyticalTechniques: analyticalTechniques.value,
     categoryOfFind: categoryOfFind.value,
     centuryStart: centuryStart.value,

@@ -2,8 +2,8 @@
 // ELEMENTS
 // Colourant from variables
 export const cfv = {
-  pigmentsInputs: document.getElementById("pigments")
-    ? document.getElementById("pigments").querySelectorAll("input")
+  colourantsInputs: document.getElementById("colourants")
+    ? document.getElementById("colourants").querySelectorAll("input")
     : "",
   categoryOfFindInputs: document.getElementById("category-of-find")
     ? document.getElementById("category-of-find").querySelectorAll("input")
@@ -152,19 +152,19 @@ export const getFormValues = () => {
   cfv.categoryOfFindInputs.forEach((el) => {
     if (el.checked) {
       categoryOfFind = el.value.trim();
-    } else categoryOfFind = "";
+    }
   });
 
   // Get the checked values and pushes them to an array
-  cfv.pigmentsInputs.forEach((el) => {
+  cfv.colourantsInputs.forEach((el) => {
     if (el.checked) {
       let value = el.value;
       if (value.includes(",")) {
         value = value.split(",");
         value = trimArrValues(value);
-        pigments.push(...value);
+        colourants.push(...value);
       } else {
-        pigments.push(value);
+        colourants.push(value);
       }
     }
   });
@@ -192,7 +192,7 @@ export const getFormValues = () => {
       certainProvenance: cfv.certainProvenance.value === "certain",
     },
     chronology: { start: +cfv.centuryStart.value, end: +cfv.centuryEnd.value },
-    pigment: pigments,
+    colourants,
     analyticalTechniques,
     categoryOfFind,
     archeologicalContext: cfv.archeologicalContext.value,

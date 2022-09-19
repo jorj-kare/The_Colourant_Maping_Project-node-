@@ -75,9 +75,9 @@ const displayEntries = (entries) => {
     <td class='table__data' data-label="Created at">${new Date(
       entry.createdAt
     ).toLocaleDateString("en-Gb")}</td>
-    <td id="td-pigment" class='table__data' data-id="${
+    <td id="td-colourants" class='table__data' data-id="${
       entry._id
-    }" data-label="Pigment">${entry.pigment}</td>
+    }" data-label="Colourant(s)">${entry.colourants}</td>
     <td class='table__data' data-label="Chronology">${
       entry.chronology.start
     }, ${entry.chronology.end}</td>
@@ -119,20 +119,20 @@ const displayEntries = (entries) => {
 // EVENTS LISTENERS
 window.addEventListener("load", async (e) => {
   filteredColourants = await getFilteredColourant();
-  displayEntries(filteredColourants.colourants);
+  displayEntries(filteredColourants.data);
 });
 form.addEventListener("change", async (e) => {
   e.preventDefault();
   filteredColourants = await getFilteredColourant();
-  displayEntries(filteredColourants.colourants);
+  displayEntries(filteredColourants.data);
 });
 
 sortBy.addEventListener("change", async (e) => {
   filteredColourants = await getFilteredColourant();
-  displayEntries(filteredColourants.colourants);
+  displayEntries(filteredColourants.data);
 });
 
 entriesContainer.addEventListener("click", (e) => {
-  displayDetails(e, filteredColourants.colourants);
+  displayDetails(e, filteredColourants.data);
   closeDetailsWindow(e);
 });

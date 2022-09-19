@@ -1,5 +1,5 @@
 const data = {
-  pigments: [
+  colourants: [
     "egyptian blue",
     "charcoal",
     "red earth",
