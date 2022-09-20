@@ -12,7 +12,7 @@ form.form(autocomplete="off")
                 select#techniques
                     option(value="" selected) All techniques
                     each technique in data.techniques
-                        option( value=`${technique}` id=`${technique}`)= `${technique}`
+                        option( value=`${technique[0]}` id=`${technique[0]}`)= `${technique[0]}`
                 input.input-other#other-techniques(hidden)          
         .form__group.area-category
             .custom-input.form__dropdown
