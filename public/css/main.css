@@ -1358,12 +1358,11 @@ body {
   position: absolute;
   opacity: 0;
   visibility: hidden;
-  min-width: 20ch;
+  width: 40ch;
   padding: 1rem;
-  margin-left: -5ch;
   margin-bottom: 13px;
+  right: -3.5rem;
   bottom: 100%;
-  left: 50%;
   border: 1px solid #ffc107;
   border-radius: 5px;
   background-color: rgba(202, 202, 202, 0.9921568627);
@@ -1378,7 +1377,7 @@ body {
   content: " ";
   position: absolute;
   top: 100%;
-  left: 22%;
+  right: 12%;
   margin-left: -5px;
   border-width: 10px;
   border-style: solid;
@@ -1648,7 +1647,7 @@ body {
   width: 100%;
 }
 .search__box .form__group {
-  max-width: 20rem;
+  max-width: 22rem;
 }
 @media screen and (max-width: 1200px) {
   .search__box .form__group {
