@@ -19,6 +19,7 @@ const btnSubmit = document.getElementById("btn-submit");
 const username = document.getElementById("username");
 const userId = document.getElementById("user-id");
 const log = document.getElementById("log");
+const logBox = document.getElementById("logBox");
 let colourantData;
 // FUNCTIONS
 
@@ -120,6 +121,7 @@ const disableForm = () => {
   mapElement.style.pointerEvents = "none";
   btnSubmit.setAttribute("hidden", true);
   document.querySelector(".update-entry").style.backgroundColor = "#B1D0E0";
+  logBox.querySelector(".tooltip").style.display = "none";
 };
 
 const enableForm = () => {
@@ -127,7 +129,8 @@ const enableForm = () => {
   mapElement.style.pointerEvents = "auto";
   btnSubmit.removeAttribute("disabled");
   log.removeAttribute("hidden");
-  log.parentElement.querySelector("label").removeAttribute("hidden");
+  logBox.querySelector("label").removeAttribute("hidden");
+  logBox.querySelector(".tooltip").style.display = "flex";
   btnSubmit.removeAttribute("hidden");
   btnResetForm.removeAttribute("hidden");
   btnEditForm.setAttribute("hidden", true);
