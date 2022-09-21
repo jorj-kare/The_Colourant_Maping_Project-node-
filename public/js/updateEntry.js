@@ -197,7 +197,7 @@ btnSubmit.addEventListener("click", (e) => {
 
 btnEditForm.addEventListener("click", (e) => {
   enableForm();
-  toggleCertainProvenance(e, mapBox);
+  map.style.pointerEvents = "none";
 });
 
 btnResetForm.addEventListener("click", (e) => {
