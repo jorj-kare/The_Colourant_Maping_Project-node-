@@ -16,13 +16,16 @@ class MapBox {
       [-180, -90], // Southwest coordinates
       [180, 90], // Northeast coordinates
     ];
+    const s = sessionStorage.getItem("mapStyle");
+    const i = sessionStorage.getItem("mapStyleIndex");
     const styleMenu = document.getElementById("menu");
-    let layerId = styleMenu.querySelector("select").value;
+    let styleId = s ? s : "mapbox/satellite-v9";
+    let styleIndex = i ? i : 0;
 
     mapboxgl.accessToken = token;
     this.map = new mapboxgl.Map({
       container: "map",
-      style: `mapbox://styles/${layerId}`,
+      style: `mapbox://styles/${styleId}`,
       center: [8.6992782, 48.4740928],
       zoom: 2,
       maxBounds: bounds,
@@ -39,10 +42,14 @@ class MapBox {
     this.map.addControl(this.geocoder);
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(new mapboxgl.ScaleControl());
-    // Set layers for mapbox
-
+    // Set style for the map
+    styleMenu.querySelector("select").selectedIndex = styleIndex;
     styleMenu.querySelector("select").addEventListener("change", (e) => {
-      window.location.reload();
+      styleId = styleMenu.querySelector("select").value;
+      styleIndex = styleMenu.querySelector("select").selectedIndex;
+      sessionStorage.setItem("mapStyle", styleId);
+      sessionStorage.setItem("mapStyleIndex", styleIndex);
+      location.reload();
     });
 
     return this.map;
