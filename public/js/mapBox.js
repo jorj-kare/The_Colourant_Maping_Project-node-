@@ -16,10 +16,13 @@ class MapBox {
       [-180, -90], // Southwest coordinates
       [180, 90], // Northeast coordinates
     ];
+    const styleMenu = document.getElementById("menu");
+    let layerId = styleMenu.querySelector("select").value;
+
     mapboxgl.accessToken = token;
     this.map = new mapboxgl.Map({
       container: "map",
-      style: "mapbox://styles/jorj-kare/cl2z58ucx003214qg4jgwyuxv",
+      style: `mapbox://styles/${layerId}`,
       center: [8.6992782, 48.4740928],
       zoom: 2,
       maxBounds: bounds,
@@ -37,10 +40,9 @@ class MapBox {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(new mapboxgl.ScaleControl());
     // Set layers for mapbox
-    const layerList = document.getElementById("menu");
-    layerList.querySelector("select").addEventListener("change", (e) => {
-      const layerId = e.target.value;
-      this.map.setStyle("mapbox://styles/" + layerId);
+
+    styleMenu.querySelector("select").addEventListener("change", (e) => {
+      window.location.reload();
     });
 
     return this.map;
