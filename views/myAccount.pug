@@ -56,10 +56,10 @@ block main
                         -const chrEnd = `${entry.chronology.end}`.includes("-") ? `${entry.chronology.end.toString().replace("-", "")} BCE` : `${entry.chronology.end} CE`;
                         li.list__item(data-id=`"${entry.id}"`)
                             -if(entry.checked ) 
-                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}. `
+                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
                                     strong=`${entry.location.certainProvenance ? "": "Uncertain provenance"}`
                             -else
-                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}. `
+                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
                                     strong=`${entry.location.certainProvenance ? "": "Uncertain provenance"}`
                                     span  -unchecked-
 
