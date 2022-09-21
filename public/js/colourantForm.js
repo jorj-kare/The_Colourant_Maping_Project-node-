@@ -57,33 +57,30 @@ export const toggleCertainProvenance = (e, mapBox) => {
   const mapElement = document.getElementById("map");
   const certainProvenance = document.getElementById("certainProvenance");
   const geocoder = document.querySelector(".mapboxgl-ctrl-geocoder--input");
-  const loc = document.querySelector("#loc");
-  const lat = document.querySelector("#latitude");
-  const lon = document.querySelector("#longitude");
   if (certainProvenance.value === "uncertain") {
     loc.removeAttribute("hidden");
     mapElement.style.pointerEvents = "none";
     setTimeout(() => {
       document.querySelector(".suggestions").style.display = "none";
-      lat.value = "";
-      lon.value = "";
+      cfv.lat.value = "";
+      cfv.lng.value = "";
       if (e.type === "change") {
-        loc.value = "";
+        cfv.loc.value = "";
       }
       geocoder.value = "";
-      lat.setAttribute("disabled", "true");
-      lon.setAttribute("disabled", "true");
+      cfv.lat.setAttribute("disabled", "true");
+      cfv.lng.setAttribute("disabled", "true");
       geocoder.setAttribute("disabled", "true");
       mapBox.removeMarker();
     }, 500);
   }
   if (certainProvenance.value === "certain") {
-    loc.value = "";
-    loc.setAttribute("hidden", "true");
+    cfv.loc.value = "";
+    cfv.loc.setAttribute("hidden", "true");
     map.style.pointerEvents = "auto";
     geocoder.removeAttribute("disabled");
-    lat.removeAttribute("disabled");
-    lon.removeAttribute("disabled");
+    cfv.lat.removeAttribute("disabled");
+    cfv.lng.removeAttribute("disabled");
   }
 };
 
