@@ -13,9 +13,6 @@ router
   .patch(authController.resetPassword)
   .post(authController.isTokenValid);
 router.use(authController.restrict);
-router
-  .route("/myAccount")
-  .delete(usersController.deleteMyAccount)
-  .patch(usersController.updateMyAccount);
+router.route("/myAccount").patch(usersController.updateMyAccount);
 router.route("/updateMyPassword").patch(authController.updateMyPassword);
 module.exports = router;
