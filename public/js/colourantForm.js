@@ -122,12 +122,18 @@ export const setRemoveAttributes = function (e) {
 };
 
 export const createChronologyString = (data) => {
-  const start = data.chronology.start.toString().includes("-")
-    ? `${data.chronology.start.toString().replace("-", "")} BCE`
-    : `${data.chronology.start} CE`;
-  const end = data.chronology.end.toString().includes("-")
-    ? `${data.chronology.end.toString().replace("-", "")} BCE`
-    : `${data.chronology.end} CE`;
+  let start, end;
+  if (data.chronology.start) {
+    start = data.chronology.start.toString().includes("-")
+      ? `${data.chronology.start.toString().replace("-", "")} BCE`
+      : `${data.chronology.start} CE`;
+    end = data.chronology.end.toString().includes("-")
+      ? `${data.chronology.end.toString().replace("-", "")} BCE`
+      : `${data.chronology.end} CE`;
+  } else {
+    start = "-";
+    end = "-";
+  }
   return { start, end };
 };
 
@@ -188,7 +194,10 @@ export const getFormValues = () => {
           : null,
       certainProvenance: cfv.certainProvenance.value === "certain",
     },
-    chronology: { start: +cfv.centuryStart.value, end: +cfv.centuryEnd.value },
+    chronology: {
+      start: cfv.centuryStart.value ? +cfv.centuryStart.value : null,
+      end: cfv.centuryEnd.value ? +cfv.centuryEnd.value : null,
+    },
     colourants,
     analyticalTechniques,
     categoryOfFind,

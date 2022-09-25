@@ -117,14 +117,16 @@ const initiateFormValues = (data) => {
   cfv.references.value = data.data.references;
   cfv.notes.value = data.data.notes;
   cfv.archeologicalContext.value = data.data.archeologicalContext;
-  cfv.centuryStart.value = data.data.chronology.start;
-  cfv.chrStart.selectedIndex = `${data.data.chronology.start}`.startsWith("-")
-    ? 0
-    : 1;
-  cfv.chrEnd.selectedIndex = `${data.data.chronology.end}`.startsWith("-")
-    ? 0
-    : 1;
-  cfv.centuryEnd.value = data.data.chronology.end;
+  if (data.data.chronology.start) {
+    cfv.centuryStart.value = data.data.chronology.start;
+    cfv.chrStart.selectedIndex = `${data.data.chronology.start}`.startsWith("-")
+      ? 0
+      : 1;
+    cfv.chrEnd.selectedIndex = `${data.data.chronology.end}`.startsWith("-")
+      ? 0
+      : 1;
+    cfv.centuryEnd.value = data.data.chronology.end;
+  }
   cfv.lat.value = data.data.location.coordinates
     ? data.data.location.coordinates[0]
     : "";

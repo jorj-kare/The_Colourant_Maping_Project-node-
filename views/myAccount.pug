@@ -51,9 +51,15 @@ block main
                 h3.h3.h3--dark Click on the link to see more information about the entry or to change it. 
                 h4.h4.h4--dark.u-mrg-top-m= `You have ${user.entries.length} entries.`
                 ul.list.u-mrg-top-m
-                    each entry in user.entries       
-                        -const chrStart = `${entry.chronology.start}`.includes("-") ? `${entry.chronology.start.toString().replace("-", "")} BCE` : `${entry.chronology.start} CE`;
-                        -const chrEnd = `${entry.chronology.end}`.includes("-") ? `${entry.chronology.end.toString().replace("-", "")} BCE` : `${entry.chronology.end} CE`;
+                    - let chrStart,chrEnd;
+                    each entry in user.entries  
+
+                        -if( entry.chronology.start)    
+                            - chrStart = `${entry.chronology.start}`.includes("-") ? `${entry.chronology.start.toString().replace("-", "")} BCE` : `${entry.chronology.start} CE`;
+                            - chrEnd = `${entry.chronology.end}`.includes("-") ? `${entry.chronology.end.toString().replace("-", "")} BCE` : `${entry.chronology.end} CE`;
+                        -else 
+                            - chrStart = ""
+                            - chrEnd = ""
                         li.list__item(data-id=`"${entry.id}"`)
                             -if(entry.checked ) 
                                 a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `

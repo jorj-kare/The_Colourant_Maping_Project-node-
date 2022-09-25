@@ -12,8 +12,8 @@ const colourantSchema = new mongoose.Schema(
       },
     },
     chronology: {
-      start: { type: Number, required: [true, "This field is required."] },
-      end: { type: Number, required: [true, "This field is required."] },
+      start: { type: Number },
+      end: { type: Number },
     },
     location: {
       type: {
