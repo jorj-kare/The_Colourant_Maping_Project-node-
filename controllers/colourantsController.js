@@ -92,7 +92,7 @@ exports.getColourant = async (req, res, next) => {
     const data = await Colourant.findById(req.params.id);
 
     if (!data)
-      return next(new CustomError("No colourant found with this id."), 404);
+      return next(new CustomError("No colourant found with this ID."), 404);
     res.status(200).json({
       status: "success",
       data,
@@ -110,7 +110,7 @@ exports.updateColourant = async (req, res, next) => {
     if (req.user.role !== "admin" && !userEntriesIds.includes(currentEntryId))
       return next(
         new CustomError(
-          "Only the user that have created this entry can update it.",
+          "Only the user that created this entry can edit it.",
           401
         )
       );
