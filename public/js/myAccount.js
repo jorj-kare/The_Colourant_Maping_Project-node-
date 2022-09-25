@@ -106,24 +106,6 @@ const accountFade = (accountForm, passwordForm) => {
 
 editInput();
 
-// const deleteAccount = async () => {
-//   try {
-//     const url = "http://127.0.0.1:3000/api/v1/users/myAccount";
-//     const res = await fetch(url, {
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     if (!res.ok) {
-//       throw new Error(data.message);
-//     } else showAlert("Your account have been deleted.",'success,3);
-//   } catch (err) {
-//     showAlert(err,'error',5);
-//   }
-// };
-
 // EVENTS LISTENERS
 
 // Update account
@@ -186,13 +168,3 @@ btnChangePassword.addEventListener("click", (e) => {
     hideShowForm(accountForm, passwordForm);
   });
 });
-
-// // Delete account
-// btnDeleteAccount.addEventListener("click", (e) => {
-//   if (confirm("Are you sure that you wont delete your account?")) {
-//     deleteAccount();
-//     window.setTimeout(() => {
-//       location.assign("/");
-//     }, 1000);
-//   }
-// });

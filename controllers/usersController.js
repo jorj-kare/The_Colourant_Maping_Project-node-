@@ -1,17 +1,5 @@
 const User = require("../models/userModel");
 
-exports.deleteMyAccount = async (req, res, next) => {
-  try {
-    await User.findByIdAndDelete(req.user.id);
-    res.status(204).json({
-      status: "success",
-      data: null,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 exports.updateMyAccount = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
