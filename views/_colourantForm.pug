@@ -92,7 +92,7 @@ form.form( autocomplete="off")
                             input.form__checkbox(title=`${technique[1]}` type="checkbox" id=`${technique[0]}` name="technique" value=`${technique[0]}`  )
                             span.custom-cb
                             label.form__label-cb(for=`${technique[0]}` )= `${technique[0]}`
-                            if technique === 'other'
+                            if technique[0] === 'other'
                                 input#other-input.form__input.form__input--small.form__input--border
             +tooltip(data.tooltipText.analyticalTechniques)  
         .row
