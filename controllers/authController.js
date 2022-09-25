@@ -136,7 +136,7 @@ exports.forgotPassword = async (req, res, next) => {
     }
     const resetToken = user.createResetPasswordToken();
     await user.save({ validateBeforeSave: false });
-    const resetURL = `${req.protocol}://${req.get(
+    const resetURL = `https://${req.get(
       "host"
     )}/resetPassword?token=${resetToken}`;
 
@@ -256,5 +256,3 @@ exports.isUserLoggedIn = async (req, res, next) => {
   }
   next();
 };
-
-
