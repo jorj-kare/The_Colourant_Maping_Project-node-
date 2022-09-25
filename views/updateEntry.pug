@@ -10,5 +10,5 @@ block main
         .c-center.u-mrg-bottom-m
             button#btn-edit-form.btn.btn--medium Edit form
             button#btn-reset-form.btn.btn--medium( hidden) Reset form
-        
-        
+            if user && user.role=== "admin"
+                button#btn-delete-entry.btn.btn--medium.btn--red Delete colourant

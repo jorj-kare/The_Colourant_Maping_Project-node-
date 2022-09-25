@@ -133,6 +133,21 @@ exports.updateColourant = async (req, res, next) => {
   }
 };
 
+exports.deleteColourant = async (req, res, next) => {
+  try {
+    const colourant = await Colourant.findOneAndRemove({ _id: req.params.id });
+    if (!colourant)
+      return next(new CustomError("No colourant found with this ID"));
+
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.exportDataToCsv = async (req, res, next) => {
   try {
     const fileName = "entries.csv";

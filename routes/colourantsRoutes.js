@@ -14,6 +14,9 @@ router
   .route("/exportData")
   .get(authController.isUserLoggedIn, colourantsController.exportDataToCsv);
 
-router.route("/:id").get(colourantsController.getColourant);
+router
+  .route("/:id")
+  .get(colourantsController.getColourant)
+  .delete(colourantsController.deleteColourant);
 
 module.exports = router;

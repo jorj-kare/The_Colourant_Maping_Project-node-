@@ -76,9 +76,14 @@ colourantSchema.index(
   { collation: { locale: "en", strength: 1, alternate: "shifted" } }
 );
 
-// colourantSchema.pre(/^delete/, async function (next) {
-//   //TODO: if delete an entry to deleted also from the user entries array
-// });
+// When an entry is deleted delete  it also from the user entries array
+colourantSchema.post("findOneAndRemove", async function (doc) {
+  const user = await User.findById(doc.contributor.toString());
+  user.entries.forEach((entry, i) => {
+    if (entry.toString() === doc._id.toString()) user.entries.splice(i, 1);
+  });
+  await user.save({ validateBeforeSave: false });
+});
 
 const Colourant = mongoose.model("Colourant", colourantSchema);
 module.exports = Colourant;

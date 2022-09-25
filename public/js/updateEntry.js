@@ -15,6 +15,7 @@ const mapElement = document.getElementById("map");
 const fieldsets = document.querySelectorAll("fieldset");
 const btnEditForm = document.getElementById("btn-edit-form");
 const btnResetForm = document.getElementById("btn-reset-form");
+const btnDeleteEntry = document.getElementById("btn-delete-entry");
 const btnSubmit = document.getElementById("btn-submit");
 const username = document.getElementById("username");
 const userId = document.getElementById("user-id");
@@ -52,6 +53,29 @@ const updateEntry = async (colourantData) => {
     if (!res.ok) throw new Error(data.message);
     if (data.status === "success") {
       showAlert("You entry has been updated!", "success", 5);
+    }
+  } catch (err) {
+    showAlert(err, "error", 5);
+  }
+};
+const deleteEntry = async () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const entryId = params.get("id");
+    const url = `${window.location.origin}/api/v1/colourants/${entryId}`;
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) throw new Error(res.statusText, res.status);
+    else {
+      showAlert("Your entry has been deleted", "success", 3);
+      window.setTimeout(() => {
+        location.assign("/myAccount");
+      }, 3000);
     }
   } catch (err) {
     showAlert(err, "error", 5);
@@ -202,4 +226,8 @@ btnEditForm.addEventListener("click", (e) => {
 
 btnResetForm.addEventListener("click", (e) => {
   location.reload();
+});
+btnDeleteEntry.addEventListener("click", (e) => {
+  if (window.confirm("Are you sure that you want to delete this entry?"))
+    deleteEntry();
 });
