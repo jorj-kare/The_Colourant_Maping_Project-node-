@@ -97,17 +97,17 @@ form.form( autocomplete="off")
             +tooltip(data.tooltipText.analyticalTechniques)  
         .row
             .form__group.u-width-l.u-mrg-top-s
-                label.form__label(for='references') References
+                label.h3.h3--dark(for='references') References
                 textarea#references.form__input.form__input--border( rows="5" )
             +tooltip(data.tooltipText.references)     
         .row
             .form__group.u-width-l.u-mrg-top-s
-                label.form__label(for='notes') Notes
+                label.h3.h3--dark(for='notes') Notes
                 textarea#notes.form__input.form__input--border( rows="5" )
             +tooltip(data.tooltipText.notes)    
         .row#logBox
             .form__group.u-width-l.u-mrg-top-s
-                label(for='log' hidden) Log
+                label.h3.h3--dark(for='log' hidden) Log
                 textarea#log.form__input.form__input--border( rows="3" hidden) 
             +tooltip(data.tooltipText.log)    
         if user
