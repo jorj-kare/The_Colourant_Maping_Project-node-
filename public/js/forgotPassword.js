@@ -18,7 +18,7 @@ const forgotPassword = async (email) => {
       showAlert(data.message, "success", 3);
       window.setTimeout(() => {
         location.assign("/");
-      }, 1000);
+      }, 3000);
     }
   } catch (err) {
     showAlert(err.message, "error", 5);

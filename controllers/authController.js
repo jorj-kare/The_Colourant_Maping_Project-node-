@@ -96,7 +96,7 @@ exports.restrict = async (req, res, next) => {
     }
     if (!token) {
       return next(
-        new CustomError("You are not login, please login to continue.", 401)
+        new CustomError("You are not logged in, please login to continue.", 401)
       );
     }
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
@@ -106,13 +106,13 @@ exports.restrict = async (req, res, next) => {
     });
     if (!currentUser) {
       return new CustomError(
-        `The user that this token belongs doesn't exist anymore.`,
+        `The user that this token belongs to does no longer exist.`,
         400
       );
     }
     if (currentUser.isPassChangedAfterToken(decoded.iat)) {
       return new CustomError(
-        "User recently changed password, please login again.",
+        "User recently changed password, please login with the new credentials.",
         401
       );
     }
@@ -140,7 +140,7 @@ exports.forgotPassword = async (req, res, next) => {
       "host"
     )}/resetPassword?token=${resetToken}`;
 
-    const message = `Forgot your password? Fill the form  with your new password and passwordConfirm to ${resetURL}.\nIf you didn't forgot your password please ignore this email.`;
+    const message = `Forgot your password? Fill out the form with your new password here: ${resetURL}.\n If you did not request a new password, please ignore this email.`;
     try {
       sendEmail({
         email: user.email,
@@ -149,7 +149,7 @@ exports.forgotPassword = async (req, res, next) => {
       });
       res.status(200).json({
         status: "success",
-        message: "The password reset token has send to your email.",
+        message: "The password reset token has been send to your email.",
       });
     } catch (err) {
       user.passwordResetToken = undefined;
@@ -157,7 +157,7 @@ exports.forgotPassword = async (req, res, next) => {
       user.save({ validateBeforeSave: false });
       return next(
         new CustomError(
-          "There was an error sending the email, please try again.",
+          "An error occurred when sending the email, please try again.",
           500
         )
       );

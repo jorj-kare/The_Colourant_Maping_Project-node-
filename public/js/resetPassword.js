@@ -21,7 +21,7 @@ const resetPassword = async (password, passwordConfirm, userId) => {
       showAlert(data.message, "success", 3);
       window.setTimeout(() => {
         location.assign("/login");
-      }, 1000);
+      }, 3000);
     }
   } catch (err) {
     showAlert(err.message, "error", 5);
@@ -46,7 +46,7 @@ const isTokenValid = async (token) => {
     showAlert(err.message, "error", 5);
     window.setTimeout(() => {
       location.assign("/");
-    }, 1000);
+    }, 5000);
   }
 };
 
