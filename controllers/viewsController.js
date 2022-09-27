@@ -1,3 +1,5 @@
+const { render } = require("pug");
+
 const data = {
   colourants: [
     "azurite",
@@ -122,7 +124,9 @@ exports.getLogoutPage = (req, res) => {
 exports.getSignupForm = (req, res) => {
   res.status(200).render("signUp");
 };
-
+exports.getVerifyAccountPage = (req, res) => {
+  res.status(200).render("verifyAccount");
+};
 exports.getForgotPasswordForm = (req, res) => {
   res.status(200).render("forgotPassword");
 };

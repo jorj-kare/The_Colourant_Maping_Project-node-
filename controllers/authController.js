@@ -23,6 +23,24 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({ status: "success", token, data: { user } });
 };
 
+exports.verifyAccount = async (req, res, next) => {
+  try {
+    const token = req.body.token;
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) return next(new CustomError("Invalid token", 404));
+    currentUser.verified = true;
+    currentUser.save({ validateBeforeSave: false });
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (err) {
+    console.log(err);
+
+    next(err);
+  }
+};
+
 exports.signUp = async (req, res, next) => {
   try {
     const newUser = await User.create({
@@ -34,8 +52,21 @@ exports.signUp = async (req, res, next) => {
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
     });
+    // const user = await User.findOne({ email: req.body.email });
+    const token = signToken(newUser._id.toHexString());
+    const p = process.env.NODE_ENV === "development" ? "http" : "https";
+    const verifyURL = `${p}://${req.get("host")}/verifyAccount?token=${token}`;
+    const message = `Click <a href="${verifyURL}">here</a> to verify your account.`;
 
-    createSendToken(newUser, 201, res);
+    sendEmail({
+      email: newUser.email,
+      subject: "Verify your account",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+    });
   } catch (err) {
     next(err);
   }
@@ -57,6 +88,8 @@ exports.login = async (req, res, next) => {
           404
         )
       );
+    if (!user.verified)
+      return next(new CustomError("Your must verify your email fist", 404));
     createSendToken(user, 200, res);
   } catch (err) {
     next(err);
@@ -140,7 +173,7 @@ exports.forgotPassword = async (req, res, next) => {
       "host"
     )}/resetPassword?token=${resetToken}`;
 
-    const message = `Forgot your password? Fill out the form with your new password here: ${resetURL}.\n If you did not request a new password, please ignore this email.`;
+    const message = `Forgot your password? <br> Fill out the form with your new password <a href="${resetURL}">here</a> <br> If you did not request a new password, please ignore this email.`;
     try {
       sendEmail({
         email: user.email,
@@ -180,7 +213,7 @@ exports.resetPassword = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       message:
-        "Your password was successfully changed, now you can login with your new password.",
+        "Your password was successfully changed, you can now login with your new password.",
     });
   } catch (err) {
     next(err);
