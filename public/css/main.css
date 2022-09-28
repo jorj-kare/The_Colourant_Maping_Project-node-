@@ -492,10 +492,7 @@ body {
 }
 
 .logout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-image: url("/img/hero.jpg");
 }
 
 .sign-up {
@@ -514,6 +511,10 @@ body {
 .sign-up .h2 {
   border-bottom: 3px double #eee8e8;
   margin-bottom: 1rem;
+}
+
+.verifyAccount {
+  background-image: url("/img/hero.jpg");
 }
 
 .forgot-password {
