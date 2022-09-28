@@ -1,7 +1,5 @@
-@use '../abstracts' as*;
+@use "../abstracts" as *;
 
-.logout{
-    @include flex-centered(column);
-
-
+.logout {
+  background-image: url("/img/hero.jpg");
 }
