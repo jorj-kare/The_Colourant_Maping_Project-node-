@@ -16,10 +16,14 @@ const signUp = async (userData) => {
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      showAlert("Congratulations you have now an account!", "success", 3);
+      showAlert(
+        "Congratulations you have now an account! Go to your email to activate your account.",
+        "success",
+        3
+      );
       window.setTimeout(() => {
         location.assign("/");
-      }, 1000);
+      }, 3000);
     }
   } catch (err) {
     showAlert(err.message, "error", 5);
