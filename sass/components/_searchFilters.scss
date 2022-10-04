@@ -6,7 +6,6 @@
   justify-items: center;
   justify-content: center;
   gap: 0.5rem;
-  // grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     "pigment techniques category"
     "chrStart chrStart chrStart"
@@ -14,13 +13,13 @@
     ". checked .";
 
   @include break($media-xSmall) {
-    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "pigment   pigment "
       "category  techniques"
       "chrStart chrStart "
       "chrEnd chrEnd "
       "checked checked ";
+    margin-top: 3rem;
   }
 
   .form {
@@ -58,7 +57,7 @@
     border-width: 1px;
   }
 
-  .area-pigments {
+  .area-colourants {
     grid-area: pigment;
   }
   .area-techniques {

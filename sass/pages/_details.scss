@@ -6,6 +6,7 @@
   align-items: center;
   position: fixed;
   inset: 0;
+
   background-image: linear-gradient(
     rgba(46, 43, 43, 0.618),
     rgba(46, 43, 43, 0.608)
@@ -15,6 +16,9 @@
   &__list {
     display: flex;
     flex-direction: column;
+    min-height: fit-content;
+    max-height: 90vh;
+    overflow-y: scroll;
     width: 70%;
     padding: 5rem;
     background-color: $color-white;

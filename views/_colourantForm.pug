@@ -1,9 +1,9 @@
 include ./_mixins.pug
 form.form( autocomplete="off")
-    fieldset.form__fieldset.form__fieldset--dark              
+    fieldset#map-fieldset.form__fieldset.form__fieldset--dark              
         .map__container.map__container--large
             include _mapComponent
-        legend.form__legend.form__legend--dark.form__legend--centered Provenience (place of discovery)
+        legend.form__legend.form__legend--dark Provenience (place of discovery)
         #coords.row.u-width-l.u-mrg-top-m            
             .form__group.u-width-s.u-mrg-rgt
                 label.form__label.form__label--dark(for='latitude' step='any') Latitude

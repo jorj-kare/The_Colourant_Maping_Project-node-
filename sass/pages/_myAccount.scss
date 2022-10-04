@@ -5,17 +5,20 @@
   padding: 15rem 3rem;
   background-color: $color-white;
   @include break($media-medium) {
-    padding: 10rem 3rem;
+    padding: 5rem 0.5rem;
   }
-  .h2{
+  .h2 {
     border-bottom: 3px double $color-white;
-  &--dark{
-    border-color: $color-primary-light;
+    &--dark {
+      border-color: $color-primary-light;
+    }
   }
-  }
-  .h3{
+  .h3 {
     padding-top: 1rem;
     text-align: center;
+    @include break($media-xSmall) {
+      padding-bottom: 3rem;
+    }
   }
 
   &__form {
@@ -29,16 +32,17 @@
         "affiliation  affiliation"
         "button button";
 
-      @include break($media-xSmall){
+      @include break($media-xSmall) {
         grid-template-areas:
-         "email email"
-         "first-name first-name"
-         "username username"
-         "last-name last-name"
-         "affiliation affiliation"
-         "button button ";
-      
-      }  
+          "email email"
+          "first-name first-name"
+          "username username"
+          "last-name last-name"
+          "affiliation affiliation"
+          "button button ";
+        justify-content: space-between;
+        gap: 1rem;
+      }
 
       .email-group {
         grid-area: email;
@@ -73,9 +77,6 @@
   .btn--close {
     top: -2rem;
     left: 2rem;
-    @include break($media-medium){
-      top: -3rem;
-      left: 3rem;
-    }
+    border: transparent;
   }
 }

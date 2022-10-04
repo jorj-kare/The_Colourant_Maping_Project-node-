@@ -8,6 +8,9 @@
   @include break($media-large) {
     padding: 5rem;
   }
+  @include break($media-xSmall) {
+    padding: 2rem;
+  }
 
   &__search {
     .search__box {
@@ -18,26 +21,21 @@
         display: grid;
       }
     }
-    // button {
-    //   border-radius: 0;
-    //   border-width: 1px;
-    //   border-left: none;
-    //   border-right: none;
-    //   @include break($media-large) {
-    //     border: 1px solid $color-primary-light;
-    //     border-radius: 5px;
-    //   }
-    // }
+
     .form {
       padding: 3rem 0;
     }
   }
   .table-box {
     overflow: scroll;
-    height: 90vh;
+    min-height: fit-content;
+    max-height: 90vh;
     max-width: 100%;
     border: 3px double $color-primary-dark;
     border-radius: 5px;
+    @include break($media-small) {
+      max-height: 75vh;
+    }
 
     &::-webkit-scrollbar {
       width: 1rem;

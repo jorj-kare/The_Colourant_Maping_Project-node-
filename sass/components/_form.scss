@@ -9,7 +9,9 @@
   font-size: 1.7rem;
   font-weight: 300;
   padding: 3rem;
-
+  @include break($media-xSmall) {
+    padding: 0 0.5rem;
+  }
   &__input {
     width: 100%;
     padding: 1.2rem 0.5rem;
@@ -118,13 +120,13 @@
     border: 3px double $color-primary-dark;
     border-radius: 5px;
     &:disabled {
-      background-color: #b1d0e0;
+      background-color: #8ba2ae;
       & input,
       textarea,
       select,
       .form__group-cb label {
-        color: rgb(108, 107, 107);
-        background-color: #b1d0e0;
+        color: $color-black;
+        background-color: #8ba2ae;
       }
 
       .form__checkbox:checked ~ label {
@@ -135,6 +137,9 @@
     @include break($media-large) {
       padding: 5rem 3rem;
       width: 100%;
+    }
+    @include break($media-large) {
+      padding: 5rem 2rem;
     }
   }
   &__fieldset--dark {

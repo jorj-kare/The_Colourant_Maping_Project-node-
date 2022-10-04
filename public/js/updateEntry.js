@@ -146,7 +146,7 @@ const disableForm = () => {
   fieldsets.forEach((el) => el.setAttribute("disabled", "true"));
   mapElement.style.pointerEvents = "none";
   btnSubmit.setAttribute("hidden", true);
-  document.querySelector(".update-entry").style.backgroundColor = "#B1D0E0";
+  document.querySelector(".update-entry").style.backgroundColor = "#8ba2ae";
   logBox.querySelector(".tooltip").style.display = "none";
 };
 

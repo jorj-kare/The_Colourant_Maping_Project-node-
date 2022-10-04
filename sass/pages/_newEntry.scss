@@ -4,8 +4,17 @@
   @include flex-centered(column);
   background-color: $color-white;
   padding-top: 10rem;
-  @include break($media-medium){
+  @include break($media-medium) {
     padding-top: 5rem;
+  }
+  @include break($media-xSmall) {
+    #map-fieldset {
+      justify-content: center;
+      padding: 5rem 2rem;
+      legend {
+        left: 2rem;
+      }
+    }
   }
 }
 

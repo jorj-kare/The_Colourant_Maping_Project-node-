@@ -1,13 +1,26 @@
 @use "../abstracts/" as *;
 
-.update-entry{
-    @include flex-centered(column);
-    background-color: $color-white;
-
-    #btnClose{
-        width: 6rem;
-        height:4rem;
-        margin: 3rem 0;
+.update-entry {
+  @include flex-centered(column);
+  background-color: $color-white;
+  background-color: #989da0;
+  .form {
+    padding-bottom: 5rem;
+  }
+  #btnClose {
+    width: 6rem;
+    height: 4rem;
+    margin: 2rem 0;
+    top: 1rem;
+    left: -2rem;
+    @include break($media-xSmall) {
+      top: 0;
+      left: -0.8rem;
     }
-    
+  }
+  #btn-edit-form,
+  #btn-delete-entry,
+  #btn-reset-form {
+    margin: 1rem;
+  }
 }

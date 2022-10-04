@@ -8,7 +8,6 @@
 .map {
   @include flex-centered(column);
   position: relative;
-  // min-height: 100vh;
   padding-top: 10rem;
   background-color: $color-white;
   @include break($media-xSmall) {
@@ -22,10 +21,10 @@
     border-radius: 6px;
     @include break($media-medium) {
       width: 80%;
-      height: 40rem;
+      height: 45rem;
     }
-    @include break($media-small) {
-      width: 90%;
+    @include break($media-xSmall) {
+      width: 96%;
     }
     &--large {
       width: 90%;
@@ -43,8 +42,8 @@
     z-index: 1;
     @include break($media-xSmall) {
       left: unset;
-      right: 1rem;
-      top: 7rem;
+      right: 0;
+      top: 6rem;
     }
     select {
       margin: 1rem;
@@ -59,11 +58,14 @@
 .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
   font-family: $font-primary;
   font-weight: 300;
-  border-radius: 10px;
+  border-radius: 5px;
 
   @include break($media-medium) {
     font-size: 16px;
     width: 50%;
+  }
+  @include break($media-xSmall) {
+    margin: 0.5rem;
   }
 
   svg {
@@ -74,7 +76,7 @@
   }
   input {
     background-color: $color-white;
-    border-radius: 10px;
+    border-radius: 5px;
     @include break($media-medium) {
       height: 40px;
     }

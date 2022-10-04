@@ -26,7 +26,6 @@
     border: 1px solid $color-primary-dark;
     font-size: 1.5rem;
     font-weight: 300;
-    word-break: break-all;
     transition: 0.5s all;
 
     &--hover:hover {
@@ -82,7 +81,6 @@
       justify-content: space-between;
       max-width: none;
       padding: 2rem;
-      padding-right: 4rem;
       border: 2px double $color-primary-dark;
       border-top-width: 0.5px;
       border-bottom-width: 0.5px;
@@ -94,6 +92,7 @@
       font-size: 1.6rem;
       font-weight: 400;
       letter-spacing: 1px;
+      padding-right: 2rem;
     }
 
     &__data:first-child {

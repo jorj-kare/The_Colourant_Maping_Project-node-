@@ -2,19 +2,21 @@
 
 .list {
   width: fit-content;
-  max-height: 25rem;
+  max-height: 65vh;
   overflow-y: auto;
-  padding-left: 2rem;
+  border-radius: 15px;
+  @include break($media-xSmall) {
+    padding: 1rem;
+  }
   &__container {
     @include form-style(column);
-    min-width: 70%;
-    max-width: 90%;
+    width: 90%;
     border: 3px double $color-primary-light;
+    @include break($media-xSmall) {
+      width: 98%;
+    }
     @include break($media-medium) {
       padding: 5rem 2rem;
-    }
-    @include break($media-large) {
-      max-width: 100%;
     }
 
     a {
@@ -27,9 +29,9 @@
   }
 
   &__item {
-    margin-top: 1rem;
-    padding: 0 0.5rem;
-    border: 0.5px solid transparent;
+    margin-top: 2rem;
+    padding: 0.5rem;
+    border: 2px dotted transparent;
     border-bottom-color: $color-primary-dark;
     color: $color-primary-dark;
     font-size: 1.8rem;
