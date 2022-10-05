@@ -378,6 +378,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+@media screen and (max-width: 600px) {
+  .hero-img {
+    background-image: linear-gradient(rgba(10, 65, 102, 0.674), rgba(11, 89, 144, 0.596)), url("/img/hero-small.jpg");
+  }
+}
 .hero-img__link {
   align-self: flex-end;
   font-size: 4rem;
