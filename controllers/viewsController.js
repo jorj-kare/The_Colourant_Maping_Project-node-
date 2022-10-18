@@ -74,10 +74,11 @@ const data = {
     "Rock art",
     "Panel painting",
     "Manuscript",
-    "glass",
-    "humans remains",
+    "Glass",
+    "Humans remains",
     "Unused colourant",
     "Raw material",
+    "Geological source",
     "other",
   ],
   chronologies: [
