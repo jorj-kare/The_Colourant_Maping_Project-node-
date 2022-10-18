@@ -27,12 +27,6 @@ const colourantSchema = new mongoose.Schema(
     },
     analyticalTechniques: {
       type: [String],
-      validate: {
-        validator: function (arr) {
-          return arr.length > 0;
-        },
-        message: "This field is required.",
-      },
     },
     categoryOfFind: {
       type: String,
