@@ -5,6 +5,7 @@ import {
   getFormValues,
   cfv,
   toggleCertainProvenance,
+  editLocation,
 } from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
@@ -43,6 +44,7 @@ mapBox.displayMap();
 
 window.addEventListener("load", (e) => {
   setRemoveAttributes(e);
+  editLocation();
 });
 
 details.addEventListener("change", function (e) {

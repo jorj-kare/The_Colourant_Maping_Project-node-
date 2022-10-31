@@ -5,6 +5,7 @@ import {
   getFormValues,
   cfv,
   toggleCertainProvenance,
+  editLocation,
 } from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
 import { showAlert } from "./alert.js";
@@ -18,7 +19,6 @@ const btnResetForm = document.getElementById("btn-reset-form");
 const btnDeleteEntry = document.getElementById("btn-delete-entry");
 const btnSubmit = document.getElementById("btn-submit");
 const username = document.getElementById("username");
-const userId = document.getElementById("user-id");
 const log = document.getElementById("log");
 const logBox = document.getElementById("logBox");
 let colourantData;
@@ -178,6 +178,7 @@ window.addEventListener("load", async (e) => {
   if (!colourantData) return;
   initiateFormValues(colourantData);
   toggleCertainProvenance(e, mapBox);
+  editLocation();
   disableForm();
   setRemoveAttributes(e);
   mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);

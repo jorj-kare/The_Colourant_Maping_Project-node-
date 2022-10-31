@@ -7,22 +7,23 @@ form.form( autocomplete="off")
     #coords.row.u-width-l.u-mrg-top-m            
       .form__group.u-width-s.u-mrg-rgt
         label.form__label.form__label--dark(for='latitude' step='any') Latitude
-        input#latitude.form__input(type="number" step='0.00000001') 
+        input#latitude.form__input(type="number" step='0.00000001' required) 
       .form__group.u-width-s
         label.form__label.form__label--dark(for='longitude') Longitude
-        input#longitude.form__input(type="number" step='0.00000001' )
-      +tooltip(`${data.tooltipText.provenience}`)
-    .form__group  
+        input#longitude.form__input(type="number" step='0.00000001'  required)
+    .row.u-width-l  
       select#certainProvenance.form__dropdown.form__dropdown--dark 
         option(value="certain" selected) Certain provenance
-        option(value="uncertain") Uncertain provenance  
+        option(value="uncertain") Uncertain provenance
+      div#tooltipProvenance   
+        +tooltip(`${data.tooltipText.provenience}`)           
     textarea#uncertainProvenance.form__input.u-width-l( cols="2" hidden)             
-    if user && user.role=== "admin"
-      .form__group.u-width-l 
-        label.form__label.form__label--dark(for='loc') Location  
-        textarea#loc.form__input(rows="2")
-    else 
-      textarea#loc.form__input(rows="2" hidden)  
+    .form__group.u-width-l
+      label.form__label.form__label--dark(for='loc') Location
+      .row  
+        input#loc.form__input(rows="2" disabled)
+        button#btnEditLoc.btn.btn--small(type='button' title="Edit location")  ✎ 
+
   fieldset#details.form__fieldset
     legend.form__legend Details
     .row

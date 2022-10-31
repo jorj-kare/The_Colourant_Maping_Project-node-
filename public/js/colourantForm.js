@@ -59,7 +59,9 @@ export const toggleCertainProvenance = (e, mapBox) => {
   const geocoder = document.querySelector(".mapboxgl-ctrl-geocoder--input");
   if (cfv.certainProvenance.value === "uncertain") {
     cfv.uncertainProvenance.removeAttribute("hidden");
-    cfv.loc.setAttribute("disabled", "true");
+    cfv.loc.closest(".form__group").classList.add("u-hidden");
+    cfv.lat.removeAttribute("required");
+    cfv.lng.removeAttribute("required");
     mapElement.style.pointerEvents = "none";
     setTimeout(() => {
       document.querySelector(".suggestions").style.display = "none";
@@ -70,23 +72,28 @@ export const toggleCertainProvenance = (e, mapBox) => {
         cfv.loc.value = "";
       }
       geocoder.value = "";
-      cfv.lat.setAttribute("disabled", "true");
-      cfv.lng.setAttribute("disabled", "true");
+      coords.classList.add("u-hidden");
       geocoder.setAttribute("disabled", "true");
       mapBox.removeMarker();
     }, 500);
   }
   if (cfv.certainProvenance.value === "certain") {
     cfv.loc.value = "";
+    cfv.lat.setAttribute("required", "true");
+    cfv.lng.setAttribute("required", "true");
     cfv.uncertainProvenance.setAttribute("hidden", "true");
     map.style.pointerEvents = "auto";
     geocoder.removeAttribute("disabled");
-    cfv.loc.removeAttribute("disabled");
-    cfv.lat.removeAttribute("disabled");
-    cfv.lng.removeAttribute("disabled");
+    cfv.loc.closest(".form__group").classList.remove("u-hidden");
+    coords.classList.remove("u-hidden");
   }
 };
-
+export const editLocation = function () {
+  document.querySelector("#btnEditLoc").addEventListener("click", (e) => {
+    cfv.loc.toggleAttribute("disabled");
+    cfv.loc.focus();
+  });
+};
 export const setRemoveAttributes = function (e) {
   if (e.target.className === "form__dropdown chr") {
     e.target.parentElement.querySelector(".century").selectedIndex = 0;
