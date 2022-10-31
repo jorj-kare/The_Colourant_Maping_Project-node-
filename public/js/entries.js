@@ -37,7 +37,7 @@ const editContributorField = (contributor) => {
 
 const editEditedField = (entry) => {
   let output;
-  if (entry.length > 1) {
+  if (entry.length > 0) {
     let details = "";
     entry.forEach((el) => {
       details += `
