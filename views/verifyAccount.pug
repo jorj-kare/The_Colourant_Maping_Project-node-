@@ -1,6 +1,9 @@
 extends base
 
-block head 
+block head
+  meta(name="description" content="Here you can verify your account.") 
+  title Verify account | Colourant mapping project
   script( type="module" src="/js/verifyAccount.js" defer )
 
+block main
   main.verifyAccount

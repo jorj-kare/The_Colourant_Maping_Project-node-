@@ -1,12 +1,12 @@
 extends base
-block head 
-    //- script(src="/js/mapBox.js" defer)
-    //- script(src="/js/colourantForm.js" defer)
+block head
+    meta(name="description" content="Here you can create a new colourant entry.")     
+    title New entry | Colourant mapping project
     script(type="module" src="/js/newEntry.js" defer)
-    
-    
+
+
 
 
 block main     
-        .new-entry    
-            include _colourantForm
+    .new-entry    
+        include _colourantForm

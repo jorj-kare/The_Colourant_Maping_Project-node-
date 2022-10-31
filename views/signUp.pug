@@ -1,5 +1,7 @@
 extends base
-block append head 
+block append head
+    meta(name="description" content="Here you can create an account.")     
+    title Sign up | Colourant mapping project
     script(type="module" src="/js/signUp.js" defer)
 
 block main 
@@ -21,7 +23,7 @@ block main
                     input#lastName.form__input(type='text' required placeholder='Secundus')  
                 .form__group
                     label.form__label Affiliation
-                    input#affiliation.form__input(type='text'  placeholder='Roman academy')
+                    input#affiliation.form__input(type='text' placeholder='Roman academy')
                 .form__group
                     label.form__label Password
                     input.form__input#password(type='password' required minlength=5 placeholder='••••••••')

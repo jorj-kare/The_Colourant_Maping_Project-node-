@@ -16,7 +16,12 @@ form.form( autocomplete="off")
             select#certainProvenance.form__dropdown.form__dropdown--dark 
                 option(value="certain" selected) Certain provenance
                 option(value="uncertain") Uncertain provenance      
-            textarea#loc.form__input(rows="2" hidden) 
+        if user && user.role=== "admin"
+            .form__group.u-width-l 
+                label.form__label.form__label--dark(for='loc') Location  
+                textarea#loc.form__input(rows="2")
+        else 
+            textarea#loc.form__input(rows="2" hidden)  
     fieldset#details.form__fieldset
         legend.form__legend Details
         .row

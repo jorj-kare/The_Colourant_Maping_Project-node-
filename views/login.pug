@@ -1,6 +1,8 @@
 extends base
-block append head 
-    script(type="module" src="/js/login.js" defer) ;
+block append head
+    meta(name="description" content="Here you can login to your account.")
+    title Login | Colourant mapping project
+    script(type="module" src="/js/login.js" defer)
 block main 
     main.login 
         .form-box
@@ -12,7 +14,7 @@ block main
                     input#username.form__input.form__input--validate(type='text' placeholder='pliny'  required)
                 .form__group
                     label.form__label(for='password') Password
-                    input#password.form__input.form__input--pass.form__input--validate(type='password'  placeholder='••••••••' minlength='5' required)
+                    input#password.form__input.form__input--pass.form__input--validate(type='password' placeholder='••••••••' minlength='5' required)
                 .form__group
                     button.btn.btn--animate.u-mrg-top-s(type='submit') Login
             .link-box        
