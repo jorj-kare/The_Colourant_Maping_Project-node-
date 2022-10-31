@@ -208,6 +208,7 @@
     color: $color-primary-dark;
     &--dark {
       color: $color-white;
+      font-size: 2rem;
     }
   }
   &__label-cb {
@@ -286,6 +287,13 @@
   margin: 1rem 0;
   padding: 1.2rem 0.5rem;
   background-color: $color-white;
+}
+
+#tooltipProvenance {
+  margin: auto 10rem;
+  div {
+    margin: 0;
+  }
 }
 .form-box {
   @include form-style(column, $color-primary-light);

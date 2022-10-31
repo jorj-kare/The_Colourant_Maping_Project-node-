@@ -1100,6 +1100,7 @@ body {
 }
 .form__label--dark {
   color: #eee8e8;
+  font-size: 2rem;
 }
 .form__label-cb {
   position: relative;
@@ -1175,6 +1176,13 @@ body {
   margin: 1rem 0;
   padding: 1.2rem 0.5rem;
   background-color: #eee8e8;
+}
+
+#tooltipProvenance {
+  margin: auto 10rem;
+}
+#tooltipProvenance div {
+  margin: 0;
 }
 
 .form-box {
