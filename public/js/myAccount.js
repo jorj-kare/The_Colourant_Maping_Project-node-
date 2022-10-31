@@ -2,11 +2,9 @@
 import { showAlert } from "./alert.js";
 
 // ELEMENTS
-const btnDeleteAccount = document.getElementById("deleteAccount");
 const btnUpdateAccount = document.getElementById("updateAccount");
 const btnChangePassword = document.getElementById("changePassword");
 const accountBox = document.querySelector(".account");
-const background = document.querySelector(".background");
 const accountForm = document.querySelector(".account__form");
 const btnEdit = document.querySelectorAll(".btn--small");
 const inputsFields = document.querySelectorAll(".form__input");

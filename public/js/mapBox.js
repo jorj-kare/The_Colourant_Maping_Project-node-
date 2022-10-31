@@ -75,13 +75,6 @@ class MapBox {
       this.geocoder.query(`${latEl.value},${lngEl.value}`);
     }),
       this.geocoder.on("result", (e) => {
-        // this.removeMarker();
-        // this.createMarker([
-        //   e.result.center[0].toFixed(8),
-        //   e.result.center[1].toFixed(8),
-        // ]);
-        // lngEl.value = e.result.center[0];
-        // latEl.value = e.result.center[1];
         locEl.value = e.result.place_name;
       });
 
