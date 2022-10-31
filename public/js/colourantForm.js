@@ -26,6 +26,7 @@ export const cfv = {
   lng: document.getElementById("longitude"),
   loc: document.getElementById("loc"),
   certainProvenance: document.getElementById("certainProvenance"),
+  uncertainProvenance: document.getElementById("uncertainProvenance"),
 };
 // FUNCTIONS
 const trimArrValues = (arr) => {
@@ -55,16 +56,17 @@ export const hideCenturies = (e) => {
 };
 export const toggleCertainProvenance = (e, mapBox) => {
   const mapElement = document.getElementById("map");
-  const certainProvenance = document.getElementById("certainProvenance");
   const geocoder = document.querySelector(".mapboxgl-ctrl-geocoder--input");
-  if (certainProvenance.value === "uncertain") {
-    loc.removeAttribute("hidden");
+  if (cfv.certainProvenance.value === "uncertain") {
+    cfv.uncertainProvenance.removeAttribute("hidden");
+    cfv.loc.setAttribute("disabled", "true");
     mapElement.style.pointerEvents = "none";
     setTimeout(() => {
       document.querySelector(".suggestions").style.display = "none";
       cfv.lat.value = "";
       cfv.lng.value = "";
       if (e.type === "change") {
+        cfv.uncertainProvenance.value = "";
         cfv.loc.value = "";
       }
       geocoder.value = "";
@@ -74,11 +76,12 @@ export const toggleCertainProvenance = (e, mapBox) => {
       mapBox.removeMarker();
     }, 500);
   }
-  if (certainProvenance.value === "certain") {
+  if (cfv.certainProvenance.value === "certain") {
     cfv.loc.value = "";
-    cfv.loc.setAttribute("hidden", "true");
+    cfv.uncertainProvenance.setAttribute("hidden", "true");
     map.style.pointerEvents = "auto";
     geocoder.removeAttribute("disabled");
+    cfv.loc.removeAttribute("disabled");
     cfv.lat.removeAttribute("disabled");
     cfv.lng.removeAttribute("disabled");
   }
@@ -187,7 +190,10 @@ export const getFormValues = () => {
 
   const data = {
     location: {
-      address: cfv.loc.value,
+      address:
+        cfv.certainProvenance.value === "certain"
+          ? cfv.loc.value
+          : cfv.uncertainProvenance.value,
       coordinates:
         cfv.certainProvenance.value === "certain"
           ? [cfv.lat.value * 1, cfv.lng.value * 1]

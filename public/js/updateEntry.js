@@ -111,7 +111,7 @@ const initiateFormValues = (data) => {
     cfv.certainProvenance.selectedIndex = 0;
   } else {
     cfv.certainProvenance.selectedIndex = 1;
-    cfv.loc.value = data.data.location.address;
+    cfv.uncertainProvenance.value = data.data.location.address;
   }
 
   cfv.references.value = data.data.references;
