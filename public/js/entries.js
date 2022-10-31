@@ -77,7 +77,7 @@ const displayEntries = (entries) => {
     ).toLocaleDateString("en-Gb")}</td>
     <td id="td-colourants" class='table__data' data-id="${
       entry._id
-    }" data-label="Colourant(s)">${entry.colourants}</td>
+    }" data-label="Colourant(s)">${entry.colourants.join(", ")}</td>
     <td class='table__data' data-label="Chronology">${
       entry.chronology.start
     }, ${entry.chronology.end}</td>
@@ -93,9 +93,9 @@ const displayEntries = (entries) => {
     <strong>Certain <br> provenance</strong><br>
     ${entry.location.certainProvenance}
     </details></td>
-    <td class='table__data' data-label="Analytical techniques">${
-      entry.analyticalTechniques
-    }</td>
+    <td class='table__data' data-label="Analytical techniques">${entry.analyticalTechniques.join(
+      ", "
+    )}</td>
     <td class='table__data' data-label="Archeological context ">${editLongText(
       entry.archeologicalContext
     )}</td>
