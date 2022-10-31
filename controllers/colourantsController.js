@@ -170,7 +170,7 @@ exports.exportDataToCsv = async (req, res, next) => {
     // flatten({ objects: "true", arrays: "false" })
     if (!req.user || (req.user && req.user.role !== "admin"))
       filters.checked = true;
-    const data = await Colourant.find().populate("contributor").lean();
+    const data = await Colourant.find(filters).populate("contributor").lean();
     const json2csvParser = new Parser({ fields, transforms });
     const cvs = json2csvParser.parse(data);
     if (!data) return next(new CustomError("No entries found"), 404);
