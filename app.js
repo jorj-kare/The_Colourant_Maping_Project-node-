@@ -17,10 +17,7 @@ app.use(express.json({ limit: "10kb" }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  "/mapboxgl-spiderifier",
-  express.static("node_modules/mapboxgl-spiderifier")
-);
+
 app.use("/mapbox-gl", express.static("node_modules/mapbox-gl"));
 const scriptSrcUrls = [
   "https://api.tiles.mapbox.com/",
@@ -44,9 +41,13 @@ const connectSrcUrls = [
   "https://api.geoapify.com/",
   "https://ka-f.fontawesome.com/",
   "https://kit.fontawesome.com/",
-  
 ];
-const fontSrcUrls = ["fonts.googleapis.com", "fonts.gstatic.com","ka-f.fontawesome.com",];
+const fontSrcUrls = [
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "ka-f.fontawesome.com",
+];
+const imgSource = ["https://mirrors.creativecommons.org/presskit/icons/"];
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -56,7 +57,7 @@ app.use(
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", "blob:"],
       objectSrc: [],
-      imgSrc: ["'self'", "blob:", "data:"],
+      imgSrc: ["'self'", "blob:", "data:", ...imgSource],
       fontSrc: ["'self'", ...fontSrcUrls],
     },
   })

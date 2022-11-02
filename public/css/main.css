@@ -347,6 +347,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   padding: 2rem;
   background-color: #8fbcc4;
 }
@@ -361,10 +362,20 @@ body {
   font-weight: 300;
   color: #006678;
   font-size: 2rem;
-  margin-top: 1rem;
 }
 .footer__link a {
   color: #712B75;
+}
+.footer p {
+  text-align: center;
+}
+.footer__img {
+  display: flex;
+}
+.footer img {
+  height: 3rem !important;
+  margin-left: 3px;
+  vertical-align: text-bottom;
 }
 
 .hero-img {
