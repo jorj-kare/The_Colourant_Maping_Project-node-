@@ -23,6 +23,25 @@ const log = document.getElementById("log");
 const logBox = document.getElementById("logBox");
 let colourantData;
 // FUNCTIONS
+function isEqual(obj1, obj2) {
+  let props1 = Object.getOwnPropertyNames(obj1);
+  let props2 = Object.getOwnPropertyNames(obj2);
+  if (props1.length != props2.length) {
+    return false;
+  }
+  for (let i = 0; i < props1.length; i++) {
+    let prop = props1[i];
+    let bothAreObjects =
+      typeof obj1[prop] === "object" && typeof obj2[prop] === "object";
+    if (
+      (!bothAreObjects && obj1[prop] !== obj2[prop]) ||
+      (bothAreObjects && !isEqual(obj1[prop], obj2[prop]))
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
 
 const getColourant = async () => {
   try {
@@ -206,17 +225,37 @@ form.addEventListener("change", (e) => {
   }
 });
 
-btnSubmit.addEventListener("click", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const params = new URLSearchParams(window.location.search);
   const entryId = params.get("id");
-  // Get the checked value
+
   const updatedData = getFormValues();
   updatedData.id = entryId;
-  updatedData.$push = {
-    edited: { at: Date.now(), from: username.value, log: log.value },
-  };
+  //Check if has been any change to the data except the "Checked" field so that when only the "Checked" field has been changed the entry will not appear as edited
+  const updatedDataCopy = { ...updatedData };
+  const data = await getColourant();
+  delete updatedDataCopy.checked;
+  delete data.data._id;
+  delete data.data.contributor;
+  delete data.data.createdAt;
+  delete data.data.edited;
+  delete data.data.__v;
+  delete data.data.location.type;
+  delete data.data.checked;
+
+  if (!isEqual(updatedDataCopy, data.data)) {
+    if (!log.value) {
+      showAlert("Information in Log field is lacking", "error", 3);
+      return;
+    }
+    updatedData.$push = {
+      edited: { at: Date.now(), from: username.value, log: log.value },
+    };
+  }
+
   updateEntry(updatedData);
+
   window.setTimeout(() => {
     location.assign("/myAccount");
   }, 1000);
@@ -224,7 +263,6 @@ btnSubmit.addEventListener("click", (e) => {
 
 btnEditForm.addEventListener("click", (e) => {
   enableForm();
-  map.style.pointerEvents = "none";
 });
 
 btnResetForm.addEventListener("click", (e) => {
