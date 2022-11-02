@@ -167,7 +167,7 @@
       position: absolute;
       top: 1rem;
       left: 5rem;
-      color: $color-white;
+      color: $color-primary-dark;
       @include break($media-large) {
         left: 3rem;
       }
@@ -207,7 +207,6 @@
     letter-spacing: 0.1rem;
     color: $color-primary-dark;
     &--dark {
-      color: $color-white;
       font-size: 2rem;
     }
   }
@@ -294,6 +293,11 @@
   div {
     margin: 0;
   }
+}
+#textLoc {
+  padding: 0.3rem 0;
+  letter-spacing: 0.2rem;
+  color: $color-primary-dark;
 }
 .form-box {
   @include form-style(column, $color-primary-light);

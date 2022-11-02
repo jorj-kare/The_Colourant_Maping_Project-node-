@@ -1071,7 +1071,7 @@ body {
   position: absolute;
   top: 1rem;
   left: 5rem;
-  color: #eee8e8;
+  color: #006678;
 }
 @media screen and (max-width: 991px) {
   .form__legend--dark {
@@ -1110,7 +1110,6 @@ body {
   color: #006678;
 }
 .form__label--dark {
-  color: #eee8e8;
   font-size: 2rem;
 }
 .form__label-cb {
@@ -1194,6 +1193,12 @@ body {
 }
 #tooltipProvenance div {
   margin: 0;
+}
+
+#textLoc {
+  padding: 0.3rem 0;
+  letter-spacing: 0.2rem;
+  color: #006678;
 }
 
 .form-box {
