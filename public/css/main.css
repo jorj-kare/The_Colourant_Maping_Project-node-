@@ -808,12 +808,12 @@ body {
 }
 
 .update-entry {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #eee8e8;
-  background-color: #989da0;
 }
 .update-entry .form {
   padding-bottom: 5rem;
@@ -824,6 +824,7 @@ body {
   margin: 2rem 0;
   top: 1rem;
   left: -2rem;
+  z-index: 11;
 }
 @media screen and (max-width: 480px) {
   .update-entry #btnClose {
@@ -835,6 +836,16 @@ body {
 .update-entry #btn-delete-entry,
 .update-entry #btn-reset-form {
   margin: 1rem;
+  z-index: 11;
+}
+.update-entry .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(6, 31, 110, 0.399);
 }
 
 .entries {
@@ -1497,6 +1508,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   transition: all 0.5s;
+  z-index: 11;
 }
 .tooltip:hover .tooltip__text {
   opacity: 1;

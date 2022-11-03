@@ -17,6 +17,7 @@
   font-size: 1rem;
   font-weight: 400;
   transition: all 0.5s;
+  z-index: 11;
 
   &:hover &__text {
     opacity: 1;

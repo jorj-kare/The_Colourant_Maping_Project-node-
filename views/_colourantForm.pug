@@ -113,10 +113,10 @@ form.form( autocomplete="off")
         label.h3.h3--dark(for='notes') Notes
         textarea#notes.form__input.form__input--border( rows="5" )
       +tooltip(data.tooltipText.notes)    
-    .row#logBox
+    .row#logBox.u-hidden
       .form__group.u-width-l.u-mrg-top-s
-        label.h3.h3--dark(for='log' hidden) Log
-        textarea#log.form__input.form__input--border( rows="3" hidden)
+        label.h3.h3--dark(for='log' ) Log
+        textarea#log.form__input.form__input--border( rows="3" )
       +tooltip(data.tooltipText.log)    
     if user
       input#user-id(value=`${user.id}` hidden )     

@@ -1,9 +1,9 @@
 @use "../abstracts/" as *;
 
 .update-entry {
+  position: relative;
   @include flex-centered(column);
   background-color: $color-white;
-  background-color: #989da0;
   .form {
     padding-bottom: 5rem;
   }
@@ -13,6 +13,7 @@
     margin: 2rem 0;
     top: 1rem;
     left: -2rem;
+    z-index: 11;
     @include break($media-xSmall) {
       top: 0;
       left: -0.8rem;
@@ -22,5 +23,15 @@
   #btn-delete-entry,
   #btn-reset-form {
     margin: 1rem;
+    z-index: 11;
+  }
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(6, 31, 110, 0.399);
   }
 }

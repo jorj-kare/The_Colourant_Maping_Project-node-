@@ -12,8 +12,6 @@ import { showAlert } from "./alert.js";
 const mapBox = new MapBox();
 // ELEMENTS
 const form = document.querySelector("form");
-const mapElement = document.getElementById("map");
-const fieldsets = document.querySelectorAll("fieldset");
 const btnEditForm = document.getElementById("btn-edit-form");
 const btnResetForm = document.getElementById("btn-reset-form");
 const btnDeleteEntry = document.getElementById("btn-delete-entry");
@@ -21,9 +19,10 @@ const btnSubmit = document.getElementById("btn-submit");
 const username = document.getElementById("username");
 const log = document.getElementById("log");
 const logBox = document.getElementById("logBox");
+const modal = document.querySelector(".modal");
 let colourantData;
 // FUNCTIONS
-function isEqual(obj1, obj2) {
+const isEqual = (obj1, obj2) => {
   let props1 = Object.getOwnPropertyNames(obj1);
   let props2 = Object.getOwnPropertyNames(obj2);
   if (props1.length != props2.length) {
@@ -41,7 +40,7 @@ function isEqual(obj1, obj2) {
     }
   }
   return true;
-}
+};
 
 const getColourant = async () => {
   try {
@@ -102,15 +101,16 @@ const deleteEntry = async () => {
 };
 
 const checkInput = (elements, values) => {
+  const otherCheckbox = elements[elements.length - 2];
+  const otherInput = elements[elements.length - 1];
+  const elIds = [];
+  const otherValues = [];
+
   if (typeof values === "string" || typeof values === "boolean") {
     values = new Array(values.toString());
   }
   values = values.map((value) => value.toLowerCase());
 
-  const otherCheckbox = elements[elements.length - 2];
-  const otherInput = elements[elements.length - 1];
-  const elIds = [];
-  const otherValues = [];
   elements.forEach((el) => {
     elIds.push(el.id.toLowerCase());
     if (values.includes(el.id.toLowerCase())) el.checked = true;
@@ -162,24 +162,18 @@ const initiateFormValues = (data) => {
 };
 
 const disableForm = () => {
-  fieldsets.forEach((el) => el.setAttribute("disabled", "true"));
-  mapElement.style.pointerEvents = "none";
   btnSubmit.setAttribute("hidden", true);
-  document.querySelector(".update-entry").style.backgroundColor = "#8ba2ae";
-  logBox.querySelector(".tooltip").style.display = "none";
+  logBox.classList.add("u-hidden");
+  modal.classList.remove("u-hidden");
 };
 
 const enableForm = () => {
-  fieldsets.forEach((el) => el.removeAttribute("disabled"));
-  mapElement.style.pointerEvents = "auto";
-  btnSubmit.removeAttribute("disabled");
-  log.removeAttribute("hidden");
-  logBox.querySelector("label").removeAttribute("hidden");
-  logBox.querySelector(".tooltip").style.display = "flex";
+  logBox.classList.remove("u-hidden");
   btnSubmit.removeAttribute("hidden");
+  btnSubmit.removeAttribute("disabled");
   btnResetForm.removeAttribute("hidden");
   btnEditForm.setAttribute("hidden", true);
-  document.querySelector(".update-entry").style.backgroundColor = "#eee8e8";
+  modal.classList.add("u-hidden");
 };
 
 const setMarker = (lat, lng) => {
@@ -232,7 +226,8 @@ form.addEventListener("submit", async (e) => {
 
   const updatedData = getFormValues();
   updatedData.id = entryId;
-  //Check if has been any change to the data except the "Checked" field so that when only the "Checked" field has been changed the entry will not appear as edited
+  //Check if has been any change to the data except the "Checked" field so that
+  //when only the "Checked" field has been changed the entry will not appear as edited
   const updatedDataCopy = { ...updatedData };
   const data = await getColourant();
   delete updatedDataCopy.checked;
