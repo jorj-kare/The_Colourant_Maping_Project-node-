@@ -156,3 +156,7 @@ exports.getContactPage = (req, res) => {
 exports.getEntriesTable = async (req, res) => {
   res.status(200).render("entries", { data });
 };
+
+exports.getGlossary = async (req, res) => {
+  res.status(200).render("glossary");
+};

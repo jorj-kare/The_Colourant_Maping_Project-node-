@@ -910,6 +910,47 @@ body {
   font-size: 1.6rem;
 }
 
+.glossary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee8e8;
+}
+.glossary figure {
+  position: relative;
+  width: 60%;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  border: 2px solid #006678;
+  border-radius: 25px;
+}
+@media screen and (max-width: 768px) {
+  .glossary figure {
+    width: 80%;
+  }
+}
+.glossary img {
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+}
+.glossary figcaption {
+  position: absolute;
+  padding: 0.5rem;
+  bottom: 0;
+  left: 0;
+  color: #006678;
+  background-color: rgb(218, 218, 218);
+}
+.glossary figcaption a {
+  color: #712B75;
+}
+.glossary h1 {
+  margin-top: 4rem;
+  padding: 0 5rem;
+}
+
 .form {
   display: flex;
   flex-direction: column;
