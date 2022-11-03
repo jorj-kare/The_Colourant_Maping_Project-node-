@@ -88,7 +88,9 @@ const displayEntries = (entries) => {
     <summary>${entry.location.address}</summary>
     -----------------<br>
     <strong>Coordinates</strong><br>
-    ${entry.location.coordinates}<br>
+    ${
+      entry.location.coordinates ? entry.location.coordinates.join(", ") : ""
+    }<br>
     -----------------<br>
     <strong>Certain <br> provenance</strong><br>
     ${entry.location.certainProvenance}
