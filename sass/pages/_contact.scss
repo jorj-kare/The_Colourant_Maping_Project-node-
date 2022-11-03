@@ -1,32 +1,41 @@
 @use "../abstracts/" as *;
 
-.contact{
-    @include flex-centered(column);
-    padding: 15rem 3rem 10rem 3rem;
-    background-color: $color-white;
-    @include break($media-xSmall){
-        padding: 3rem 2rem;
-    }
+.contact {
+  @include flex-centered(column);
+  padding: 15rem 3rem 10rem 3rem;
+  background-color: $color-white;
+  @include break($media-xSmall) {
+    padding: 3rem 2rem;
+  }
 
-    .text-box{
-        padding: 3rem 7rem;
-        border:4px double $color-primary-light;
-        border-radius: 5px;
-        @include break($media-medium){
-            padding: 3rem 5rem;
-        }
-        @include break($media-xSmall){
-            padding: 3rem;
-        }
+  .text-box {
+    padding: 3rem 7rem;
+    border: 4px double $color-primary-light;
+    border-radius: 5px;
+    @include break($media-medium) {
+      padding: 3rem 5rem;
     }
-
-    &__text{
-        max-width: 60ch;
-        color: $color-primary-dark;
-        font-size: 2.2rem;
-        word-spacing: .2rem;
-        letter-spacing: .15rem;
-        
+    @include break($media-xSmall) {
+      padding: 3rem;
     }
+  }
 
+  &__text {
+    max-width: 70ch;
+    color: $color-primary-dark;
+    font-size: 2.2rem;
+    word-spacing: 0.2rem;
+    letter-spacing: 0.15rem;
+    padding-top: 1rem;
+    text-align: justify;
+  }
+  ion-icon {
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+    color: $color-purple;
+    pointer-events: none;
+  }
+  a {
+    color: $color-purple;
+  }
 }

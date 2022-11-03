@@ -460,11 +460,22 @@ body {
   }
 }
 .contact__text {
-  max-width: 60ch;
+  max-width: 70ch;
   color: #006678;
   font-size: 2.2rem;
   word-spacing: 0.2rem;
   letter-spacing: 0.15rem;
+  padding-top: 1rem;
+  text-align: justify;
+}
+.contact ion-icon {
+  padding-left: 0.5rem;
+  padding-right: 1rem;
+  color: #712B75;
+  pointer-events: none;
+}
+.contact a {
+  color: #712B75;
 }
 
 .login {

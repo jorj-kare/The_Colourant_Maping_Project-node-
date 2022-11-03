@@ -25,6 +25,7 @@ const scriptSrcUrls = [
   "https://events.mapbox.com/",
   "https://kit.fontawesome.com/",
   "https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v1.0.0/leaflet.markercluster.js",
+  "https://unpkg.com/",
 ];
 const styleSrcUrls = [
   "https://api.mapbox.com/",
@@ -41,6 +42,7 @@ const connectSrcUrls = [
   "https://api.geoapify.com/",
   "https://ka-f.fontawesome.com/",
   "https://kit.fontawesome.com/",
+  "https://unpkg.com/",
 ];
 const fontSrcUrls = [
   "fonts.googleapis.com",
