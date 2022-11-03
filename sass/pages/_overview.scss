@@ -44,7 +44,7 @@
   @include flex-centered($direction: column);
   justify-content: flex-start;
   border: 3px double $color-primary-light;
-  min-height: 100vh;
+  min-height: 80vh;
   padding: 5rem 5rem;
   background-color: $color-white;
   font-size: 2.2rem;
@@ -53,8 +53,9 @@
   color: $color-black;
 
   &__text {
-    max-width: 60ch;
+    max-width: 65ch;
     margin-top: 1.5rem;
     color: $color-primary-dark;
+    text-align: justify;
   }
 }
