@@ -7,6 +7,7 @@
   @include break($media-medium) {
     padding: 5rem 0.5rem;
   }
+
   .h2 {
     border-bottom: 3px double $color-white;
     &--dark {
@@ -68,15 +69,25 @@
   .link {
     font-size: 2.5rem;
   }
+
+  #changePassword {
+    margin-top: 2rem;
+  }
 }
 
 .password__form {
   @include form-style(column, $color-primary-light);
   min-width: 70%;
-
+  @include break($media-xSmall) {
+    padding: 10rem 0 !important;
+  }
   .btn--close {
     top: -2rem;
     left: 2rem;
     border: transparent;
+    @include break($media-xSmall) {
+      top: -8rem;
+      left: -2rem;
+    }
   }
 }

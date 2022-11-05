@@ -669,6 +669,9 @@ body {
 .account .link {
   font-size: 2.5rem;
 }
+.account #changePassword {
+  margin-top: 2rem;
+}
 
 .password__form {
   display: flex;
@@ -680,10 +683,21 @@ body {
   border-radius: 15px;
   min-width: 70%;
 }
+@media screen and (max-width: 480px) {
+  .password__form {
+    padding: 10rem 0 !important;
+  }
+}
 .password__form .btn--close {
   top: -2rem;
   left: 2rem;
   border: transparent;
+}
+@media screen and (max-width: 480px) {
+  .password__form .btn--close {
+    top: -8rem;
+    left: -2rem;
+  }
 }
 
 .new-entry {
