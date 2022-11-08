@@ -1,6 +1,7 @@
 /* eslint-disable*/
-import { showAlert } from "./alert.js";
+import { showAlert, showConfirm } from "./alert.js";
 const form = document.querySelector(".form");
+
 const signUp = async (userData) => {
   try {
     const url = `${window.location.origin}/api/v1/users/signUp`;
@@ -16,14 +17,10 @@ const signUp = async (userData) => {
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      showAlert(
-        "Congratulations you have now an account! Go to your email to activate your account.",
-        "success",
-        3
+      await showConfirm(
+        "Congratulations, you have now created an account! PLease check your email for account activation. Note: we have identified an issue with certain institutional email addresses. If you have not received an activation email, please contact us."
       );
-      window.setTimeout(() => {
-        location.assign("/");
-      }, 3000);
+      location.assign("/");
     }
   } catch (err) {
     showAlert(err.message, "error", 5);
@@ -41,5 +38,6 @@ form.addEventListener("submit", (e) => {
     password: document.getElementById("password").value,
     passwordConfirm: document.getElementById("passwordConfirm").value,
   };
+
   signUp(data);
 });

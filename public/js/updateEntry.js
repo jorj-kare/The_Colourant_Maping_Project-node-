@@ -8,7 +8,7 @@ import {
   editLocation,
 } from "./colourantForm.js";
 import { MapBox } from "./mapBox.js";
-import { showAlert } from "./alert.js";
+import { showAlert, showConfirm } from "./alert.js";
 const mapBox = new MapBox();
 // ELEMENTS
 const form = document.querySelector("form");
@@ -267,7 +267,9 @@ btnEditForm.addEventListener("click", (e) => {
 btnResetForm.addEventListener("click", (e) => {
   location.reload();
 });
-btnDeleteEntry.addEventListener("click", (e) => {
-  if (window.confirm("Are you sure that you want to delete this entry?"))
+btnDeleteEntry.addEventListener("click", async (e) => {
+  if (
+    await showConfirm("Are you sure that you want to delete this entry?", true)
+  )
     deleteEntry();
 });
