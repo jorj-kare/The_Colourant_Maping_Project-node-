@@ -128,6 +128,10 @@ const checkInput = (elements, values) => {
 const initiateFormValues = (data) => {
   if (data.data.location.certainProvenance) {
     cfv.certainProvenance.selectedIndex = 0;
+    console.log(data.data.location.address);
+
+    cfv.loc.value = data.data.location.address;
+    console.log(cfv.loc.value);
   } else {
     cfv.certainProvenance.selectedIndex = 1;
     cfv.uncertainProvenance.value = data.data.location.address;
@@ -189,14 +193,14 @@ window.addEventListener("load", async (e) => {
   mapBox.displayMap();
   colourantData = await getColourant();
   if (!colourantData) return;
-  initiateFormValues(colourantData);
+  mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
   toggleCertainProvenance(e, mapBox);
   editLocation();
   disableForm();
   setRemoveAttributes(e);
-  mapBox.setLocation(cfv.lng, cfv.lat, cfv.loc, cfv.coords);
   window.setTimeout(() => {
     setMarker(cfv.lat.value, cfv.lng.value);
+    initiateFormValues(colourantData);
   }, 1000);
 });
 
