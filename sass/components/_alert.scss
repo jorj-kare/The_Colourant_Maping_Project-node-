@@ -8,7 +8,7 @@
   margin-top: 1rem;
   padding: 3rem 15rem;
   border-radius: 5px;
-//   border: 2px double $color-purple;
+  //   border: 2px double $color-purple;
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   color: $color-white;
   text-align: center;
@@ -22,5 +22,41 @@
   &--error {
     border-color: $color-red;
     background-color: $color-red;
+  }
+}
+
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(14, 13, 13, 0.435);
+  z-index: 15;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50ch;
+    gap: 4rem;
+    padding: 3rem 5rem;
+    border: 2px solid $color-primary-dark;
+    border-radius: 25px;
+    background-color: $color-white;
+    color: $color-primary-dark;
+    font-size: 2.2rem;
+    letter-spacing: 0.1rem;
+  }
+  &__btn {
+    display: flex;
+    gap: 2rem;
+    button {
+      width: fit-content;
+      padding-block: 0.5rem;
+    }
   }
 }
