@@ -31,8 +31,8 @@ const createColourant = async (colourantData) => {
     if (data.status === "success") {
       showAlert("You entry has been submitted successfully!", "success", 5);
       window.setTimeout(() => {
-        location.assign("/");
-      }, 1000);
+        location.reload();
+      }, 2000);
     }
   } catch (err) {
     showAlert(err.message, "error", 5);
