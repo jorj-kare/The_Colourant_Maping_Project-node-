@@ -27,7 +27,7 @@ form.form(autocomplete="off")
                 option(value="BCE" selected) BCE
                 option(value="CE") CE                
             select#century-start.form__dropdown.century( name="century-start"   ) 
-                option(value=""  selected ) Chronology from
+                option(value=""  selected ) Chronology (from)
                 optgroup.bce-optgroup(label="BCE" ) 
                     each chr in data.chronologies
                         if (chr <= 0)
@@ -42,7 +42,7 @@ form.form(autocomplete="off")
                 option(value="BCE" selected) BCE
                 option(value="CE") CE            
             select#century-end.form__dropdown.century( name="century-end" ) 
-                option(value=""  selected ) Chronology end
+                option(value=""  selected ) Chronology (to)
                 optgroup.bce-optgroup(label="BCE" ) 
                     each chr in data.chronologies
                         if (chr <= 0)
