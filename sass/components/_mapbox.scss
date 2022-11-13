@@ -96,6 +96,19 @@
   }
 }
 
+.mapboxgl-popup-content {
+  border: 0.5px solid $color-primary-dark;
+  border-radius: 5px;
+  background-color: $color-white;
+  button {
+    color: $color-primary-dark;
+    transition: all 0.5s;
+    &:hover {
+      background-color: $color-yellow;
+    }
+  }
+}
+
 .mapboxgl-ctrl.mapboxgl-ctrl-group {
   @include break($media-small) {
     display: none;

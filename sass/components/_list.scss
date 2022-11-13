@@ -38,7 +38,7 @@
     letter-spacing: 0.2rem;
     word-spacing: 0.3rem;
     list-style-type: circle;
-    transition: all 0.3s;
+    transition: all 0.4s;
 
     &:hover {
       list-style-type: disc;
@@ -48,8 +48,11 @@
       cursor: pointer;
     }
     &--small {
-      font-size: 1.4rem;
+      margin-top: 1rem;
       list-style-type: none;
+      font-size: 1.4rem;
+      word-spacing: 0.1rem;
+
       &:hover {
         list-style-type: none;
         border-left-color: transparent;
