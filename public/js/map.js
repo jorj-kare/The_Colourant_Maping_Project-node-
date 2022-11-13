@@ -104,7 +104,7 @@ mapBox.map.on("load", () => {
         20,
         "#f28cb1",
         40,
-        "#D82148",
+        "#A460ED",
       ],
       "circle-radius": ["step", ["get", "point_count"], 17, 10, 25, 40, 30],
     },
@@ -129,7 +129,7 @@ mapBox.map.on("load", () => {
     filter: ["!", ["has", "point_count"]],
     paint: {
       "circle-color": "#4fe5ff",
-      "circle-radius": 6,
+      "circle-radius": 7,
     },
   });
 });
@@ -144,7 +144,8 @@ mapBox.map.on("click", "unclustered-point", (e) => {
        >${e.features[0].properties.colourants
          .replace("[", "")
          .replace("]", "")
-         .replaceAll('"', "")}</li>`
+         .replaceAll('"', "")} 
+      </li>`
     )
     .addTo(mapBox.map);
 });
