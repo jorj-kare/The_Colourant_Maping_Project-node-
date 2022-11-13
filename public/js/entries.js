@@ -22,12 +22,15 @@ const editLongText = (entry) => {
 };
 const editContributorField = (contributor) => {
   let output;
+  const emailField = contributor.email
+    ? `<strong>Email: </strong>${contributor.email}<br>`
+    : "";
   if (contributor.lastName) {
     output = `<details><summary>${contributor.username}</summary>
         <strong>First name: </strong>${contributor.firstName}<br>
         <strong>Last name: </strong>${contributor.lastName}<br>
         <strong>Affiliation: </strong> ${contributor.affiliation}<br>
-        <strong>Email: </strong>${contributor.email}<br>
+-        ${emailField}
         </details>`;
   } else {
     output = `${contributor.username}`;
@@ -58,7 +61,7 @@ const editEditedField = (entry) => {
 };
 
 const addTablesForAdmin = (entry) => {
-  if (!entry.contributor.lastName) return ``;
+  if (!entry.contributor.email) return ``;
   return `<td class="table__data" data-label="Checked">${
     entry.checked == true ? "Checked" : "Unchecked"
   }</td>

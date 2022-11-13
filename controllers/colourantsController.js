@@ -73,8 +73,8 @@ exports.getColourants = async (req, res, next) => {
   );
 
   if (req.user && req.user.role === "admin") {
-    contributorFields = "username firstName lastName affiliation";
-  } else contributorFields = "username";
+    contributorFields = "username firstName lastName affiliation email";
+  } else contributorFields = "username firstName lastName affiliation ";
 
   await Colourant.populate(data, {
     path: "contributor",
