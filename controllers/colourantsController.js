@@ -150,7 +150,14 @@ exports.deleteColourant = async (req, res, next) => {
 
 exports.exportDataToCsv = async (req, res, next) => {
   try {
-    const fileName = "entries.csv";
+    const d = new Date();
+
+    const day = d.toLocaleString("en-CA", { day: "2-digit" });
+    const month = d.toLocaleString("en-CA", { month: "2-digit" });
+    const year = d.toLocaleString("en-CA", { year: "numeric" });
+
+    const date = year + month + day;
+    const fileName = `CMP_data_${date}.csv`;
     const filters = {};
     const fields = [
       { label: "Colourant(s)", value: "colourants" },
