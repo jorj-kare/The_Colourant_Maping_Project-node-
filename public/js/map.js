@@ -64,6 +64,7 @@ const createGeoJson = (data) => {
       properties: {
         id: el._id,
         colourants: el.colourants,
+        address: el.location.address,
       },
     });
   });
@@ -141,10 +142,12 @@ mapBox.map.on("click", "unclustered-point", (e) => {
       `<li class="list__item list__item--small" data-id="${
         e.features[0].properties.id
       }" 
-       >${e.features[0].properties.colourants
+       >
+       ${e.features[0].properties.colourants
          .replace("[", "")
          .replace("]", "")
-         .replaceAll('"', "")} 
+         .replaceAll('"', "")} <br>
+         ${e.features[0].properties.address.split(",")[0]}
       </li>`
     )
     .addTo(mapBox.map);
