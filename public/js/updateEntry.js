@@ -87,6 +87,7 @@ const deleteEntry = async () => {
         "Content-Type": "application/json",
       },
     });
+    console.log(res);
 
     if (!res.ok) throw new Error(res.statusText, res.status);
     else {

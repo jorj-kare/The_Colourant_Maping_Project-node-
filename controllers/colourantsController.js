@@ -135,7 +135,7 @@ exports.updateColourant = async (req, res, next) => {
 
 exports.deleteColourant = async (req, res, next) => {
   try {
-    const colourant = await Colourant.findOneAndRemove({ _id: req.params.id });
+    const colourant = await Colourant.findOneAndDelete({ _id: req.params.id });
     if (!colourant)
       return next(new CustomError("No colourant found with this ID"));
 
