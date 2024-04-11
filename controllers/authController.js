@@ -12,34 +12,33 @@ const signToken = (id) =>
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id.toHexString());
   const cookiesOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
     httpOnly: true,
   };
+
   if (process.env.NODE_ENV === "production") cookiesOptions.secure = true;
   res.cookie("jwt", token, cookiesOptions);
   user.password = undefined;
   res.status(statusCode).json({ status: "success", token, data: { user } });
 };
+// using nodmailer and sendgrid
+// exports.verifyAccount = async (req, res, next) => {
+//   try {
+//     const token = req.body.token;
+//     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//     const currentUser = await User.findById(decoded.id);
+//     if (!currentUser) return next(new CustomError("Invalid token", 404));
+//     currentUser.verified = true;
+//     currentUser.save({ validateBeforeSave: false });
+//     res.status(200).json({
+//       status: "success",
+//     });
+//   } catch (err) {
+//     console.log(err);
 
-exports.verifyAccount = async (req, res, next) => {
-  try {
-    const token = req.body.token;
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    const currentUser = await User.findById(decoded.id);
-    if (!currentUser) return next(new CustomError("Invalid token", 404));
-    currentUser.verified = true;
-    currentUser.save({ validateBeforeSave: false });
-    res.status(200).json({
-      status: "success",
-    });
-  } catch (err) {
-    console.log(err);
-
-    next(err);
-  }
-};
+//     next(err);
+//   }
+// };
 
 exports.signUp = async (req, res, next) => {
   try {
@@ -51,18 +50,20 @@ exports.signUp = async (req, res, next) => {
       affiliation: req.body.affiliation,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
+      verified: true,
     });
+    // using nodmailer and sendgrid
+    // const token = signToken(newUser._id.toHexString());
     // const user = await User.findOne({ email: req.body.email });
-    const token = signToken(newUser._id.toHexString());
-    const p = process.env.NODE_ENV === "development" ? "http" : "https";
-    const verifyURL = `${p}://${req.get("host")}/verifyAccount?token=${token}`;
-    const message = `Click <a href="${verifyURL}">here</a> to verify your account.`;
+    // const p = process.env.NODE_ENV === "development" ? "http" : "https";
+    // const verifyURL = `${p}://${req.get("host")}/verifyAccount?token=${token}`;
+    // const message = `Click <a href="${verifyURL}">here</a> to verify your account.`;
 
-    sendEmail({
-      email: newUser.email,
-      subject: "Verify your account",
-      message,
-    });
+    // sendEmail({
+    //   email: newUser.email,
+    //   subject: "Verify your account",
+    //   message,
+    // });
 
     res.status(200).json({
       status: "success",
@@ -157,48 +158,46 @@ exports.restrict = async (req, res, next) => {
     next(err);
   }
 };
+// using nodmailer and sendgrid
+// exports.forgotPassword = async (req, res, next) => {
+//   try {
+//     const { email } = req.body;
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return next(
+//         new CustomError(`There is no user with ${email} email address.`, 404)
+//       );
+//     }
+//     const resetToken = user.createResetPasswordToken();
+//     await user.save({ validateBeforeSave: false });
+//     const resetURL = `https://${req.get(
+//       "host"
+//     )}/resetPassword?token=${resetToken}`;
 
-exports.forgotPassword = async (req, res, next) => {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      return next(
-        new CustomError(`There is no user with ${email} email address.`, 404)
-      );
-    }
-    const resetToken = user.createResetPasswordToken();
-    await user.save({ validateBeforeSave: false });
-    const resetURL = `https://${req.get(
-      "host"
-    )}/resetPassword?token=${resetToken}`;
+//     const message = `Forgot your password? <br> Fill out the form with your new password <a href="${resetURL}">here</a> <br> If you did not request a new password, please ignore this email.`;
+//     try {
+//       sendEmail({
+//         email: user.email,
+//         subject: "Your password reset token (Valid for 10 minutes)",
+//         message,
+//       });
+//       res.token = resetURL;
+//       res.status(200).json({
+//         status: "success",
+//         message:
+//           "PLease check your email for a password reset token. Note: we have identified an issue with certain institutional email addresses. If you have not received an  email, please contact us.",
+//       });
+//     } catch (err) {
+//       user.passwordResetToken = undefined;
+//       user.passwordResetTokenExpires = undefined;
+//       user.save({ validateBeforeSave: false });
+//       return next(new CustomError("An error occurred, please try again.", 500));
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
-    const message = `Forgot your password? <br> Fill out the form with your new password <a href="${resetURL}">here</a> <br> If you did not request a new password, please ignore this email.`;
-    try {
-      sendEmail({
-        email: user.email,
-        subject: "Your password reset token (Valid for 10 minutes)",
-        message,
-      });
-      res.status(200).json({
-        status: "success",
-        message: "The password reset token has been send to your email.",
-      });
-    } catch (err) {
-      user.passwordResetToken = undefined;
-      user.passwordResetTokenExpires = undefined;
-      user.save({ validateBeforeSave: false });
-      return next(
-        new CustomError(
-          "An error occurred when sending the email, please try again.",
-          500
-        )
-      );
-    }
-  } catch (err) {
-    next(err);
-  }
-};
 exports.resetPassword = async (req, res, next) => {
   try {
     const { userId } = req.body;
@@ -288,4 +287,23 @@ exports.isUserLoggedIn = async (req, res, next) => {
     }
   }
   next();
+};
+
+exports.createResetUrl = async (req, res, next) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return next(
+      new CustomError(`There is no user with ${email} email address.`, 404)
+    );
+  }
+  const resetToken = user.createResetPasswordToken();
+  await user.save({ validateBeforeSave: false });
+  const resetURL = `https://${req.get("host")}/resetPassword?token=${resetToken}`;
+
+  res.status(200).json({
+    status: "success",
+    message: "Token created",
+    token: resetURL,
+  });
 };

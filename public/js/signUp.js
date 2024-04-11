@@ -17,9 +17,7 @@ const signUp = async (userData) => {
     if (!res.ok) throw new Error(data.message);
 
     if (data.status === "success") {
-      await showConfirm(
-        "Congratulations, you have now created an account! PLease check your email for account activation. Note: we have identified an issue with certain institutional email addresses. If you have not received an activation email, please contact us."
-      );
+      await showConfirm("Congratulations, you have now created an account!");
       location.assign("/");
     }
   } catch (err) {

@@ -1,0 +1,16 @@
+extends base
+block append head 
+  meta(name="description" content="Here admin can create a url to reset a password.")
+  title Create reset Url | Colourant mapping project
+  script(type="module" src="/js/createResetUrl.js" defer)
+block main 
+  main.forgot-password 
+    .form-box 
+      h2.h2 Create a reset password Url
+      h3.h3 Paste the email of the user and if the email exist at the database a Url will be created <br>then you can send it to the user.
+      form.form
+        .form__group
+          label.form__label(for='email') Email
+          .form__input--btn
+            input#email.form__input(type='email', required)
+            button.btn(type="submit") →

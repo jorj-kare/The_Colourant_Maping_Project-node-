@@ -160,3 +160,6 @@ exports.getEntriesTable = async (req, res) => {
 exports.getGlossary = async (req, res) => {
   res.status(200).render("glossary");
 };
+exports.getCreateResetUrl = async (req, res) => {
+  res.status(200).render("adminResetUrl");
+};

@@ -7,7 +7,6 @@ router.route("/").get(viewsController.getView);
 router.route("/login").get(viewsController.getLoginForm);
 router.route("/logout").get(viewsController.getLogoutPage);
 router.route("/signUp").get(viewsController.getSignupForm);
-router.route("/verifyAccount").get(viewsController.getVerifyAccountPage);
 router.route("/forgotPassword").get(viewsController.getForgotPasswordForm);
 router.route("/resetPassword").get(viewsController.getResetPasswordForm);
 router.route("/map").get(viewsController.getMapPage);
@@ -23,4 +22,10 @@ router
 router
   .route("/entries")
   .get(authController.isUserLoggedIn, viewsController.getEntriesTable);
+router
+  .route("/createResetUrl")
+  .get(authController.restrict, viewsController.getCreateResetUrl);
 module.exports = router;
+
+// using nodmailer and sendgrid
+// router.route("/verifyAccount").get(viewsController.getVerifyAccountPage);
