@@ -24,7 +24,7 @@ router
   .get(authController.isUserLoggedIn, viewsController.getEntriesTable);
 router
   .route("/createResetUrl")
-  .get(authController.restrict, viewsController.getCreateResetUrl);
+  .get(authController.restrictTo("admin"), viewsController.getCreateResetUrl);
 module.exports = router;
 
 // using nodmailer and sendgrid
