@@ -65,8 +65,8 @@ const addTablesForAdmin = (entry) => {
   return `<td class="table__data" data-label="Checked">${
     entry.checked == true ? "Checked" : "Unchecked"
   }</td>
-    <td class="table__data table__data--hover" data-label="Edit"><a href="/updateEntry?id=${
-      entry._id
+    <td class="table__data table__data--hover" data-label="Edit"><a id="table-edit" href="/updateEntry?id=${
+      entry.uniqueId
     }")>✎</td>`;
 };
 const displayEntries = (entries) => {
@@ -78,9 +78,7 @@ const displayEntries = (entries) => {
     <td class='table__data' data-label="Created at">${new Date(
       entry.createdAt
     ).toLocaleDateString("en-Gb")}</td>
-    <td id="td-colourants" class='table__data' data-id="${
-      entry._id
-    }" data-label="Colourant(s)">${entry.colourants.join(", ")}</td>
+    <td id="td-colourants" class='table__data table__data--hover ' data-label="Colourant(s)"><a href="/CMP?id=${entry.uniqueId}">${entry.colourants.join(", ")}</a></td>
     <td class='table__data' data-label="Chronology">${
       entry.chronology.start
     }, ${entry.chronology.end}</td>

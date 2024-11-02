@@ -31,21 +31,25 @@
     &--hover:hover {
       background-color: $color-yellow-dark;
     }
-
     a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      inset: 0;
       color: $color-primary-dark;
+      text-decoration: underline;
     }
   }
   #td-pigment {
-    &:hover {
-      cursor: pointer;
-      color: $color-primary-dark;
-    }
+    cursor: pointer;
+    color: $color-primary-dark;
+  }
+  #td-colourants {
+    cursor: pointer;
+  }
+
+  #table-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
   }
 }
 @media only screen and (max-width: $media-medium) {

@@ -64,10 +64,10 @@ block main
                             - chrEnd = ""
                         li.list__item(data-id=`"${entry.id}"`)
                             -if(entry.checked ) 
-                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
+                                a(href=`/updateEntry?id=${entry.uniqueId}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
                                     strong=`${entry.location.certainProvenance ? "": "Uncertain provenance"}`
                             -else
-                                a(href=`/updateEntry?id=${entry.id}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
+                                a(href=`/updateEntry?id=${entry.uniqueId}`)=`${entry.createdAt.toLocaleDateString('en-Gb')}, colourant(s): ${entry.colourants}, chronology: ${chrStart}, ${chrEnd}, location: ${entry.location.address}. `
                                     strong=`${entry.location.certainProvenance ? "": "Uncertain provenance"}`
                                     span  -unchecked-
 

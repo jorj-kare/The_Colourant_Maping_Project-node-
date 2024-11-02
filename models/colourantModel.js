@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
 const User = require("./userModel");
+const { customAlphabet } = require("nanoid");
+const nanoid = customAlphabet("1234567890", 5);
 const colourantSchema = new mongoose.Schema(
   {
+    uniqueId: {
+      type: String,
+      required: true,
+      default: () => nanoid(),
+      index: { unique: true },
+    },
     colourants: {
       type: [String],
       validate: {

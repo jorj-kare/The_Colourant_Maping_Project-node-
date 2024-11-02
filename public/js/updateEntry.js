@@ -129,10 +129,8 @@ const checkInput = (elements, values) => {
 const initiateFormValues = (data) => {
   if (data.data.location.certainProvenance) {
     cfv.certainProvenance.selectedIndex = 0;
-    console.log(data.data.location.address);
 
     cfv.loc.value = data.data.location.address;
-    console.log(cfv.loc.value);
   } else {
     cfv.certainProvenance.selectedIndex = 1;
     cfv.uncertainProvenance.value = data.data.location.address;
@@ -230,13 +228,14 @@ form.addEventListener("submit", async (e) => {
   const entryId = params.get("id");
 
   const updatedData = getFormValues();
-  updatedData.id = entryId;
+  updatedData.uniqueId = entryId;
   //Check if has been any change to the data except the "Checked" field so that
   //when only the "Checked" field has been changed the entry will not appear as edited
   const updatedDataCopy = { ...updatedData };
   const data = await getColourant();
   delete updatedDataCopy.checked;
   delete data.data._id;
+  delete data.data.id;
   delete data.data.contributor;
   delete data.data.createdAt;
   delete data.data.edited;

@@ -156,10 +156,14 @@ exports.getContactPage = (req, res) => {
 exports.getEntriesTable = async (req, res) => {
   res.status(200).render("entries", { data });
 };
-
-exports.getGlossary = async (req, res) => {
-  res.status(200).render("glossary");
+exports.getColourantPage = (req, res) => {
+  res.status(200).render("colourantDetails");
 };
+
 exports.getCreateResetUrl = async (req, res) => {
   res.status(200).render("adminResetUrl");
 };
+
+// exports.getGlossary = async (req, res) => {
+//   res.status(200).render("glossary");
+// };

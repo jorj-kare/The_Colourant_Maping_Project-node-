@@ -97,6 +97,7 @@
 }
 
 .mapboxgl-popup-content {
+  padding: 15px 20px;
   border: 0.5px solid $color-primary-dark;
   border-radius: 5px;
   background-color: $color-white;
@@ -116,4 +117,7 @@
 }
 .mapboxgl-popup {
   z-index: 3;
+}
+#url-link {
+  padding: 0;
 }

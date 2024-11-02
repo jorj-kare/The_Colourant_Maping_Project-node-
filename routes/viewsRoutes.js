@@ -12,7 +12,8 @@ router.route("/resetPassword").get(viewsController.getResetPasswordForm);
 router.route("/map").get(viewsController.getMapPage);
 router.route("/contact").get(viewsController.getContactPage);
 router.route("/newEntry").get(viewsController.getNewEntryForm);
-router.route("/glossary").get(viewsController.getGlossary);
+router.route("/CMP").get(viewsController.getColourantPage);
+// router.route("/glossary").get(viewsController.getGlossary);
 router
   .route("/myAccount")
   .get(authController.restrict, viewsController.getMyAccount);

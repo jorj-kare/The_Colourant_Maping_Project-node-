@@ -29,7 +29,7 @@ const displayResults = (data) => {
       }, <strong>${
         el.location.certainProvenance === true ? "" : "Uncertain provenance"
       }</strong>`;
-      markup += `<li data-id="${el._id}" data-colourants="${el.colourants}" class="list__item">${str}</li>`;
+      markup += `<li data-id="${el._id}" data-colourants="${el.colourants}" class="list__item"><a href="/CMP?id=${el.uniqueId}">${str}</a></li>`;
     });
   }
   resultsList.insertAdjacentHTML("afterbegin", markup);
@@ -62,7 +62,7 @@ const createGeoJson = (data) => {
         ],
       },
       properties: {
-        id: el._id,
+        uniqueId: el.uniqueId,
         colourants: el.colourants,
         address: el.location.address,
       },
@@ -139,16 +139,14 @@ mapBox.map.on("click", "unclustered-point", (e) => {
   new mapboxgl.Popup()
     .setLngLat([e.lngLat.lng, e.lngLat.lat])
     .setHTML(
-      `<li class="list__item list__item--small" data-id="${
-        e.features[0].properties.id
-      }" 
-       >
+      ` <a  id="url-link"  class="list__item list__item--small"  href="/CMP?id=${e.features[0].properties.uniqueId}">
        ${e.features[0].properties.colourants
          .replace("[", "")
          .replace("]", "")
          .replaceAll('"', "")} <br>
-         ${e.features[0].properties.address.split(",")[0]}
-      </li>`
+      ${e.features[0].properties.address.split(",")[0]}
+       </a>
+      `
     )
     .addTo(mapBox.map);
 });

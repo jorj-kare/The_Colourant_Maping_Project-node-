@@ -5,7 +5,7 @@ const {
 } = require("json2csv");
 const Colourant = require("../models/colourantModel");
 const CustomError = require("../utils/customError");
-
+const { customAlphabet } = require("nanoid");
 exports.createColourant = async (req, res, next) => {
   try {
     if (req.user.role !== "admin" && req.body.checked) delete req.body.checked;
@@ -87,9 +87,33 @@ exports.getColourants = async (req, res, next) => {
   });
 };
 
+// exports.getColourant = async (req, res, next) => {
+//   try {
+//     const data = await Colourant.findById(req.params.id);
+
+//     if (!data)
+//       return next(new CustomError("No colourant found with this ID."), 404);
+//     res.status(200).json({
+//       status: "success",
+//       data,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 exports.getColourant = async (req, res, next) => {
   try {
-    const data = await Colourant.findById(req.params.id);
+    let contributorFields;
+
+    const data = await Colourant.findOne({ uniqueId: req.params.id });
+    if (req.user && req.user.role === "admin") {
+      contributorFields = "username firstName lastName affiliation email";
+    } else contributorFields = "username firstName lastName affiliation ";
+
+    await Colourant.populate(data, {
+      path: "contributor",
+      select: contributorFields,
+    });
 
     if (!data)
       return next(new CustomError("No colourant found with this ID."), 404);
@@ -104,8 +128,10 @@ exports.getColourant = async (req, res, next) => {
 
 exports.updateColourant = async (req, res, next) => {
   try {
-    const currentEntryId = req.body.id;
-    const userEntriesIds = req.user.entries.map((entry) => entry.id);
+    const currentEntryId = req.body.uniqueId;
+
+    const userEntriesIds = req.user.entries.map((entry) => entry.uniqueId);
+
     // Allow only to the admin or the user that had created the entry to updated it.
     if (req.user.role !== "admin" && !userEntriesIds.includes(currentEntryId))
       return next(
@@ -116,7 +142,7 @@ exports.updateColourant = async (req, res, next) => {
       );
 
     const data = await Colourant.findOneAndUpdate(
-      { _id: req.body.id },
+      { uniqueId: req.body.uniqueId },
       req.body,
       {
         new: true,
@@ -135,7 +161,9 @@ exports.updateColourant = async (req, res, next) => {
 
 exports.deleteColourant = async (req, res, next) => {
   try {
-    const colourant = await Colourant.findOneAndDelete({ _id: req.params.id });
+    const colourant = await Colourant.findOneAndDelete({
+      uniqueId: req.params.id,
+    });
     if (!colourant)
       return next(new CustomError("No colourant found with this ID"));
 
